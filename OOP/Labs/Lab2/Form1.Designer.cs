@@ -53,15 +53,15 @@
             this.NameField.AutoSize = true;
             this.NameField.Location = new System.Drawing.Point(13, 13);
             this.NameField.Name = "NameField";
-            this.NameField.Size = new System.Drawing.Size(53, 25);
+            this.NameField.Size = new System.Drawing.Size(14, 20);
             this.NameField.TabIndex = 0;
-            this.NameField.Text = "Имя";
+            this.NameField.Text = "`";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(18, 52);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 31);
+            this.textBox1.Size = new System.Drawing.Size(256, 26);
             this.textBox1.TabIndex = 1;
             // 
             // comboBox1
@@ -73,7 +73,7 @@
             "Сервер"});
             this.comboBox1.Location = new System.Drawing.Point(18, 144);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(256, 33);
+            this.comboBox1.Size = new System.Drawing.Size(256, 28);
             this.comboBox1.TabIndex = 2;
             // 
             // TypeLabel
@@ -81,7 +81,7 @@
             this.TypeLabel.AutoSize = true;
             this.TypeLabel.Location = new System.Drawing.Point(13, 103);
             this.TypeLabel.Name = "TypeLabel";
-            this.TypeLabel.Size = new System.Drawing.Size(49, 25);
+            this.TypeLabel.Size = new System.Drawing.Size(36, 20);
             this.TypeLabel.TabIndex = 3;
             this.TypeLabel.Text = "Тип";
             // 
@@ -102,7 +102,7 @@
             this.SSD_Button.AutoSize = true;
             this.SSD_Button.Location = new System.Drawing.Point(142, 30);
             this.SSD_Button.Name = "SSD_Button";
-            this.SSD_Button.Size = new System.Drawing.Size(86, 29);
+            this.SSD_Button.Size = new System.Drawing.Size(68, 24);
             this.SSD_Button.TabIndex = 1;
             this.SSD_Button.TabStop = true;
             this.SSD_Button.Text = "SSD";
@@ -113,7 +113,7 @@
             this.HDD_Button.AutoSize = true;
             this.HDD_Button.Location = new System.Drawing.Point(15, 30);
             this.HDD_Button.Name = "HDD_Button";
-            this.HDD_Button.Size = new System.Drawing.Size(88, 29);
+            this.HDD_Button.Size = new System.Drawing.Size(70, 24);
             this.HDD_Button.TabIndex = 0;
             this.HDD_Button.TabStop = true;
             this.HDD_Button.Text = "HDD";
@@ -125,7 +125,7 @@
             this.DriveSizeTrack.Location = new System.Drawing.Point(18, 333);
             this.DriveSizeTrack.Maximum = 1024;
             this.DriveSizeTrack.Name = "DriveSizeTrack";
-            this.DriveSizeTrack.Size = new System.Drawing.Size(369, 90);
+            this.DriveSizeTrack.Size = new System.Drawing.Size(369, 69);
             this.DriveSizeTrack.SmallChange = 10;
             this.DriveSizeTrack.TabIndex = 100;
             this.DriveSizeTrack.Scroll += new System.EventHandler(this.DriveSizeTrack_Scroll);
@@ -135,7 +135,7 @@
             this.DriveSize.AutoSize = true;
             this.DriveSize.Location = new System.Drawing.Point(17, 293);
             this.DriveSize.Name = "DriveSize";
-            this.DriveSize.Size = new System.Drawing.Size(152, 25);
+            this.DriveSize.Size = new System.Drawing.Size(114, 20);
             this.DriveSize.TabIndex = 101;
             this.DriveSize.Text = "Размер диска";
             // 
@@ -144,7 +144,7 @@
             this.DriveSizeValue.AutoSize = true;
             this.DriveSizeValue.Location = new System.Drawing.Point(17, 398);
             this.DriveSizeValue.Name = "DriveSizeValue";
-            this.DriveSizeValue.Size = new System.Drawing.Size(120, 25);
+            this.DriveSizeValue.Size = new System.Drawing.Size(91, 20);
             this.DriveSizeValue.TabIndex = 102;
             this.DriveSizeValue.Text = "Значение: ";
             // 
@@ -153,7 +153,7 @@
             this.RamValue.AutoSize = true;
             this.RamValue.Location = new System.Drawing.Point(21, 636);
             this.RamValue.Name = "RamValue";
-            this.RamValue.Size = new System.Drawing.Size(120, 25);
+            this.RamValue.Size = new System.Drawing.Size(91, 20);
             this.RamValue.TabIndex = 106;
             this.RamValue.Text = "Значение: ";
             // 
@@ -162,16 +162,17 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(21, 531);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(301, 25);
+            this.label2.Size = new System.Drawing.Size(228, 20);
             this.label2.TabIndex = 105;
             this.label2.Text = "Размер оперативной памяти";
             // 
             // RamValueTrack
             // 
+            this.RamValueTrack.LargeChange = 8;
             this.RamValueTrack.Location = new System.Drawing.Point(22, 571);
             this.RamValueTrack.Maximum = 64;
             this.RamValueTrack.Name = "RamValueTrack";
-            this.RamValueTrack.Size = new System.Drawing.Size(240, 90);
+            this.RamValueTrack.Size = new System.Drawing.Size(240, 69);
             this.RamValueTrack.SmallChange = 2;
             this.RamValueTrack.TabIndex = 104;
             this.RamValueTrack.Scroll += new System.EventHandler(this.RamValueTrack_Scroll);
@@ -181,7 +182,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 441);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 25);
+            this.label1.Size = new System.Drawing.Size(199, 20);
             this.label1.TabIndex = 108;
             this.label1.Text = "Тип оперативной памяти";
             // 
@@ -196,13 +197,13 @@
             "DDR5"});
             this.comboBox2.Location = new System.Drawing.Point(18, 482);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(256, 33);
+            this.comboBox2.Size = new System.Drawing.Size(256, 28);
             this.comboBox2.TabIndex = 107;
             // 
             // Компьютер
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(685, 737);
+            this.ClientSize = new System.Drawing.Size(685, 809);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.RamValue);
@@ -220,7 +221,7 @@
             this.MaximizeBox = false;
             this.Name = "Компьютер";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Добавить устройство";
             this.DriveGroup.ResumeLayout(false);
             this.DriveGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).EndInit();
