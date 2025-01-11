@@ -26,5 +26,11 @@ namespace Lab2
         {
             RamValue.Text = String.Format("Значение: {0} GB", RamValueTrack.Value);
         }
+
+        private void addProc_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
     }
 }

@@ -43,6 +43,7 @@
             this.RamValueTrack = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.addProc = new System.Windows.Forms.Button();
             this.DriveGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RamValueTrack)).BeginInit();
@@ -200,10 +201,21 @@
             this.comboBox2.Size = new System.Drawing.Size(256, 28);
             this.comboBox2.TabIndex = 107;
             // 
+            // addProc
+            // 
+            this.addProc.Location = new System.Drawing.Point(34, 677);
+            this.addProc.Name = "addProc";
+            this.addProc.Size = new System.Drawing.Size(195, 43);
+            this.addProc.TabIndex = 109;
+            this.addProc.Text = "Добавить процессор";
+            this.addProc.UseVisualStyleBackColor = true;
+            this.addProc.Click += new System.EventHandler(this.addProc_Click);
+            // 
             // Компьютер
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(685, 809);
+            this.Controls.Add(this.addProc);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.RamValue);
@@ -248,6 +260,7 @@
         private System.Windows.Forms.TrackBar RamValueTrack;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button addProc;
     }
 }
 
