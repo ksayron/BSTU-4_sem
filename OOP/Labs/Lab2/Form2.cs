@@ -16,5 +16,75 @@ namespace Lab2
         {
             InitializeComponent();
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RamValueTrack_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RamValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addProc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DriveSizeValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DriveSize_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DriveSizeTrack_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DriveGroup_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TypeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NameField_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

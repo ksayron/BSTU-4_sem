@@ -1,6 +1,6 @@
 ﻿namespace Lab2
 {
-    partial class Компьютер
+    partial class Computer_form
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -211,7 +211,7 @@
             this.addProc.UseVisualStyleBackColor = true;
             this.addProc.Click += new System.EventHandler(this.addProc_Click);
             // 
-            // Компьютер
+            // Computer_form
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(685, 809);
@@ -231,7 +231,7 @@
             this.Controls.Add(this.NameField);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Компьютер";
+            this.Name = "Computer_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавить устройство";
             this.DriveGroup.ResumeLayout(false);

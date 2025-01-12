@@ -16,7 +16,7 @@ namespace Lab2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Компьютер());
+            Application.Run(new Computer_form());
             
         }
     }
