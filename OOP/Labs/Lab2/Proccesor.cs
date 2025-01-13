@@ -17,9 +17,15 @@ namespace Lab2
         x86 = 1,
         x64 = 2
     }
+
+    public enum EProducer
+    {
+        AMD = 1,
+        Intel = 2
+    }
     public class Proccesor
     {
-        public string Producer;
+        public EProducer Producer;
         public string Model;
         public uint Cores;
         public double Hz;
@@ -27,9 +33,8 @@ namespace Lab2
         
         public EArchitecture Architecture;
         public ECacheSize CacheSize;
-        public Proccesor(string producer, string model, uint cores, double hz, double maxHz,uint size,uint arc)
+        public Proccesor( string model, uint cores, double hz, double maxHz,uint size,uint arc)
         {
-            Producer = producer;
             Model = model;
             Cores = cores;
             Hz = hz;

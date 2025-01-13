@@ -125,7 +125,7 @@
             this.ProducerGroup.Controls.Add(this.INTEL_Button);
             this.ProducerGroup.Controls.Add(this.AMD_Button);
             this.ProducerGroup.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.ProducerGroup.Location = new System.Drawing.Point(33, 72);
+            this.ProducerGroup.Location = new System.Drawing.Point(29, 12);
             this.ProducerGroup.Name = "ProducerGroup";
             this.ProducerGroup.Size = new System.Drawing.Size(284, 73);
             this.ProducerGroup.TabIndex = 114;
@@ -189,7 +189,7 @@
             // NameField
             // 
             this.NameField.AutoSize = true;
-            this.NameField.Location = new System.Drawing.Point(44, 171);
+            this.NameField.Location = new System.Drawing.Point(40, 115);
             this.NameField.Name = "NameField";
             this.NameField.Size = new System.Drawing.Size(70, 20);
             this.NameField.TabIndex = 110;
