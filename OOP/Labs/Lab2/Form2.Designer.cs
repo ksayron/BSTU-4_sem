@@ -61,7 +61,7 @@
             // RamValue
             // 
             this.RamValue.AutoSize = true;
-            this.RamValue.Location = new System.Drawing.Point(32, 657);
+            this.RamValue.Location = new System.Drawing.Point(63, 581);
             this.RamValue.Name = "RamValue";
             this.RamValue.Size = new System.Drawing.Size(91, 20);
             this.RamValue.TabIndex = 120;
@@ -71,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 552);
+            this.label2.Location = new System.Drawing.Point(40, 429);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(228, 20);
             this.label2.TabIndex = 119;
@@ -81,7 +81,7 @@
             // RamValueTrack
             // 
             this.RamValueTrack.LargeChange = 8;
-            this.RamValueTrack.Location = new System.Drawing.Point(33, 592);
+            this.RamValueTrack.Location = new System.Drawing.Point(33, 493);
             this.RamValueTrack.Maximum = 64;
             this.RamValueTrack.Name = "RamValueTrack";
             this.RamValueTrack.Size = new System.Drawing.Size(269, 69);
@@ -92,7 +92,7 @@
             // DriveSizeValue
             // 
             this.DriveSizeValue.AutoSize = true;
-            this.DriveSizeValue.Location = new System.Drawing.Point(28, 419);
+            this.DriveSizeValue.Location = new System.Drawing.Point(63, 374);
             this.DriveSizeValue.Name = "DriveSizeValue";
             this.DriveSizeValue.Size = new System.Drawing.Size(91, 20);
             this.DriveSizeValue.TabIndex = 117;
@@ -102,7 +102,7 @@
             // DriveSize
             // 
             this.DriveSize.AutoSize = true;
-            this.DriveSize.Location = new System.Drawing.Point(28, 314);
+            this.DriveSize.Location = new System.Drawing.Point(40, 235);
             this.DriveSize.Name = "DriveSize";
             this.DriveSize.Size = new System.Drawing.Size(114, 20);
             this.DriveSize.TabIndex = 116;
@@ -112,7 +112,7 @@
             // DriveSizeTrack
             // 
             this.DriveSizeTrack.LargeChange = 50;
-            this.DriveSizeTrack.Location = new System.Drawing.Point(29, 354);
+            this.DriveSizeTrack.Location = new System.Drawing.Point(33, 302);
             this.DriveSizeTrack.Maximum = 1024;
             this.DriveSizeTrack.Name = "DriveSizeTrack";
             this.DriveSizeTrack.Size = new System.Drawing.Size(398, 69);
@@ -205,7 +205,7 @@
             "DDR3",
             "DDR4",
             "DDR5"});
-            this.comboBox2.Location = new System.Drawing.Point(36, 215);
+            this.comboBox2.Location = new System.Drawing.Point(33, 164);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(285, 28);
             this.comboBox2.TabIndex = 121;
