@@ -38,9 +38,6 @@
             this.ProducerGroup = new System.Windows.Forms.GroupBox();
             this.INTEL_Button = new System.Windows.Forms.RadioButton();
             this.AMD_Button = new System.Windows.Forms.RadioButton();
-            this.TypeLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.NameField = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -159,37 +156,6 @@
             this.AMD_Button.Text = "AMD";
             this.AMD_Button.UseVisualStyleBackColor = true;
             // 
-            // TypeLabel
-            // 
-            this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(563, 215);
-            this.TypeLabel.Name = "TypeLabel";
-            this.TypeLabel.Size = new System.Drawing.Size(36, 20);
-            this.TypeLabel.TabIndex = 113;
-            this.TypeLabel.Text = "Тип";
-            this.TypeLabel.Click += new System.EventHandler(this.TypeLabel_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Рабочая станция",
-            "Ноутбук",
-            "Сервер"});
-            this.comboBox1.Location = new System.Drawing.Point(503, 493);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(285, 28);
-            this.comboBox1.TabIndex = 112;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(482, 397);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(285, 26);
-            this.textBox1.TabIndex = 111;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // NameField
             // 
             this.NameField.AutoSize = true;
@@ -264,9 +230,6 @@
             this.Controls.Add(this.DriveSize);
             this.Controls.Add(this.DriveSizeTrack);
             this.Controls.Add(this.ProducerGroup);
-            this.Controls.Add(this.TypeLabel);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.NameField);
             this.Name = "Form2";
             this.Text = "Добавить процессор";
@@ -293,9 +256,6 @@
         private System.Windows.Forms.GroupBox ProducerGroup;
         private System.Windows.Forms.RadioButton INTEL_Button;
         private System.Windows.Forms.RadioButton AMD_Button;
-        private System.Windows.Forms.Label TypeLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label NameField;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.GroupBox groupBox2;
