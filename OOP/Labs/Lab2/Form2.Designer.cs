@@ -51,7 +51,7 @@
             // 
             // addProc
             // 
-            this.addProc.Location = new System.Drawing.Point(290, 784);
+            this.addProc.Location = new System.Drawing.Point(292, 753);
             this.addProc.Name = "addProc";
             this.addProc.Size = new System.Drawing.Size(224, 43);
             this.addProc.TabIndex = 123;
@@ -219,7 +219,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 839);
+            this.ClientSize = new System.Drawing.Size(800, 808);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.addProc);
             this.Controls.Add(this.comboBox2);
