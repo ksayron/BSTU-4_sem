@@ -33,11 +33,14 @@ namespace Lab2
         
         public EArchitecture Architecture;
         public ECacheSize CacheSize;
-        public Proccesor( string model, uint cores, double hz, double maxHz,uint size,uint arc)
+        public Proccesor( string model, uint cores, double hz, double maxHz, ECacheSize size, EArchitecture arc)
         {
             Model = model;
             Cores = cores;
             Hz = hz;
+            MaxHz = maxHz;
+            Architecture = arc;
+            CacheSize = size;
         }
     }
 }

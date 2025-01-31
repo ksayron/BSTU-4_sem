@@ -12,9 +12,12 @@ namespace Lab2
 {
     public partial class Form2 : Form
     {
+        private Proccesor proccesor;  
         public Form2()
         {
             InitializeComponent();
+            proccesor = new Proccesor("undefined",1,1.0,1.0,ECacheSize.L1,EArchitecture.x86);
+
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
