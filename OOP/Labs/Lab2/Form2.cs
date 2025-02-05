@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -86,6 +86,16 @@ namespace Lab2
         }
 
         private void NameField_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AMD_Button_CheckedChanged(object sender, EventArgs e)
+        {
+            proccesor.Producer=EProducer.AMD;
+        }
+
+        private void INTEL_Button_CheckedChanged(object sender, EventArgs e)
         {
 
         }
