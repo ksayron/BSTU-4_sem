@@ -42,6 +42,7 @@ namespace Lab2
         public Drive drives;
         public Ram ram;
         public DateTime PurchaseDate;
+        public Proccesor Proccesor;
 
     }
 }

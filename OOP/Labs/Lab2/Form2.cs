@@ -62,7 +62,8 @@ namespace Lab2
 
         private void DriveSizeTrack_Scroll(object sender, EventArgs e)
         {
-
+            DriveSizeValue.Text = String.Format("Значение: {0} GB", DriveSizeTrack.Value);
+           
         }
 
         private void DriveGroup_Enter(object sender, EventArgs e)
@@ -97,7 +98,12 @@ namespace Lab2
 
         private void INTEL_Button_CheckedChanged(object sender, EventArgs e)
         {
+            proccesor.Producer = EProducer.Intel;
+        }
 
+        private void Model_textBox_TextChanged(object sender, EventArgs e)
+        {
+            proccesor.Model=Model_textBox.Text;
         }
     }
 }

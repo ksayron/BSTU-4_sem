@@ -52,7 +52,7 @@
             // addProc
             // 
             this.addProc.Location = new System.Drawing.Point(209, 1024);
-            this.addProc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addProc.Margin = new System.Windows.Forms.Padding(4);
             this.addProc.Name = "addProc";
             this.addProc.Size = new System.Drawing.Size(299, 54);
             this.addProc.TabIndex = 123;
@@ -86,7 +86,7 @@
             // 
             this.RamValueTrack.LargeChange = 8;
             this.RamValueTrack.Location = new System.Drawing.Point(44, 616);
-            this.RamValueTrack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RamValueTrack.Margin = new System.Windows.Forms.Padding(4);
             this.RamValueTrack.Maximum = 64;
             this.RamValueTrack.Name = "RamValueTrack";
             this.RamValueTrack.Size = new System.Drawing.Size(359, 90);
@@ -120,7 +120,7 @@
             // 
             this.DriveSizeTrack.LargeChange = 50;
             this.DriveSizeTrack.Location = new System.Drawing.Point(44, 378);
-            this.DriveSizeTrack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DriveSizeTrack.Margin = new System.Windows.Forms.Padding(4);
             this.DriveSizeTrack.Maximum = 1024;
             this.DriveSizeTrack.Name = "DriveSizeTrack";
             this.DriveSizeTrack.Size = new System.Drawing.Size(531, 90);
@@ -134,9 +134,9 @@
             this.ProducerGroup.Controls.Add(this.AMD_Button);
             this.ProducerGroup.ForeColor = System.Drawing.SystemColors.WindowText;
             this.ProducerGroup.Location = new System.Drawing.Point(39, 15);
-            this.ProducerGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProducerGroup.Margin = new System.Windows.Forms.Padding(4);
             this.ProducerGroup.Name = "ProducerGroup";
-            this.ProducerGroup.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProducerGroup.Padding = new System.Windows.Forms.Padding(4);
             this.ProducerGroup.Size = new System.Drawing.Size(379, 91);
             this.ProducerGroup.TabIndex = 114;
             this.ProducerGroup.TabStop = false;
@@ -147,7 +147,7 @@
             // 
             this.INTEL_Button.AutoSize = true;
             this.INTEL_Button.Location = new System.Drawing.Point(189, 38);
-            this.INTEL_Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.INTEL_Button.Margin = new System.Windows.Forms.Padding(4);
             this.INTEL_Button.Name = "INTEL_Button";
             this.INTEL_Button.Size = new System.Drawing.Size(102, 29);
             this.INTEL_Button.TabIndex = 1;
@@ -160,7 +160,7 @@
             // 
             this.AMD_Button.AutoSize = true;
             this.AMD_Button.Location = new System.Drawing.Point(20, 38);
-            this.AMD_Button.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AMD_Button.Margin = new System.Windows.Forms.Padding(4);
             this.AMD_Button.Name = "AMD_Button";
             this.AMD_Button.Size = new System.Drawing.Size(90, 29);
             this.AMD_Button.TabIndex = 0;
@@ -186,9 +186,9 @@
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.groupBox2.Location = new System.Drawing.Point(59, 819);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(379, 91);
             this.groupBox2.TabIndex = 124;
             this.groupBox2.TabStop = false;
@@ -198,7 +198,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(189, 38);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(78, 29);
             this.radioButton1.TabIndex = 1;
@@ -210,7 +210,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(20, 38);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(78, 29);
             this.radioButton2.TabIndex = 0;
@@ -224,6 +224,7 @@
             this.Model_textBox.Name = "Model_textBox";
             this.Model_textBox.Size = new System.Drawing.Size(345, 31);
             this.Model_textBox.TabIndex = 125;
+            this.Model_textBox.TextChanged += new System.EventHandler(this.Model_textBox_TextChanged);
             // 
             // Form2
             // 
@@ -241,7 +242,7 @@
             this.Controls.Add(this.DriveSizeTrack);
             this.Controls.Add(this.ProducerGroup);
             this.Controls.Add(this.NameField);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
             this.Text = "Добавить процессор";
             ((System.ComponentModel.ISupportInitialize)(this.RamValueTrack)).EndInit();
