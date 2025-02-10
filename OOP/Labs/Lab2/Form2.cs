@@ -32,7 +32,7 @@ namespace Lab2
 
         private void RamValueTrack_Scroll(object sender, EventArgs e)
         {
-
+           CoresValue.Text = String.Format("Значение: {0} Ядер", CoreValueTrack.Value);
         }
 
         private void RamValue_Click(object sender, EventArgs e)
@@ -60,11 +60,7 @@ namespace Lab2
 
         }
 
-        private void DriveSizeTrack_Scroll(object sender, EventArgs e)
-        {
-            DriveSizeValue.Text = String.Format("Значение: {0} GB", DriveSizeTrack.Value);
-           
-        }
+
 
         private void DriveGroup_Enter(object sender, EventArgs e)
         {
@@ -104,6 +100,16 @@ namespace Lab2
         private void Model_textBox_TextChanged(object sender, EventArgs e)
         {
             proccesor.Model=Model_textBox.Text;
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
