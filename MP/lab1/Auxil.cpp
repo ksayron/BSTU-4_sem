@@ -1,6 +1,6 @@
 #include "Auxil.h"
 
-void start() {
+void auxil::start() {
     srand(time(0));
 }
 
@@ -11,5 +11,6 @@ int auxil::iget(int imin, int imax)
 
 double auxil::dget(double dmin, double dmax)
 {
-    return ((rand()) % (dmax - dmin)) + dmin;
+    return ((rand()) % int(dmax - dmin)) + int(dmin) + double(rand() % 10)/10;
 }
+
