@@ -82,21 +82,21 @@ namespace Lab1
 
         private void inputFirst_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == '-'))
             {
                 e.Handled = true; 
 
-                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Вводите только числа.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void inputSecond_KeyPress(object sender, KeyPressEventArgs e)
         {
-             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+             if(!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == '-'))
             {
                 e.Handled = true; 
 
-                MessageBox.Show("Please enter numbers only.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Вводите только числа.", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }

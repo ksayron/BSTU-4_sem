@@ -137,7 +137,7 @@
             this.ResultBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.ResultBox.Location = new System.Drawing.Point(71, 279);
             this.ResultBox.Name = "ResultBox";
-            this.ResultBox.Size = new System.Drawing.Size(360, 49);
+            this.ResultBox.Size = new System.Drawing.Size(489, 49);
             this.ResultBox.TabIndex = 8;
             // 
             // ToBinButton
