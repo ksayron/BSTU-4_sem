@@ -37,24 +37,32 @@
             this.AMD_Button = new System.Windows.Forms.RadioButton();
             this.ModelField = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.Model_textBox = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.x86_radioButton = new System.Windows.Forms.RadioButton();
+            this.x64_radioButton = new System.Windows.Forms.RadioButton();
             this.SeriesField = new System.Windows.Forms.Label();
             this.CacheGroup = new System.Windows.Forms.GroupBox();
+            this.L3_RadioButtom = new System.Windows.Forms.RadioButton();
             this.L2_RadioButtom = new System.Windows.Forms.RadioButton();
             this.L1_RadioButtom = new System.Windows.Forms.RadioButton();
-            this.L3_RadioButtom = new System.Windows.Forms.RadioButton();
+            this.Hz_value = new System.Windows.Forms.Label();
+            this.Hz_label = new System.Windows.Forms.Label();
+            this.Hz_trackBar = new System.Windows.Forms.TrackBar();
+            this.MaxHz_value = new System.Windows.Forms.Label();
+            this.MaxHZ_label = new System.Windows.Forms.Label();
+            this.MaxHz_trackBar = new System.Windows.Forms.TrackBar();
+            this.Model_comboBox = new System.Windows.Forms.ComboBox();
+            this.Series_comboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.CoreValueTrack)).BeginInit();
             this.ProducerGroup.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.CacheGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Hz_trackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxHz_trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // addProc
             // 
-            this.addProc.Location = new System.Drawing.Point(209, 1024);
+            this.addProc.Location = new System.Drawing.Point(179, 952);
             this.addProc.Margin = new System.Windows.Forms.Padding(4);
             this.addProc.Name = "addProc";
             this.addProc.Size = new System.Drawing.Size(299, 54);
@@ -66,7 +74,7 @@
             // CoresValue
             // 
             this.CoresValue.AutoSize = true;
-            this.CoresValue.Location = new System.Drawing.Point(54, 562);
+            this.CoresValue.Location = new System.Drawing.Point(53, 376);
             this.CoresValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CoresValue.Name = "CoresValue";
             this.CoresValue.Size = new System.Drawing.Size(120, 25);
@@ -77,7 +85,7 @@
             // CoresField
             // 
             this.CoresField.AutoSize = true;
-            this.CoresField.Location = new System.Drawing.Point(54, 403);
+            this.CoresField.Location = new System.Drawing.Point(54, 297);
             this.CoresField.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CoresField.Name = "CoresField";
             this.CoresField.Size = new System.Drawing.Size(133, 25);
@@ -88,7 +96,7 @@
             // CoreValueTrack
             // 
             this.CoreValueTrack.LargeChange = 8;
-            this.CoreValueTrack.Location = new System.Drawing.Point(58, 468);
+            this.CoreValueTrack.Location = new System.Drawing.Point(58, 326);
             this.CoreValueTrack.Margin = new System.Windows.Forms.Padding(4);
             this.CoreValueTrack.Maximum = 12;
             this.CoreValueTrack.Minimum = 1;
@@ -143,7 +151,7 @@
             // ModelField
             // 
             this.ModelField.AutoSize = true;
-            this.ModelField.Location = new System.Drawing.Point(53, 144);
+            this.ModelField.Location = new System.Drawing.Point(53, 110);
             this.ModelField.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ModelField.Name = "ModelField";
             this.ModelField.Size = new System.Drawing.Size(89, 25);
@@ -153,10 +161,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.x86_radioButton);
+            this.groupBox2.Controls.Add(this.x64_radioButton);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.groupBox2.Location = new System.Drawing.Point(59, 770);
+            this.groupBox2.Location = new System.Drawing.Point(59, 523);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
@@ -165,49 +173,36 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Архитектура";
             // 
-            // radioButton1
+            // x86_radioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(189, 38);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(78, 29);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "x86";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.x86_radioButton.AutoSize = true;
+            this.x86_radioButton.Location = new System.Drawing.Point(189, 38);
+            this.x86_radioButton.Margin = new System.Windows.Forms.Padding(4);
+            this.x86_radioButton.Name = "x86_radioButton";
+            this.x86_radioButton.Size = new System.Drawing.Size(78, 29);
+            this.x86_radioButton.TabIndex = 1;
+            this.x86_radioButton.TabStop = true;
+            this.x86_radioButton.Text = "x86";
+            this.x86_radioButton.UseVisualStyleBackColor = true;
+            this.x86_radioButton.CheckedChanged += new System.EventHandler(this.x86_radioButton_CheckedChanged);
             // 
-            // radioButton2
+            // x64_radioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(20, 38);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(78, 29);
-            this.radioButton2.TabIndex = 0;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "x64";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // Model_textBox
-            // 
-            this.Model_textBox.Location = new System.Drawing.Point(58, 196);
-            this.Model_textBox.Name = "Model_textBox";
-            this.Model_textBox.Size = new System.Drawing.Size(345, 31);
-            this.Model_textBox.TabIndex = 125;
-            this.Model_textBox.TextChanged += new System.EventHandler(this.Model_textBox_TextChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(58, 332);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(345, 31);
-            this.textBox1.TabIndex = 127;
+            this.x64_radioButton.AutoSize = true;
+            this.x64_radioButton.Location = new System.Drawing.Point(20, 38);
+            this.x64_radioButton.Margin = new System.Windows.Forms.Padding(4);
+            this.x64_radioButton.Name = "x64_radioButton";
+            this.x64_radioButton.Size = new System.Drawing.Size(78, 29);
+            this.x64_radioButton.TabIndex = 0;
+            this.x64_radioButton.TabStop = true;
+            this.x64_radioButton.Text = "x64";
+            this.x64_radioButton.UseVisualStyleBackColor = true;
+            this.x64_radioButton.CheckedChanged += new System.EventHandler(this.x64_radioButton_CheckedChanged);
             // 
             // SeriesField
             // 
             this.SeriesField.AutoSize = true;
-            this.SeriesField.Location = new System.Drawing.Point(53, 280);
+            this.SeriesField.Location = new System.Drawing.Point(54, 202);
             this.SeriesField.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SeriesField.Name = "SeriesField";
             this.SeriesField.Size = new System.Drawing.Size(74, 25);
@@ -220,7 +215,7 @@
             this.CacheGroup.Controls.Add(this.L2_RadioButtom);
             this.CacheGroup.Controls.Add(this.L1_RadioButtom);
             this.CacheGroup.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CacheGroup.Location = new System.Drawing.Point(58, 635);
+            this.CacheGroup.Location = new System.Drawing.Point(59, 424);
             this.CacheGroup.Margin = new System.Windows.Forms.Padding(4);
             this.CacheGroup.Name = "CacheGroup";
             this.CacheGroup.Padding = new System.Windows.Forms.Padding(4);
@@ -228,30 +223,6 @@
             this.CacheGroup.TabIndex = 128;
             this.CacheGroup.TabStop = false;
             this.CacheGroup.Text = "Размерность кэша";
-            // 
-            // L2_RadioButtom
-            // 
-            this.L2_RadioButtom.AutoSize = true;
-            this.L2_RadioButtom.Location = new System.Drawing.Point(189, 38);
-            this.L2_RadioButtom.Margin = new System.Windows.Forms.Padding(4);
-            this.L2_RadioButtom.Name = "L2_RadioButtom";
-            this.L2_RadioButtom.Size = new System.Drawing.Size(67, 29);
-            this.L2_RadioButtom.TabIndex = 1;
-            this.L2_RadioButtom.TabStop = true;
-            this.L2_RadioButtom.Text = "L2";
-            this.L2_RadioButtom.UseVisualStyleBackColor = true;
-            // 
-            // L1_RadioButtom
-            // 
-            this.L1_RadioButtom.AutoSize = true;
-            this.L1_RadioButtom.Location = new System.Drawing.Point(20, 38);
-            this.L1_RadioButtom.Margin = new System.Windows.Forms.Padding(4);
-            this.L1_RadioButtom.Name = "L1_RadioButtom";
-            this.L1_RadioButtom.Size = new System.Drawing.Size(67, 29);
-            this.L1_RadioButtom.TabIndex = 0;
-            this.L1_RadioButtom.TabStop = true;
-            this.L1_RadioButtom.Text = "L1";
-            this.L1_RadioButtom.UseVisualStyleBackColor = true;
             // 
             // L3_RadioButtom
             // 
@@ -265,15 +236,143 @@
             this.L3_RadioButtom.UseVisualStyleBackColor = true;
             this.L3_RadioButtom.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
+            // L2_RadioButtom
+            // 
+            this.L2_RadioButtom.AutoSize = true;
+            this.L2_RadioButtom.Location = new System.Drawing.Point(189, 38);
+            this.L2_RadioButtom.Margin = new System.Windows.Forms.Padding(4);
+            this.L2_RadioButtom.Name = "L2_RadioButtom";
+            this.L2_RadioButtom.Size = new System.Drawing.Size(67, 29);
+            this.L2_RadioButtom.TabIndex = 1;
+            this.L2_RadioButtom.TabStop = true;
+            this.L2_RadioButtom.Text = "L2";
+            this.L2_RadioButtom.UseVisualStyleBackColor = true;
+            this.L2_RadioButtom.CheckedChanged += new System.EventHandler(this.L2_RadioButtom_CheckedChanged);
+            // 
+            // L1_RadioButtom
+            // 
+            this.L1_RadioButtom.AutoSize = true;
+            this.L1_RadioButtom.Location = new System.Drawing.Point(20, 38);
+            this.L1_RadioButtom.Margin = new System.Windows.Forms.Padding(4);
+            this.L1_RadioButtom.Name = "L1_RadioButtom";
+            this.L1_RadioButtom.Size = new System.Drawing.Size(67, 29);
+            this.L1_RadioButtom.TabIndex = 0;
+            this.L1_RadioButtom.TabStop = true;
+            this.L1_RadioButtom.Text = "L1";
+            this.L1_RadioButtom.UseVisualStyleBackColor = true;
+            this.L1_RadioButtom.CheckedChanged += new System.EventHandler(this.L1_RadioButtom_CheckedChanged);
+            // 
+            // Hz_value
+            // 
+            this.Hz_value.AutoSize = true;
+            this.Hz_value.Location = new System.Drawing.Point(52, 738);
+            this.Hz_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Hz_value.Name = "Hz_value";
+            this.Hz_value.Size = new System.Drawing.Size(182, 25);
+            this.Hz_value.TabIndex = 133;
+            this.Hz_value.Text = "Значение: 1.0 Hz";
+            // 
+            // Hz_label
+            // 
+            this.Hz_label.AutoSize = true;
+            this.Hz_label.Location = new System.Drawing.Point(56, 628);
+            this.Hz_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Hz_label.Name = "Hz_label";
+            this.Hz_label.Size = new System.Drawing.Size(93, 25);
+            this.Hz_label.TabIndex = 132;
+            this.Hz_label.Text = "Частота";
+            // 
+            // Hz_trackBar
+            // 
+            this.Hz_trackBar.LargeChange = 20;
+            this.Hz_trackBar.Location = new System.Drawing.Point(57, 673);
+            this.Hz_trackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.Hz_trackBar.Maximum = 120;
+            this.Hz_trackBar.Minimum = 10;
+            this.Hz_trackBar.Name = "Hz_trackBar";
+            this.Hz_trackBar.Size = new System.Drawing.Size(359, 90);
+            this.Hz_trackBar.TabIndex = 50;
+            this.Hz_trackBar.Value = 10;
+            this.Hz_trackBar.Scroll += new System.EventHandler(this.Hz_trackBar_Scroll);
+            // 
+            // MaxHz_value
+            // 
+            this.MaxHz_value.AutoSize = true;
+            this.MaxHz_value.Location = new System.Drawing.Point(55, 901);
+            this.MaxHz_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MaxHz_value.Name = "MaxHz_value";
+            this.MaxHz_value.Size = new System.Drawing.Size(182, 25);
+            this.MaxHz_value.TabIndex = 136;
+            this.MaxHz_value.Text = "Значение: 1.0 Hz";
+            // 
+            // MaxHZ_label
+            // 
+            this.MaxHZ_label.AutoSize = true;
+            this.MaxHZ_label.Location = new System.Drawing.Point(59, 791);
+            this.MaxHZ_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MaxHZ_label.Name = "MaxHZ_label";
+            this.MaxHZ_label.Size = new System.Drawing.Size(154, 25);
+            this.MaxHZ_label.TabIndex = 135;
+            this.MaxHZ_label.Text = "Макс. частота";
+            // 
+            // MaxHz_trackBar
+            // 
+            this.MaxHz_trackBar.LargeChange = 20;
+            this.MaxHz_trackBar.Location = new System.Drawing.Point(60, 836);
+            this.MaxHz_trackBar.Margin = new System.Windows.Forms.Padding(4);
+            this.MaxHz_trackBar.Maximum = 120;
+            this.MaxHz_trackBar.Minimum = 10;
+            this.MaxHz_trackBar.Name = "MaxHz_trackBar";
+            this.MaxHz_trackBar.Size = new System.Drawing.Size(359, 90);
+            this.MaxHz_trackBar.TabIndex = 50;
+            this.MaxHz_trackBar.Value = 10;
+            this.MaxHz_trackBar.Scroll += new System.EventHandler(this.MaxHz_trackBar_Scroll);
+            // 
+            // Model_comboBox
+            // 
+            this.Model_comboBox.FormattingEnabled = true;
+            this.Model_comboBox.Items.AddRange(new object[] {
+            "3100",
+            "3300",
+            "5500",
+            "5700",
+            "5900"});
+            this.Model_comboBox.Location = new System.Drawing.Point(61, 149);
+            this.Model_comboBox.Name = "Model_comboBox";
+            this.Model_comboBox.Size = new System.Drawing.Size(358, 33);
+            this.Model_comboBox.TabIndex = 137;
+            this.Model_comboBox.SelectedIndexChanged += new System.EventHandler(this.Model_comboBox_SelectedIndexChanged);
+            // 
+            // Series_comboBox
+            // 
+            this.Series_comboBox.FormattingEnabled = true;
+            this.Series_comboBox.Items.AddRange(new object[] {
+            "Pentium",
+            "FX",
+            "Core",
+            "Ryzen"});
+            this.Series_comboBox.Location = new System.Drawing.Point(59, 243);
+            this.Series_comboBox.Name = "Series_comboBox";
+            this.Series_comboBox.Size = new System.Drawing.Size(360, 33);
+            this.Series_comboBox.TabIndex = 138;
+            this.Series_comboBox.SelectedIndexChanged += new System.EventHandler(this.Series_comboBox_SelectedIndexChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 1092);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(692, 1037);
+            this.Controls.Add(this.Series_comboBox);
+            this.Controls.Add(this.Model_comboBox);
+            this.Controls.Add(this.MaxHz_value);
+            this.Controls.Add(this.MaxHZ_label);
+            this.Controls.Add(this.MaxHz_trackBar);
+            this.Controls.Add(this.Hz_value);
+            this.Controls.Add(this.Hz_label);
+            this.Controls.Add(this.Hz_trackBar);
             this.Controls.Add(this.CacheGroup);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.SeriesField);
-            this.Controls.Add(this.Model_textBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.addProc);
             this.Controls.Add(this.CoresValue);
@@ -292,6 +391,8 @@
             this.groupBox2.PerformLayout();
             this.CacheGroup.ResumeLayout(false);
             this.CacheGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Hz_trackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxHz_trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,14 +409,20 @@
         private System.Windows.Forms.RadioButton AMD_Button;
         private System.Windows.Forms.Label ModelField;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.TextBox Model_textBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RadioButton x86_radioButton;
+        private System.Windows.Forms.RadioButton x64_radioButton;
         private System.Windows.Forms.Label SeriesField;
         private System.Windows.Forms.GroupBox CacheGroup;
         private System.Windows.Forms.RadioButton L2_RadioButtom;
         private System.Windows.Forms.RadioButton L1_RadioButtom;
         private System.Windows.Forms.RadioButton L3_RadioButtom;
+        private System.Windows.Forms.Label Hz_value;
+        private System.Windows.Forms.Label Hz_label;
+        private System.Windows.Forms.TrackBar Hz_trackBar;
+        private System.Windows.Forms.Label MaxHz_value;
+        private System.Windows.Forms.Label MaxHZ_label;
+        private System.Windows.Forms.TrackBar MaxHz_trackBar;
+        private System.Windows.Forms.ComboBox Model_comboBox;
+        private System.Windows.Forms.ComboBox Series_comboBox;
     }
 }
