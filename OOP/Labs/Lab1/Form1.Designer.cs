@@ -90,6 +90,7 @@
             this.inputFirst.Name = "inputFirst";
             this.inputFirst.Size = new System.Drawing.Size(348, 31);
             this.inputFirst.TabIndex = 4;
+            this.inputFirst.TextChanged += new System.EventHandler(this.inputFirst_TextChanged);
             this.inputFirst.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputFirst_KeyPress);
             // 
             // label1

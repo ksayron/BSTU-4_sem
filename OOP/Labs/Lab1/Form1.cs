@@ -153,5 +153,10 @@ namespace Lab1
             }
 
         }
+
+        private void inputFirst_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
