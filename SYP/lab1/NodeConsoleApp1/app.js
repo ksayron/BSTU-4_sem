@@ -12,12 +12,42 @@ function krat3i5(a) {
     }
     return count;
 }
-const task1 = this.document.getElementById("task1");
-if (task1 != null) {
-    task1.innerHTML = Phonenumber(numbers);
+function turning(n, k) {
+    let tmp;
+    for (let i = 0; i < k; i++) {
+        tmp = n[0];
+        for (let j = 0; j < n.length; j++) {
+            if (j != n.length - 1) {
+                n[j] = n[j + 1];
+            }
+            else {
+                n[j] = tmp;
+            }
+            console.log(j);
+        }
+    }
+    return n;
 }
-const task2 = this.document.getElementById("task2");
-if (task2 != null) {
-    task2.innerHTML = krat3i5(10) + "";
+function wait() {
+    while (true) {
+    }
 }
+function GetMedian(arrnum1, arrnum2) {
+    if (arrnum1.length == 0 && arrnum2.length == 0) {
+        return null;
+    }
+    let concatTwoArr = arrnum1.concat(arrnum2);
+    concatTwoArr.sort();
+    if (concatTwoArr.length % 2 == 0) {
+        return (concatTwoArr[(concatTwoArr.length / 2) - 1] + concatTwoArr[concatTwoArr.length / 2]) / 2;
+    }
+    else {
+        return concatTwoArr[Math.floor(concatTwoArr.length / 2)];
+    }
+}
+console.log(Phonenumber(numbers));
+console.log(krat3i5(10));
+console.log(turning(numbers, 1));
+console.log(GetMedian([1, 3], [2, 4]));
+console.log(wait());
 //# sourceMappingURL=app.js.map
