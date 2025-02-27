@@ -1,4 +1,4 @@
-namespace Lab2
+namespace Lab2_2
 {
     public class Program
     {
@@ -20,9 +20,8 @@ namespace Lab2
             }
 
             app.UseHttpsRedirection();
-            app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "Neuman.html" } });
             app.UseStaticFiles();
-           
+
             app.UseRouting();
 
             app.UseAuthorization();

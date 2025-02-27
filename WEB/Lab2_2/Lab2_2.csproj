@@ -6,10 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\img\Neumann.jpg" />
-    <None Include="wwwroot\index.css" />
-    <None Include="wwwroot\Neuman.html" />
-  </ItemGroup>
-
 </Project>
