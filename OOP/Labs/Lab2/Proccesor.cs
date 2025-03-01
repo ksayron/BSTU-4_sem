@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Lab2
 {
+    [Serializable]
     public enum ECacheSize
     {
         none = 0,
@@ -15,19 +16,21 @@ namespace Lab2
         L2 = 2,
         L3 = 3
     }
+    [Serializable]
     public enum EArchitecture
     {
         none = 0,
         x86 = 1,
         x64 = 2
     }
-
+    [Serializable]
     public enum EProducer
     {
         none = 0,
         AMD = 1,
         Intel = 2
     }
+    [Serializable]
     public enum ESeries
     {
         none = 0,
@@ -36,7 +39,7 @@ namespace Lab2
         FX = 3,
         Ryzen = 4
     }
-
+    [Serializable]
     public enum EModel
     {
         none = 0,
@@ -46,6 +49,7 @@ namespace Lab2
         M5700 = 4,
         M5900 = 5
     }
+    [Serializable]
     public class Proccesor
     {
         public EProducer Producer;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
+    [Serializable]
     public enum EComType
     {
         none,
@@ -13,6 +14,7 @@ namespace Lab2
         Laptop,
         Server
     }
+    [Serializable]
     public enum ERAMType
     {
         none,
@@ -22,22 +24,26 @@ namespace Lab2
         DDR4,
         DDR5
     }
+    [Serializable]
     public enum EDriveType
     {
         none,
         HDD,
         SSD
     }
+    [Serializable]
     public struct Drive
     {
         public EDriveType type;
         public uint size;
     }
+    [Serializable]
     public struct Ram
     {
         public ERAMType type;
         public uint size;
     }
+    [Serializable]
     public class Computer
     {
         public string Name;
@@ -47,7 +53,7 @@ namespace Lab2
         public DateTime PurchaseDate;
         public Proccesor Proccesor;
         public DateTime date;
-        public uint Price;
+        public double Price;
 
         public Computer()
         {
@@ -61,6 +67,178 @@ namespace Lab2
             ram.type = ERAMType.none;
             date = new DateTime();
             Proccesor = new Proccesor();
+            Price = 0;
+        }
+
+        public void CalculatePrice()
+        {
+            double DiskPrice = 0;
+            double RamPrice = 0;
+            double ProcPrice = 0;
+            switch (drives.type)
+            {
+                case EDriveType.none :
+                    {
+                        throw new Exception("нет диска");
+                        break;
+                    }
+                case EDriveType.HDD:
+                    {
+                        DiskPrice = 1;
+                        break;
+                    }
+                case EDriveType.SSD:
+                    {
+                        DiskPrice = 2;
+                        break;
+                    }
+                default :
+                    {
+                        throw new Exception("хз как");
+                    }
+            }
+            DiskPrice *= 0.03*drives.size;
+            switch (ram.type)
+            {
+                case ERAMType.none:
+                    {
+                        throw new Exception("нет оперативки");
+                        break;
+                    }
+                case ERAMType.DDR1:
+                    {
+                        RamPrice = 1;
+                        break;
+                    }
+                case ERAMType.DDR2:
+                    {
+                        RamPrice = 2;
+                        break;
+                    }
+                case ERAMType.DDR3:
+                    {
+                        RamPrice = 3;
+                        break;
+                    }
+                case ERAMType.DDR4:
+                    {
+                        RamPrice = 4;
+                        break;
+                    }
+                case ERAMType.DDR5:
+                    {
+                        RamPrice = 6;
+                        break;
+                    }
+                default:
+                    {
+                        throw new Exception("хз как");
+                    }
+            }
+            RamPrice *= ram.size;
+            switch (Proccesor.Series)
+            {
+                case ESeries.none:
+                    {
+                        throw new Exception("нет оперативки");
+                        break;
+                    }
+                case ESeries.Pentium:
+                    {
+                        ProcPrice = 1;
+                        break;
+                    }
+                case ESeries.FX:
+                    {
+                        ProcPrice = 1;
+                        break;
+                    }
+                case ESeries.Core:
+                    {
+                        ProcPrice = 2;
+                        break;
+                    }
+                case ESeries.Ryzen:
+                    {
+                        ProcPrice = 2;
+                        break;
+                    }
+                default:
+                    {
+                        throw new Exception("хз как");
+                    }
+
+            }
+            switch (Proccesor.Model)
+            {
+                case EModel.none:
+                    {
+                        throw new Exception("нет оперативки");
+                        break;
+                    }
+                case EModel.M3100:
+                    {
+                        ProcPrice *= 10;
+                        break;
+                    }
+                case EModel.M3300:
+                    {
+                        ProcPrice *= 30;
+                        break;
+                    }
+                case EModel.M5500:
+                    {
+                        ProcPrice *= 50;
+                        break;
+                    }
+                case EModel.M5700:
+                    {
+                        ProcPrice *= 70;
+                        break;
+                    }
+                case EModel.M5900:
+                    {
+                        ProcPrice *= 90;
+                        break;
+                    }
+                default:
+                    {
+                        throw new Exception("хз как");
+                    }
+            }
+            switch (Proccesor.CacheSize)
+            {
+                case ECacheSize.none:
+                    {
+                        throw new Exception("нет процессора");
+                        break;
+                    }
+                case ECacheSize.L1:
+                    {
+                        ProcPrice *= 1.2;
+                        break;
+                    }
+                case ECacheSize.L2:
+                    {
+                        ProcPrice *= 2;
+                        break;
+                    }
+                case ECacheSize.L3:
+                    {
+                        ProcPrice *= 2.5;
+                        break;
+                    }
+                default:
+                    {
+                        throw new Exception("хз как");
+                    }
+            }
+            if(Proccesor.Architecture == EArchitecture.x64)
+            {
+                ProcPrice *= 1.5;
+            }
+            ProcPrice += Proccesor.Cores * (Proccesor.Hz / 2 + Proccesor.MaxHz / 2);
+            Price = ProcPrice+RamPrice+DiskPrice;
         }
     }
 }

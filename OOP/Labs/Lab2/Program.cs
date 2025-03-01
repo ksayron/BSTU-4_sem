@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Lab2
 {
     internal static class Program
@@ -14,6 +15,7 @@ namespace Lab2
         [STAThread]
         static void Main()
         {
+            List<Computer> computers = new List<Computer>();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Computer_form());

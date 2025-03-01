@@ -45,7 +45,18 @@
             this.RamType_comboBox = new System.Windows.Forms.ComboBox();
             this.addProc = new System.Windows.Forms.Button();
             this.Proc_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Calc_button = new System.Windows.Forms.Button();
+            this.Price_label = new System.Windows.Forms.Label();
+            this.SaveJSON_button = new System.Windows.Forms.Button();
+            this.GetJSON_button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.search_button = new System.Windows.Forms.Button();
+            this.help_Button = new System.Windows.Forms.Button();
             this.DriveGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RamValueTrack)).BeginInit();
@@ -62,7 +73,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 52);
+            this.textBox1.Location = new System.Drawing.Point(19, 41);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(256, 31);
             this.textBox1.TabIndex = 1;
@@ -75,7 +86,7 @@
             "Рабочая станция",
             "Ноутбук",
             "Сервер"});
-            this.Type_comboBox.Location = new System.Drawing.Point(18, 144);
+            this.Type_comboBox.Location = new System.Drawing.Point(17, 103);
             this.Type_comboBox.Name = "Type_comboBox";
             this.Type_comboBox.Size = new System.Drawing.Size(256, 33);
             this.Type_comboBox.TabIndex = 2;
@@ -84,7 +95,7 @@
             // TypeLabel
             // 
             this.TypeLabel.AutoSize = true;
-            this.TypeLabel.Location = new System.Drawing.Point(13, 103);
+            this.TypeLabel.Location = new System.Drawing.Point(12, 75);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Size = new System.Drawing.Size(49, 25);
             this.TypeLabel.TabIndex = 3;
@@ -95,7 +106,7 @@
             this.DriveGroup.Controls.Add(this.SSD_Button);
             this.DriveGroup.Controls.Add(this.HDD_Button);
             this.DriveGroup.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.DriveGroup.Location = new System.Drawing.Point(19, 211);
+            this.DriveGroup.Location = new System.Drawing.Point(17, 151);
             this.DriveGroup.Name = "DriveGroup";
             this.DriveGroup.Size = new System.Drawing.Size(255, 73);
             this.DriveGroup.TabIndex = 4;
@@ -129,7 +140,7 @@
             // DriveSizeTrack
             // 
             this.DriveSizeTrack.LargeChange = 50;
-            this.DriveSizeTrack.Location = new System.Drawing.Point(18, 333);
+            this.DriveSizeTrack.Location = new System.Drawing.Point(13, 256);
             this.DriveSizeTrack.Maximum = 1024;
             this.DriveSizeTrack.Name = "DriveSizeTrack";
             this.DriveSizeTrack.Size = new System.Drawing.Size(369, 90);
@@ -140,7 +151,7 @@
             // DriveSize
             // 
             this.DriveSize.AutoSize = true;
-            this.DriveSize.Location = new System.Drawing.Point(17, 293);
+            this.DriveSize.Location = new System.Drawing.Point(17, 227);
             this.DriveSize.Name = "DriveSize";
             this.DriveSize.Size = new System.Drawing.Size(152, 25);
             this.DriveSize.TabIndex = 101;
@@ -149,7 +160,7 @@
             // DriveSizeValue
             // 
             this.DriveSizeValue.AutoSize = true;
-            this.DriveSizeValue.Location = new System.Drawing.Point(17, 398);
+            this.DriveSizeValue.Location = new System.Drawing.Point(27, 311);
             this.DriveSizeValue.Name = "DriveSizeValue";
             this.DriveSizeValue.Size = new System.Drawing.Size(120, 25);
             this.DriveSizeValue.TabIndex = 102;
@@ -158,7 +169,7 @@
             // RamValue
             // 
             this.RamValue.AutoSize = true;
-            this.RamValue.Location = new System.Drawing.Point(21, 636);
+            this.RamValue.Location = new System.Drawing.Point(27, 521);
             this.RamValue.Name = "RamValue";
             this.RamValue.Size = new System.Drawing.Size(120, 25);
             this.RamValue.TabIndex = 106;
@@ -167,7 +178,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 531);
+            this.label2.Location = new System.Drawing.Point(21, 445);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(301, 25);
             this.label2.TabIndex = 105;
@@ -176,7 +187,7 @@
             // RamValueTrack
             // 
             this.RamValueTrack.LargeChange = 8;
-            this.RamValueTrack.Location = new System.Drawing.Point(22, 571);
+            this.RamValueTrack.Location = new System.Drawing.Point(22, 473);
             this.RamValueTrack.Maximum = 64;
             this.RamValueTrack.Name = "RamValueTrack";
             this.RamValueTrack.Size = new System.Drawing.Size(240, 90);
@@ -187,7 +198,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 441);
+            this.label1.Location = new System.Drawing.Point(17, 364);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(262, 25);
             this.label1.TabIndex = 108;
@@ -202,7 +213,7 @@
             "DDR3",
             "DDR4",
             "DDR5"});
-            this.RamType_comboBox.Location = new System.Drawing.Point(18, 482);
+            this.RamType_comboBox.Location = new System.Drawing.Point(19, 392);
             this.RamType_comboBox.Name = "RamType_comboBox";
             this.RamType_comboBox.Size = new System.Drawing.Size(256, 33);
             this.RamType_comboBox.TabIndex = 107;
@@ -210,9 +221,9 @@
             // 
             // addProc
             // 
-            this.addProc.Location = new System.Drawing.Point(276, 684);
+            this.addProc.Location = new System.Drawing.Point(280, 569);
             this.addProc.Name = "addProc";
-            this.addProc.Size = new System.Drawing.Size(195, 66);
+            this.addProc.Size = new System.Drawing.Size(127, 66);
             this.addProc.TabIndex = 109;
             this.addProc.Text = "Добавить процессор";
             this.addProc.UseVisualStyleBackColor = true;
@@ -220,27 +231,150 @@
             // 
             // Proc_richTextBox
             // 
-            this.Proc_richTextBox.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.Proc_richTextBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Proc_richTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Proc_richTextBox.Enabled = false;
-            this.Proc_richTextBox.Location = new System.Drawing.Point(26, 684);
+            this.Proc_richTextBox.Location = new System.Drawing.Point(32, 569);
             this.Proc_richTextBox.Name = "Proc_richTextBox";
             this.Proc_richTextBox.Size = new System.Drawing.Size(221, 161);
             this.Proc_richTextBox.TabIndex = 110;
             this.Proc_richTextBox.Text = "Процессор:";
             // 
-            // monthCalendar1
+            // label3
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(72, 891);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 111;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 748);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 25);
+            this.label3.TabIndex = 112;
+            this.label3.Text = "Дата покупки";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(26, 776);
+            this.dateTimePicker1.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(265, 31);
+            this.dateTimePicker1.TabIndex = 113;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // Calc_button
+            // 
+            this.Calc_button.Location = new System.Drawing.Point(26, 833);
+            this.Calc_button.Name = "Calc_button";
+            this.Calc_button.Size = new System.Drawing.Size(110, 23);
+            this.Calc_button.TabIndex = 114;
+            this.Calc_button.Text = "Посчитать стоимость";
+            this.Calc_button.UseVisualStyleBackColor = true;
+            this.Calc_button.Click += new System.EventHandler(this.Calc_button_Click);
+            // 
+            // Price_label
+            // 
+            this.Price_label.AutoSize = true;
+            this.Price_label.Location = new System.Drawing.Point(142, 831);
+            this.Price_label.Name = "Price_label";
+            this.Price_label.Size = new System.Drawing.Size(132, 25);
+            this.Price_label.TabIndex = 115;
+            this.Price_label.Text = "Стоимость: ";
+            // 
+            // SaveJSON_button
+            // 
+            this.SaveJSON_button.Location = new System.Drawing.Point(611, 48);
+            this.SaveJSON_button.Name = "SaveJSON_button";
+            this.SaveJSON_button.Size = new System.Drawing.Size(497, 34);
+            this.SaveJSON_button.TabIndex = 116;
+            this.SaveJSON_button.Text = "Сохранить в XML";
+            this.SaveJSON_button.UseVisualStyleBackColor = true;
+            this.SaveJSON_button.Click += new System.EventHandler(this.SaveJSON_button_Click);
+            // 
+            // GetJSON_button
+            // 
+            this.GetJSON_button.Location = new System.Drawing.Point(611, 101);
+            this.GetJSON_button.Name = "GetJSON_button";
+            this.GetJSON_button.Size = new System.Drawing.Size(497, 34);
+            this.GetJSON_button.TabIndex = 117;
+            this.GetJSON_button.Text = "Извлечь из XML";
+            this.GetJSON_button.UseVisualStyleBackColor = true;
+            this.GetJSON_button.Click += new System.EventHandler(this.GetJSON_button_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(26, 874);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(381, 34);
+            this.button1.TabIndex = 118;
+            this.button1.Text = "Добавить компьютер";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Location = new System.Drawing.Point(611, 191);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(497, 629);
+            this.richTextBox1.TabIndex = 119;
+            this.richTextBox1.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(767, 839);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 25);
+            this.label4.TabIndex = 121;
+            this.label4.Text = "Стоимость: ";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(611, 833);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(137, 37);
+            this.button2.TabIndex = 120;
+            this.button2.Text = "Посчитать стоимость";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // search_button
+            // 
+            this.search_button.Location = new System.Drawing.Point(611, 151);
+            this.search_button.Name = "search_button";
+            this.search_button.Size = new System.Drawing.Size(497, 34);
+            this.search_button.TabIndex = 122;
+            this.search_button.Text = "Поиск";
+            this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // help_Button
+            // 
+            this.help_Button.AutoSize = true;
+            this.help_Button.Location = new System.Drawing.Point(1084, 874);
+            this.help_Button.Name = "help_Button";
+            this.help_Button.Size = new System.Drawing.Size(154, 35);
+            this.help_Button.TabIndex = 123;
+            this.help_Button.Text = "О программе";
+            this.help_Button.UseVisualStyleBackColor = true;
+            this.help_Button.Click += new System.EventHandler(this.help_Button_Click);
             // 
             // Computer_form
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1068, 1293);
-            this.Controls.Add(this.monthCalendar1);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(1250, 1293);
+            this.Controls.Add(this.help_Button);
+            this.Controls.Add(this.search_button);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.GetJSON_button);
+            this.Controls.Add(this.SaveJSON_button);
+            this.Controls.Add(this.Price_label);
+            this.Controls.Add(this.Calc_button);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Proc_richTextBox);
             this.Controls.Add(this.addProc);
             this.Controls.Add(this.label1);
@@ -257,11 +391,12 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.NameField);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.Name = "Computer_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Добавить устройство";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Text = "IT дамбалатория";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Computer_form_KeyDown);
             this.DriveGroup.ResumeLayout(false);
             this.DriveGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).EndInit();
@@ -290,7 +425,18 @@
         private System.Windows.Forms.ComboBox RamType_comboBox;
         private System.Windows.Forms.Button addProc;
         private System.Windows.Forms.RichTextBox Proc_richTextBox;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button Calc_button;
+        private System.Windows.Forms.Label Price_label;
+        private System.Windows.Forms.Button SaveJSON_button;
+        private System.Windows.Forms.Button GetJSON_button;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button search_button;
+        private System.Windows.Forms.Button help_Button;
     }
 }
 

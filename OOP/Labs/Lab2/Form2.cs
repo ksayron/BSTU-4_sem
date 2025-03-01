@@ -108,12 +108,20 @@ namespace Lab2
 
         private void Hz_trackBar_Scroll(object sender, EventArgs e)
         {
+            if (MaxHz_trackBar.Value < Hz_trackBar.Value)
+            {
+                MaxHz_trackBar.Value = Hz_trackBar.Value;
+            }
             Hz_value.Text = String.Format("Значение: {0} Hz", ((float)Hz_trackBar.Value)/10);
             proccesor.Hz = ((float)Hz_trackBar.Value) / 10;
         }
 
         private void MaxHz_trackBar_Scroll(object sender, EventArgs e)
         {
+            if (MaxHz_trackBar.Value < Hz_trackBar.Value)
+            {
+                MaxHz_trackBar.Value= Hz_trackBar.Value;
+            }
             MaxHz_value.Text = String.Format("Значение: {0} Hz", ((float)MaxHz_trackBar.Value) / 10);
             proccesor.MaxHz = ((float)MaxHz_trackBar.Value) / 10;
         }
