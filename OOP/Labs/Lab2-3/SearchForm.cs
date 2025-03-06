@@ -51,7 +51,39 @@ namespace Lab2
             }
             if (sortBy_comboBox.SelectedIndex == 1)
             {
-                responce = responce.OrderBy(comp => comp.Price);
+                responce = responce.OrderBy(comp => comp.Price).ToList<Computer>();
+            }
+            foreach (var comp in responce)
+            {
+                richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
+            }
+        }
+
+        private void sortBy_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            responce = new List<Computer>();
+            query = textBox1.Text;
+            foreach (var comp in computers)
+            {
+                if (query != "")
+                {
+                    if (comp.Name.Contains(query))
+                    {
+                        responce.Add(comp);
+
+                    }
+
+                }
+                else
+                {
+                    responce.Add(comp);
+                }
+
+            }
+            richTextBox1.Text = "";
+            if (sortBy_comboBox.SelectedIndex == 1)
+            {
+                responce = responce.OrderBy(comp => comp.Price).ToList<Computer>();
             }
             foreach (var comp in responce)
             {

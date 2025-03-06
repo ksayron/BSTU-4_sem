@@ -258,7 +258,7 @@ namespace Lab2
                 }
                 foreach (var comp in computers)
                 {
-                    richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model}  " + '\n';
+                    richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
                 }
                 MessageBox.Show("Компутеры распокавали", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

@@ -71,6 +71,7 @@
             this.sortBy_comboBox.Name = "sortBy_comboBox";
             this.sortBy_comboBox.Size = new System.Drawing.Size(269, 33);
             this.sortBy_comboBox.TabIndex = 3;
+            this.sortBy_comboBox.SelectedIndexChanged += new System.EventHandler(this.sortBy_comboBox_SelectedIndexChanged);
             // 
             // SearchForm
             // 
