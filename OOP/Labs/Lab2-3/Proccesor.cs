@@ -78,7 +78,8 @@ namespace Lab2
         }
         public string Stats()
         {
-            string message = $"Производитель: {Producer}\n" +
+            string message = 
+                $"Производитель: {Producer}\n" +
                 $"Модель: {Model}\n" +
                 $"Серия: {Series}\n" +
                 $"Кол-во ядер: {Cores}\n" +

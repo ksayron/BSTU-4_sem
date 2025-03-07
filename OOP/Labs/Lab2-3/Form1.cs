@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Text.Json;
 using System.Xml.Serialization;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lab2
 {
@@ -220,13 +221,27 @@ namespace Lab2
                 compik.drives.type = EDriveType.SSD;
             }
             compik.date = dateTimePicker1.Value;
-            computers.Add(compik);
-            foreach(var comp in computers)
+            var contex = new ValidationContext(compik);
+            var results = new List<ValidationResult>();
+            if (Validator.TryValidateObject(compik,contex,results,true))
             {
-                richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model}  " + '\n';
+                MessageBox.Show(textBox1.Text.Length.ToString(), "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                computers.Add(compik);
+                foreach (var comp in computers)
+                {
+                    richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model}  " + '\n';
+                }
             }
-            MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            else
+            {
+                foreach (var message in results)
+                {
+                    MessageBox.Show(message.ErrorMessage, "Ой", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            Logging.Text = "Добавили компутер" + DateTime.Now;
+            }
 
         private void SaveJSON_button_Click(object sender, EventArgs e)
         {
@@ -243,6 +258,7 @@ namespace Lab2
             catch{
                 MessageBox.Show("Ошибка при сериализации", "Ой", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            Logging.Text = "Компутеры запокавали" + DateTime.Now;
         }
 
         private void GetJSON_button_Click(object sender, EventArgs e)
@@ -266,6 +282,7 @@ namespace Lab2
             {
                 MessageBox.Show("Ошибка при сериализации", "Ой", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            Logging.Text = "Распаковали компутеры" + DateTime.Now;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -277,6 +294,7 @@ namespace Lab2
                 sum += computer.Price;
             }
             label4.Text ="Стоимость:"+ Math.Round(sum, 2) + " $";
+            Logging.Text = "Подсчет стоимости дабалатории"+DateTime.Now;
         }
 
         private void Computer_form_KeyDown(object sender, KeyEventArgs e)
@@ -295,6 +313,19 @@ namespace Lab2
         {
             var form3 = new helpForm();
             form3.ShowDialog();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var form3 = new helpForm();
+            form3.ShowDialog();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            var searchForm = new SearchForm(computers);
+            searchForm.computers = computers;
+            searchForm.ShowDialog();
         }
     }
 }

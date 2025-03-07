@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,13 +48,22 @@ namespace Lab2
     [Serializable]
     public class Computer
     {
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string Name;
+        [Required]
         public EComType Type;
+        [Required]
         public Drive drives;
+        [Required]
         public Ram ram;
+        [Required]
         public DateTime PurchaseDate;
+        [Required]
         public Proccesor Proccesor;
+        
         public DateTime date;
+        [Required]
         public double Price;
 
         public Computer()

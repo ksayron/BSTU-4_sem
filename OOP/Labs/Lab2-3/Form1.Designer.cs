@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Computer_form));
             this.NameField = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.Type_comboBox = new System.Windows.Forms.ComboBox();
@@ -57,9 +58,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.search_button = new System.Windows.Forms.Button();
             this.help_Button = new System.Windows.Forms.Button();
+            this.LogLabel = new System.Windows.Forms.Label();
+            this.Logging = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.DriveGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RamValueTrack)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // NameField
@@ -73,7 +80,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(19, 41);
+            this.textBox1.Location = new System.Drawing.Point(16, 45);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(256, 31);
             this.textBox1.TabIndex = 1;
@@ -313,14 +320,14 @@
             this.richTextBox1.Enabled = false;
             this.richTextBox1.Location = new System.Drawing.Point(611, 191);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(497, 629);
+            this.richTextBox1.Size = new System.Drawing.Size(497, 527);
             this.richTextBox1.TabIndex = 119;
             this.richTextBox1.Text = "";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(767, 839);
+            this.label4.Location = new System.Drawing.Point(767, 742);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 25);
             this.label4.TabIndex = 121;
@@ -328,7 +335,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(611, 833);
+            this.button2.Location = new System.Drawing.Point(611, 736);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(137, 37);
             this.button2.TabIndex = 120;
@@ -357,12 +364,64 @@
             this.help_Button.UseVisualStyleBackColor = true;
             this.help_Button.Click += new System.EventHandler(this.help_Button_Click);
             // 
+            // LogLabel
+            // 
+            this.LogLabel.AutoSize = true;
+            this.LogLabel.Location = new System.Drawing.Point(611, 794);
+            this.LogLabel.Name = "LogLabel";
+            this.LogLabel.Size = new System.Drawing.Size(226, 25);
+            this.LogLabel.TabIndex = 124;
+            this.LogLabel.Text = "Последнее действие:";
+            // 
+            // Logging
+            // 
+            this.Logging.AutoSize = true;
+            this.Logging.Location = new System.Drawing.Point(832, 794);
+            this.Logging.Name = "Logging";
+            this.Logging.Size = new System.Drawing.Size(0, 25);
+            this.Logging.TabIndex = 125;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1250, 42);
+            this.toolStrip1.TabIndex = 126;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(167, 36);
+            this.toolStripButton1.Text = "О программе";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(86, 44);
+            this.toolStripButton2.Text = "Поиск";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
             // Computer_form
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1250, 1293);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.Logging);
+            this.Controls.Add(this.LogLabel);
             this.Controls.Add(this.help_Button);
             this.Controls.Add(this.search_button);
             this.Controls.Add(this.label4);
@@ -401,6 +460,8 @@
             this.DriveGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DriveSizeTrack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RamValueTrack)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,6 +498,11 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button search_button;
         private System.Windows.Forms.Button help_Button;
+        private System.Windows.Forms.Label LogLabel;
+        private System.Windows.Forms.Label Logging;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
     }
 }
 
