@@ -22,11 +22,11 @@ const array: Array<Person> = [
 //
 
 type CarsType = {
-    manufacturer: string;
-    model: string;
+    manufacturer?: string;
+    model?: string;
 }
 
-let car: CarsType = { manufacturer: "manufacturer", model: 'model' };
+let car: CarsType = { };
 
 //
 
@@ -116,7 +116,7 @@ const group1: GroupType = {
         }
     },
     group: 1,
-    mark: 0 as any
+    mark: 0 as MarkFilterType
 }
 
 group1.students.push(person1);
