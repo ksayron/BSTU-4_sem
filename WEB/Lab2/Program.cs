@@ -21,7 +21,7 @@ namespace Lab2
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "Neuman.html" } });
-            app.UseStaticFiles();
+            app.UseStaticFiles("/static");
            
             app.UseRouting();
 

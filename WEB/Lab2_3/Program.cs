@@ -7,11 +7,13 @@ namespace Lab2_3
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            //builder.Logging.AddFilter("Microsoft.AspNetCore.Diagnostics", LogLevel.None);
             // Add services to the container.
             builder.Services.AddRazorPages();
-
+            
             var app = builder.Build();
+            //app.UseHttpLogging();
+            app.UseExceptionHandler("/error");
             app.MapGet("/", () => "Start");
             app.MapGet("/test1", () => 
             {
