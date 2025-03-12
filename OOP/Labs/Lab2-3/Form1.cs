@@ -151,7 +151,7 @@ namespace Lab2
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
-
+            bool conditions_met = true;
             var compik = new Computer();
             compik.Name = textBox1.Text;
             compik.drives.size = (uint)DriveSizeTrack.Value;
@@ -174,7 +174,8 @@ namespace Lab2
                     }
                 default:
                     {
-                        MessageBox.Show("Выберите тип жесткого диска", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Выберите тип устройства", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        conditions_met = false;
                         break;
                     }
             }
@@ -208,6 +209,7 @@ namespace Lab2
                 default:
                     {
                         MessageBox.Show("Выберите тип оперативной памяти", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        conditions_met = false;
                         break;
                     }
             }
@@ -219,6 +221,10 @@ namespace Lab2
             else if (SSD_Button.Checked)
             {
                 compik.drives.type = EDriveType.SSD;
+            }
+            else
+            {
+                conditions_met=false;
             }
             compik.date = dateTimePicker1.Value;
             var contex = new ValidationContext(compik);
@@ -294,7 +300,7 @@ namespace Lab2
                 sum += computer.Price;
             }
             label4.Text ="Стоимость:"+ Math.Round(sum, 2) + " $";
-            Logging.Text = "Подсчет стоимости дабалатории"+DateTime.Now;
+            Logging.Text = "Подсчет стоимости даvбалатории"+DateTime.Now;
         }
 
         private void Computer_form_KeyDown(object sender, KeyEventArgs e)

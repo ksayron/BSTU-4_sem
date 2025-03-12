@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace Lab2
     [Serializable]
     public class Computer
     {
-        [Required]
+        [Required(ErrorMessage = "Устройство должно обладать именем")]
         [StringLength(50, MinimumLength = 3)]
         public string Name;
         [Required]
@@ -64,6 +65,7 @@ namespace Lab2
         
         public DateTime date;
         [Required]
+        [Range(0,2000)]
         public double Price;
 
         public Computer()
@@ -86,6 +88,7 @@ namespace Lab2
             double DiskPrice = 0;
             double RamPrice = 0;
             double ProcPrice = 0;
+            try{ 
             switch (drives.type)
             {
                 case EDriveType.none :
@@ -105,7 +108,7 @@ namespace Lab2
                     }
                 default :
                     {
-                        throw new Exception("хз как");
+                        throw new Exception("хз как"); 
                     }
             }
             DiskPrice *= 0.03*drives.size;
@@ -217,32 +220,40 @@ namespace Lab2
                         throw new Exception("хз как");
                     }
             }
-            switch (Proccesor.CacheSize)
-            {
-                case ECacheSize.none:
-                    {
-                        throw new Exception("нет процессора");
-                        break;
-                    }
-                case ECacheSize.L1:
-                    {
-                        ProcPrice *= 1.2;
-                        break;
-                    }
-                case ECacheSize.L2:
-                    {
-                        ProcPrice *= 2;
-                        break;
-                    }
-                case ECacheSize.L3:
-                    {
-                        ProcPrice *= 2.5;
-                        break;
-                    }
-                default:
-                    {
-                        throw new Exception("хз как");
-                    }
+                switch (Proccesor.CacheSize)
+                {
+                    case ECacheSize.none:
+                        {
+                            throw new Exception("нет процессора");
+                            break;
+                        }
+                    case ECacheSize.L1:
+                        {
+                            ProcPrice *= 1.2;
+                            break;
+                        }
+                    case ECacheSize.L2:
+                        {
+                            ProcPrice *= 2;
+                            break;
+                        }
+                    case ECacheSize.L3:
+                        {
+                            ProcPrice *= 2.5;
+                            break;
+                        }
+                    default:
+                        {
+                            throw new Exception("хз как");
+                        }
+                }
+                if (Proccesor.Architecture == EArchitecture.none)
+                {
+                    throw new Exception("no architecture");
+                }
+            }
+            catch{
+                return;
             }
             if(Proccesor.Architecture == EArchitecture.x64)
             {

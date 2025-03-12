@@ -15,7 +15,7 @@ namespace Lab2
         [STAThread]
         static void Main()
         {
-            List<Computer> computers = new List<Computer>();
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Computer_form());
