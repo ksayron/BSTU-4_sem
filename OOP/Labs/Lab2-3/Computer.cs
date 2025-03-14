@@ -46,24 +46,52 @@ namespace Lab2
         public ERAMType type;
         public uint size;
     }
+
+    public class ValidDateAttribute : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            if(value!= null)
+            {
+               if (!DateTime.TryParse(value.ToString(), out DateTime validateDate))
+               {
+                    this.ErrorMessage = "Неккоректная дата";
+                    return false;
+               }
+               if(validateDate < new DateTime(2000, 1, 1))
+               {
+                    this.ErrorMessage = "Слишком старый компьютер";
+                    return false;
+               }
+                if (validateDate > DateTime.Now)
+                {
+                    this.ErrorMessage = "Вы не из будущего!";
+                    return false;
+                }
+                return true;
+            }
+            this.ErrorMessage = "Отсутствует дата";
+            return false;
+        }
+    }
     [Serializable]
     public class Computer
     {
         [Required(ErrorMessage = "Устройство должно обладать именем")]
         [StringLength(50, MinimumLength = 3)]
-        public string Name;
+        public string Name { get; set; }
         [Required]
-        public EComType Type;
+        public EComType Type { get; set; }
         [Required]
         public Drive drives;
         [Required]
         public Ram ram;
         [Required]
-        public DateTime PurchaseDate;
+        public DateTime PurchaseDate { get; set; }
         [Required]
-        public Proccesor Proccesor;
-        
-        public DateTime date;
+        public Proccesor Proccesor { get; set; }
+        [ValidDate]
+        public DateTime date {  get; set; }
         [Required]
         [Range(0,2000)]
         public double Price;

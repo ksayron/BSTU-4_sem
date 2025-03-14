@@ -19,11 +19,19 @@ namespace Lab2
     {
         public Computer computer;
         public List<Computer> computers;
+        bool ProcFormCall = false;
         public Computer_form()
         {
             InitializeComponent();
             computer = new Computer();
             computers = new List<Computer>();
+            dataGridView1.Columns.Add("Computer Name", "Computer Name");
+            dataGridView1.Columns.Add("Computer Type", "Computer Type");
+            dataGridView1.Columns.Add("CPU", "Процессор");
+            dataGridView1.Columns.Add("Drives", "Диски");
+            dataGridView1.Columns.Add("RAM", "Опер. память");
+            dataGridView1.Columns.Add("Purchase Date", "Дата закупки");
+            dataGridView1.Columns.Add("Price", "Цена");
         }
 
         private void DriveSizeTrack_Scroll(object sender, EventArgs e)
@@ -45,6 +53,8 @@ namespace Lab2
 
             computer.Proccesor = form2.proccesor;
             Proc_richTextBox.Text = "Процессор: \n"+computer.Proccesor.Stats();
+            Logging.Text = "Добавлен процессор" + DateTime.Now;
+            ProcFormCall = true;
 
         }
 
@@ -213,6 +223,7 @@ namespace Lab2
                         break;
                     }
             }
+            compik.ram.size = (uint)RamValueTrack.Value;
             compik.Proccesor = computer.Proccesor;
             if (HDD_Button.Checked)
             {
@@ -225,28 +236,46 @@ namespace Lab2
             else
             {
                 conditions_met=false;
+                MessageBox.Show("Выберите тип жесткого диска", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            compik.drives.size = (uint)DriveSizeTrack.Value;
+            if (!ProcFormCall)
+            {
+                conditions_met = false;
+                MessageBox.Show("Добавтье процессор!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             compik.date = dateTimePicker1.Value;
-            var contex = new ValidationContext(compik);
-            var results = new List<ValidationResult>();
-            if (Validator.TryValidateObject(compik,contex,results,true))
-            {
-                MessageBox.Show(textBox1.Text.Length.ToString(), "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                computers.Add(compik);
-                foreach (var comp in computers)
+            if(conditions_met){
+                var contex = new ValidationContext(compik, null, null);
+                var results = new List<ValidationResult>();
+                if (Validator.TryValidateObject(compik, contex, results, true))
                 {
-                    richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model}  " + '\n';
+                    MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    computers.Add(compik);
+                    foreach (var comp in computers)
+                    {
+                        richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model}  " + '\n';
+                        dataGridView1.Rows.Add(
+                        comp.Name,
+                        comp.Type,
+                        comp.Proccesor.Producer.ToString() + ' ' + comp.Proccesor.Series + ' ' + comp.Proccesor.Model,
+                        comp.drives.type.ToString() + ' ' + comp.drives.size,
+                        comp.ram.type.ToString() + ' ' + comp.ram.size,
+                        comp.date,
+                        comp.Price
+                        );
+                    }
+                    ProcFormCall = false;
                 }
-            }
-            else
-            {
-                foreach (var message in results)
+                else
                 {
-                    MessageBox.Show(message.ErrorMessage, "Ой", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    foreach (var message in results)
+                    {
+                        MessageBox.Show(message.ErrorMessage, "Ой", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
+                Logging.Text = "Добавили компутер" + DateTime.Now;
             }
-            Logging.Text = "Добавили компутер" + DateTime.Now;
             }
 
         private void SaveJSON_button_Click(object sender, EventArgs e)
@@ -281,7 +310,17 @@ namespace Lab2
                 foreach (var comp in computers)
                 {
                     richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
+                    dataGridView1.Rows.Add(
+                        comp.Name,
+                        comp.Type,
+                        comp.Proccesor.Producer.ToString()+' '+comp.Proccesor.Series+ ' ' +comp.Proccesor.Model,
+                        comp.drives.type.ToString()+' '+comp.drives.size,
+                        comp.ram.type.ToString()+' '+comp.ram.size,
+                        comp.date,
+                        comp.Price
+                        );
                 }
+                
                 MessageBox.Show("Компутеры распокавали", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
@@ -313,6 +352,7 @@ namespace Lab2
             var searchForm = new SearchForm(computers);
             searchForm.computers = computers;
             searchForm.ShowDialog();
+            Logging.Text = "Поиск" + DateTime.Now;
         }
 
         private void help_Button_Click(object sender, EventArgs e)
@@ -332,6 +372,29 @@ namespace Lab2
             var searchForm = new SearchForm(computers);
             searchForm.computers = computers;
             searchForm.ShowDialog();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            this.FindForm().Location = new Point(this.FindForm().Location.X+100, this.FindForm().Location.Y);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            this.FindForm().Location = new Point(this.FindForm().Location.X - 100, this.FindForm().Location.Y);
+        }
+
+        private void LogLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                computers[e.RowIndex].Proccesor.DisplayProperties();
+            }
         }
     }
 }

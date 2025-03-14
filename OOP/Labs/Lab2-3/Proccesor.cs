@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
@@ -52,14 +53,23 @@ namespace Lab2
     [Serializable]
     public class Proccesor
     {
-        public EProducer Producer;
-        public EModel Model;
-        public ESeries Series;
-        public uint Cores;
-        public float Hz;
-        public float MaxHz;
-        
+        [Required]
+        public EProducer Producer {  get; set; }
+        [Required]
+        public EModel Model {  get; set; }
+        [Required]
+        public ESeries Series {  get; set; }
+        [Required]
+        public uint Cores {  get; set; }
+        [Required]
+        [Range(1, 120)]
+        public float Hz { get; set; }
+        [Required]
+        [Range(1, 120)]
+        public float MaxHz { get; set; }
+        [Required]
         public EArchitecture Architecture;
+        [Required]
         public ECacheSize CacheSize;
         public Proccesor(EProducer producer, EModel model,ESeries series, uint cores, float hz, float maxHz, ECacheSize size, EArchitecture arc)
         {

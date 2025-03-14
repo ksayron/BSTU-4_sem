@@ -1,6 +1,7 @@
 ﻿using System;   
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Lab2
         public Form2()
         {
             InitializeComponent();
-            proccesor = new Proccesor(EProducer.none, EModel.none,ESeries.none,1,10,10,ECacheSize.none,EArchitecture.none);
+            proccesor = new Proccesor(EProducer.none, EModel.none,ESeries.none,0,0,0,ECacheSize.none,EArchitecture.none);
 
         }
 
@@ -113,6 +114,7 @@ namespace Lab2
                 MaxHz_trackBar.Value = Hz_trackBar.Value;
             }
             Hz_value.Text = String.Format("Значение: {0} Hz", ((float)Hz_trackBar.Value)/10);
+            MaxHz_value.Text = String.Format("Значение: {0} Hz", ((float)MaxHz_trackBar.Value) / 10);
             proccesor.Hz = ((float)Hz_trackBar.Value) / 10;
         }
 
@@ -244,8 +246,22 @@ namespace Lab2
             {
                 MessageBox.Show("Выберите архитектруру процессора", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            proccesor.DisplayProperties();
-            this.Close();
+            var contex = new ValidationContext(proccesor, null, null);
+            var results = new List<ValidationResult>();
+            if (Validator.TryValidateObject(proccesor, contex, results, true))
+            {
+
+                proccesor.DisplayProperties();
+                this.Close();
+            }
+            else
+            {
+                foreach (var message in results)
+                {
+                    MessageBox.Show(message.ErrorMessage, "Ой", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            
         }
     }
 }

@@ -95,7 +95,7 @@
             // 
             // CoreValueTrack
             // 
-            this.CoreValueTrack.LargeChange = 8;
+            this.CoreValueTrack.LargeChange = 4;
             this.CoreValueTrack.Location = new System.Drawing.Point(58, 326);
             this.CoreValueTrack.Margin = new System.Windows.Forms.Padding(4);
             this.CoreValueTrack.Maximum = 12;
