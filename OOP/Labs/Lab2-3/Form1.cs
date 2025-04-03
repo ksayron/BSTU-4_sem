@@ -19,12 +19,14 @@ namespace Lab2
     {
         public Computer computer;
         public List<Computer> computers;
+        public List<Computer> backup;
         bool ProcFormCall = false;
         public Computer_form()
         {
             InitializeComponent();
             computer = new Computer();
             computers = new List<Computer>();
+            backup = new List<Computer>();
             dataGridView1.Columns.Add("Computer Name", "Computer Name");
             dataGridView1.Columns.Add("Computer Type", "Computer Type");
             dataGridView1.Columns.Add("CPU", "Процессор");
@@ -250,6 +252,7 @@ namespace Lab2
                 var results = new List<ValidationResult>();
                 if (Validator.TryValidateObject(compik, contex, results, true))
                 {
+                    backup = computers;
                     MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     computers.Add(compik);
                     foreach (var comp in computers)
@@ -304,6 +307,7 @@ namespace Lab2
                 XmlSerializer xml = new XmlSerializer(typeof(List<Computer>));
                 using (FileStream fs = new FileStream("computers.xml", FileMode.OpenOrCreate))
                 {
+                    backup = computers; 
                     computers = xml.Deserialize(fs) as List<Computer>;
                     
                 }
@@ -376,12 +380,48 @@ namespace Lab2
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            this.FindForm().Location = new Point(this.FindForm().Location.X+100, this.FindForm().Location.Y);
+            richTextBox1.Text = "";
+            dataGridView1.Rows.Clear();
+            var temp = computers;
+            computers = backup;
+            backup = temp;
+            foreach (var comp in computers)
+            {
+                richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
+                dataGridView1.Rows.Add(
+                    comp.Name,
+                    comp.Type,
+                    comp.Proccesor.Producer.ToString() + ' ' + comp.Proccesor.Series + ' ' + comp.Proccesor.Model,
+                    comp.drives.type.ToString() + ' ' + comp.drives.size,
+                    comp.ram.type.ToString() + ' ' + comp.ram.size,
+                    comp.date,
+                    comp.Price
+                    );
+            }
+            Logging.Text = "Возврат действия" + DateTime.Now;
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            this.FindForm().Location = new Point(this.FindForm().Location.X - 100, this.FindForm().Location.Y);
+            richTextBox1.Text = "";
+            dataGridView1.Rows.Clear();
+            var temp = computers;
+            computers = backup;
+            backup = temp;
+            foreach (var comp in computers)
+            {
+                richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
+                dataGridView1.Rows.Add(
+                    comp.Name,
+                    comp.Type,
+                    comp.Proccesor.Producer.ToString() + ' ' + comp.Proccesor.Series + ' ' + comp.Proccesor.Model,
+                    comp.drives.type.ToString() + ' ' + comp.drives.size,
+                    comp.ram.type.ToString() + ' ' + comp.ram.size,
+                    comp.date,
+                    comp.Price
+                    );
+            }
+            Logging.Text = "Отмена действия" + DateTime.Now;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
