@@ -42,21 +42,15 @@
     "PhotoPath": "/Photo/Dijkstra.jpg"
   },
   {
-    "Id": 9,
-    "Firstname": "Amy",
-    "Surname": "Lovelace",
-    "PhotoPath": "/Photo/Lovelace.jpg"
+    "Id": 0,
+    "Firstname": "Updated2",
+    "Surname": "Updated2",
+    "PhotoPath": "Photo/Updated2.jpg"
   },
   {
-    "Id": 8,
-    "Firstname": "Jane",
-    "Surname": "Morgan",
-    "PhotoPath": "/Photo/Morgan.jpg"
-  },
-  {
-    "Id": 11,
-    "Firstname": "Chino",
-    "Surname": "Moreno",
-    "PhotoPath": "/Photo/Moreno.jpg"
+    "Id": 0,
+    "Firstname": "TestUpd2",
+    "Surname": "TestUpd2",
+    "PhotoPath": "Photo/TestUpd2.jpg"
   }
 ]

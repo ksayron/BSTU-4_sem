@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Photo\Berners-Lee.jpg" />
+    <Content Remove="wwwroot\Photo\Chomsky.jpg" />
+    <Content Remove="wwwroot\Photo\Codd.jpg" />
+    <Content Remove="wwwroot\Photo\Dijkstra.jpg" />
+    <Content Remove="wwwroot\Photo\Knuth.jpg" />
+    <Content Remove="wwwroot\Photo\Linus.jpg" />
+    <Content Remove="wwwroot\Photo\Neumann.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Photo\Berners-Lee.jpg" />
+    <None Include="wwwroot\Photo\Chomsky.jpg" />
+    <None Include="wwwroot\Photo\Codd.jpg" />
+    <None Include="wwwroot\Photo\Dijkstra.jpg" />
+    <None Include="wwwroot\Photo\Knuth.jpg" />
+    <None Include="wwwroot\Photo\Linus.jpg" />
+    <None Include="wwwroot\Photo\Neumann.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="lab4_LIB">
+      <HintPath>..\..\lab4\lab4_LIB\bin\Debug\net8.0\lab4_LIB.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
