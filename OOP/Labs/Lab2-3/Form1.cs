@@ -163,6 +163,7 @@ namespace Lab2
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
+            dataGridView1.Rows.Clear();
             bool conditions_met = true;
             var compik = new Computer();
             compik.Name = textBox1.Text;
@@ -252,7 +253,7 @@ namespace Lab2
                 var results = new List<ValidationResult>();
                 if (Validator.TryValidateObject(compik, contex, results, true))
                 {
-                    backup = computers;
+                    backup = new List<Computer>(computers);
                     MessageBox.Show("Компутер добавлен", "Добавили", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     computers.Add(compik);
                     foreach (var comp in computers)
@@ -307,7 +308,7 @@ namespace Lab2
                 XmlSerializer xml = new XmlSerializer(typeof(List<Computer>));
                 using (FileStream fs = new FileStream("computers.xml", FileMode.OpenOrCreate))
                 {
-                    backup = computers; 
+                    backup = new List<Computer>(computers); 
                     computers = xml.Deserialize(fs) as List<Computer>;
                     
                 }
@@ -383,8 +384,8 @@ namespace Lab2
             richTextBox1.Text = "";
             dataGridView1.Rows.Clear();
             var temp = computers;
-            computers = backup;
-            backup = temp;
+            computers = new List<Computer>(backup);
+            backup = new List<Computer>(temp);
             foreach (var comp in computers)
             {
                 richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';
@@ -406,8 +407,8 @@ namespace Lab2
             richTextBox1.Text = "";
             dataGridView1.Rows.Clear();
             var temp = computers;
-            computers = backup;
-            backup = temp;
+            computers = new List<Computer>(backup);
+            backup = new List<Computer>(temp);
             foreach (var comp in computers)
             {
                 richTextBox1.Text += $"{comp.Name} {comp.Type} {comp.Proccesor.Producer} {comp.Proccesor.Series} {comp.Proccesor.Model} {comp.Price}$" + '\n';

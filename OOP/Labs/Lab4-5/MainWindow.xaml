@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab4_5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Главная" Height="450" Width="800">
 
+    <Grid Margin="0,0,0,0">
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/kruti_oboi.jpg"/>
+        </Grid.Background>
+
+        <Button Content="Button" HorizontalAlignment="Left" Margin="59,340,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Image Name="creeper" HorizontalAlignment="Left" Height="56" Margin="173,270,0,0" VerticalAlignment="Top" Width="56" Source="/creeper.jpg" Visibility="Hidden">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/creeper.jpg" Stretch="UniformToFill"/>
+            </Image.OpacityMask>
+        </Image>
     </Grid>
 </Window>

@@ -9,4 +9,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="creeper.jpg" />
+    <None Remove="kruti_oboi.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="creeper.jpg" />
+    <Resource Include="kruti_oboi.jpg" />
+  </ItemGroup>
+
 </Project>
