@@ -7,7 +7,7 @@ namespace lab5_2
     public class Program
     {
         public static void Main(string[] args)
-        {
+        {       
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -35,7 +35,7 @@ namespace lab5_2
             using (ICelebrityRepository repository = JSONCelebrityRepository.Create("Celebrities"))
             {
                 RouteGroupBuilder api = app.MapGroup("/Celebrities");
-                SurnameFilter.repository = FileNotFoundFilter.repository =
+                SurnameFilter.repository = FileNotFoundFilter.repository = FileNotFoundPutFilter.repository =
                 FoundByIDFilter.repository = SurnameFilter.repository = repository;
 
                 app.UseExceptionHandler("/Celebrities/Error");
@@ -71,11 +71,11 @@ namespace lab5_2
                     var res = repository.UpdateCelebByID(id, celebrity);
                     if (res != null)
                     {
-                        return new Celebrity((int)id, celebrity.Firstname, celebrity.Surname, celebrity.PhotoPath);
+                        return new Celebrity((int)res, celebrity.Firstname, celebrity.Surname, celebrity.PhotoPath);
                     }
                     else { throw new UpdateByIDException($"Put /Celebrities error, Id = {id}"); }
                 })
-                .AddEndpointFilter<FileNotFoundFilter>();
+                .AddEndpointFilter<FileNotFoundPutFilter>();
                 app.Map("/Celebrities/Error", (HttpContext ctx) =>
                 {
                     Exception? ex = ctx.Features.Get<IExceptionHandlerFeature>()?.Error;
