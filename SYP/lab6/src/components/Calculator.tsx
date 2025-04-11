@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef } from "react";
+﻿import React, { useState,useEffect, useRef } from "react";
 import { evaluate } from 'mathjs';
 import Button from "./Button";
 import "../App.css";
@@ -13,6 +13,19 @@ const Calculator: React.FC = () => {
     const [inputValue, setInputValue] = useState("");
     const [DisplayValue, setDisplayValue] = useState("");
     const [LogValue, setLogValue] = useState("");
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+    }, [isDarkMode]);
+
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+    };
 
     const handleInputChange = (newValue: string) => {
         setInputValue(newValue);
@@ -35,7 +48,7 @@ const Calculator: React.FC = () => {
         return regex.test(str);
     }
     return (
-        <div className="counter-div">
+        <div className="counter-div" data-theme={isDarkMode ? 'dark' : 'light'} >
             <div>
                 <NumInput title="NumInput" InputValue={inputValue} ref={InputForm} onChange={handleInputChange}></NumInput>
                 <Button
@@ -134,6 +147,9 @@ const Calculator: React.FC = () => {
             <div>
                 <Log title="Log" InputValue={LogValue} ref={LogRef} onChange={handleLogChange} ></Log>
             </div>
+            <button className="theme-toggle" onClick={toggleTheme}>
+                {isDarkMode ? '☀️' : '🌙'}
+            </button>
         </div>
     );
 }
