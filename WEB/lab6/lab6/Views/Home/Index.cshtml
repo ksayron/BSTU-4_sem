@@ -1,0 +1,40 @@
+﻿
+@using lab6_MSSQL_LIB
+@model IRepository
+@{
+	<h1>Celebrities</h1>
+	@foreach (var celebrity in Model.GetAllCelebrity())
+	{
+
+
+		<img src="~/img/@celebrity.ReqPhotoPath" alt="@celebrity.FullName" onclick="showEvents(@celebrity.Id)"/>
+
+	}
+	<p id="event-text">
+	</p>
+	<style>
+	img{width:300px;height:300px;}
+	</style>
+	<script>
+		async function showEvents(celebId) {
+			const response = await fetch(`/api/LifeEvents/Celebrities/${celebId}`);
+			const events = await response.json();
+			console.log(events);
+			let textHolder = document.getElementById("event-text");
+			textHolder.innerHTML = "<h2>Events:</h2>";
+
+			if (events.length === 0) {
+				textHolder.innerHTML += "<p>error : 404</p>";
+			} else {
+				const list = document.createElement("ul");
+				events.forEach(ev => {
+					const li = document.createElement("li");
+					li.innerText = `${ev.date} - ${ev.description}  | CelebId:${ev.celebrityId} | EventId:${ev.id}`;
+					list.appendChild(li);
+				});
+				textHolder.appendChild(list);
+			}
+		}
+	</script>
+
+}

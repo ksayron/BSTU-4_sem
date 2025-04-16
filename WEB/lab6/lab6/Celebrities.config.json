@@ -1,0 +1,6 @@
+{
+  "Celebrities": {
+    "PhotosFolder": "D:\\BSTU\\4sem\\WEB\\lab6\\lab6\\wwwroot\\img\\",
+    "ConnectionString": "Server=(LocalDb)\\MSSQLLocalDB; Database = Lab6_DB; TrustServerCertificate=True; Trusted_Connection=true"
+  }
+}

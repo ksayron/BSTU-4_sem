@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\img\Babbage.jpg" />
+    <Content Remove="wwwroot\img\Berners-Lee.jpg" />
+    <Content Remove="wwwroot\img\Chomsky.jpg" />
+    <Content Remove="wwwroot\img\Codd.jpg" />
+    <Content Remove="wwwroot\img\Dijsktra.jpg" />
+    <Content Remove="wwwroot\img\Einstein.jpg" />
+    <Content Remove="wwwroot\img\Ershov.jpg" />
+    <Content Remove="wwwroot\img\Huntington.jpg" />
+    <Content Remove="wwwroot\img\Knuth.jpg" />
+    <Content Remove="wwwroot\img\Linus.jpg" />
+    <Content Remove="wwwroot\img\Lovelace.jpg" />
+    <Content Remove="wwwroot\img\Neumann.jpg" />
+    <Content Remove="wwwroot\img\Tanenbaum.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\lab6_MSSQL_LIB\lab6_MSSQL_LIB.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\Babbage.jpg" />
+    <None Include="wwwroot\img\Berners-Lee.jpg" />
+    <None Include="wwwroot\img\Chomsky.jpg" />
+    <None Include="wwwroot\img\Codd.jpg" />
+    <None Include="wwwroot\img\Dijsktra.jpg" />
+    <None Include="wwwroot\img\Einstein.jpg" />
+    <None Include="wwwroot\img\Ershov.jpg" />
+    <None Include="wwwroot\img\Huntington.jpg" />
+    <None Include="wwwroot\img\Knuth.jpg" />
+    <None Include="wwwroot\img\Linus.jpg" />
+    <None Include="wwwroot\img\Lovelace.jpg" />
+    <None Include="wwwroot\img\Neumann.jpg" />
+    <None Include="wwwroot\img\Tanenbaum.jpg" />
+    <None Include="wwwroot\index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\img\Celeberities.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
