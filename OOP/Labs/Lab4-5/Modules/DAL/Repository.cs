@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Lab4_5.Modules.DAL
 {
-    public interface IRepository : IRepository<User, Book> { }
+    public interface IRepository : IRepository<User, Book,Author,Genre> { }
     public class Repository : IRepository
     {
         LibraryContext context;
@@ -161,5 +161,65 @@ namespace Lab4_5.Modules.DAL
         }
 
         public void Dispose() { }
+
+        public List<Author> GetAllAuthors()
+        {
+            return this.context.Authors.ToList();
+        }
+
+        public Author? GetAuthorById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetAuthorBySurname(string surname)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddAuthor(Author author)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteAuthorById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateAuthor(int id, Author author)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Genre> GetAllGenres()
+        {
+            return this.context.Genres.ToList();
+        }
+
+        public Genre? GetGenreById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetGenreByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddGenre(Genre genre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteGenreById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateGenre(int id, Genre genre)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

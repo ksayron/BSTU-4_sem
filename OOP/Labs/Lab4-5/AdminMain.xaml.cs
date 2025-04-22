@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Lab4_5.Modules.classes;
+using Lab4_5.Modules.DAL;
 namespace Lab4_5
 {
     /// <summary>
@@ -19,6 +20,7 @@ namespace Lab4_5
     /// </summary>
     public partial class AdminMain : Window
     {
+        Repository repo = ((App)Application.Current).repository;
         User user;
         public AdminMain()
         {
@@ -29,7 +31,9 @@ namespace Lab4_5
         {
             user = auth_user;
             InitializeComponent();
+            this.BooksGrid.ItemsSource = repo.GetAllBooks();
             this.UserNameLabel.Content = user.Username;
+            
             switch (user.ProfilePicId)
             {
                 case 0:
@@ -46,6 +50,12 @@ namespace Lab4_5
                 
 
             }
+        }
+
+        private void AddBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            var new_form = new BookAddBox();
+            new_form.ShowDialog();
         }
     }
 }

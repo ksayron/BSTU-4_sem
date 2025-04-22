@@ -34,5 +34,10 @@ namespace Lab4_5.Modules.classes
             Surname = surname;
             Books = new List<Book>();
         }
+        public override string ToString()
+        {
+            return $"{Name} {Surname}";
+        }
     }
+
 }

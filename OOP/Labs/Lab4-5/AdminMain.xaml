@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Lab4_5"
         mc:Ignorable="d"
         Title="AdminMain" Height="450" Width="800">
@@ -16,18 +17,29 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="2">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="./Resources/Images/ProfPic/1.jpg" Width="20" Name="ProfilePicImage"></Image>
-                <Label HorizontalContentAlignment="Center" Content="UserName" Name="UserNameLabel"></Label>
+        <Image Grid.Column="0" Grid.Row="0" Source="./Resources/Images/Library/logo.png">
+            
+        </Image>
+        <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="2,0,0,0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="./Resources/Images/ProfPic/1.jpg" Width="20" Name="ProfilePicImage"></Image>
+                    <Label HorizontalContentAlignment="Center" Content="UserName" Name="UserNameLabel"></Label>
+                </StackPanel>
+                <Button Name="MyProfileButton">Мой профиль</Button>
             </StackPanel>
-            <Button Name="MyProfileButton">Мой профиль</Button>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2">
+        </Border>
+        <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2,2,0,0" >
+            <StackPanel >
             <Button>Главная</Button>
             <Button>Пользователи</Button>
-            <Button>Добавить книгу</Button>
+            <Button Name="AddBookButton" Click="AddBookButton_Click">Добавить книгу</Button>
             <Button>Выход</Button>
-        </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1" Margin="20,10,20,10" Background="#FFFFF4D6" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
+            <TextBox Margin="10,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" materialDesign:HintAssist.Hint="Поиск..."></TextBox>
+        </Border>
+        <DataGrid Grid.Row="1" Grid.Column="1"  AutoGenerateColumns="True" Name="BooksGrid"></DataGrid>
     </Grid>
 </Window>

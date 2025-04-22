@@ -12,11 +12,13 @@
   <ItemGroup>
     <None Remove="Resources\Images\BookImg\book.png" />
     <None Remove="Resources\Images\BookImg\std-book.svg" />
+    <None Remove="Resources\Images\Library\logo.png" />
     <None Remove="Resources\Images\nopic.jpg" />
     <None Remove="Resources\Images\testpic.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
   </ItemGroup>
@@ -24,6 +26,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\BookImg\book.png" />
     <Resource Include="Resources\Images\BookImg\std-book.svg" />
+    <Resource Include="Resources\Images\Library\logo.png" />
     <Resource Include="Resources\Images\nopic.jpg" />
     <Resource Include="Resources\Images\ProfPic\1.jpg" />
     <Resource Include="Resources\Images\testpic.jpg" />

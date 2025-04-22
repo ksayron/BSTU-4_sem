@@ -40,6 +40,12 @@ namespace Lab4_5
 
         }
 
+        public static void ShowM(string title, string message)
+        {
+            var message_box = new Message(title, message);
+            message_box.Show();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

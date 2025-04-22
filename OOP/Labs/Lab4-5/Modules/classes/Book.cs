@@ -25,10 +25,10 @@ namespace Lab4_5.Modules.classes
         public bool IsAvailible { get => (AmountAvailible>0); }
         [Range(0,10)]
         public double Rating { get; set; }
-        public List<Author> Authors { get; set; }//all authors og the book
+        public List<Author> Authors { get; set; }//all authors og the book many to many relation
         public List<Order> IssuedOrders { get; set; }//all copies of the book that were issied to readers
         public List<Review> Reviews { get; set; }//all reviews for this book
-        public List<Genre> Genres { get; set; }//all genres for this book
+        public List<Genre> Genres { get; set; }//all genres for this book many to many relation
 
         public Book()
         {
