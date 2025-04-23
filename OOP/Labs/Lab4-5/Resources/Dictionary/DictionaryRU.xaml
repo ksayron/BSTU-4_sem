@@ -1,0 +1,148 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Lab4_5"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <!-- Окно регистрации -->
+            <s:String x:Key="Login">Логин</s:String>
+            <s:String x:Key="Password">Пароль</s:String>
+            <s:String x:Key="CardID">Номер карты читателя</s:String>
+            <s:String x:Key="Email">Электронная почта</s:String>
+            <s:String x:Key="AuthButton">Войти</s:String>
+            <s:String x:Key="RegLabel">Нет&#10;аккаунта?</s:String>
+            <s:String x:Key="AuthLabel">Есть&#10;аккаунт?</s:String>
+            <s:String x:Key="RegLink">Зарегестрироваться</s:String>
+            <s:String x:Key="RegTitle">Регистрация</s:String>
+            <s:String x:Key="AuthTitle">Авторизация</s:String>
+            <s:String x:Key="RegSuccess">Регистрация завершена</s:String>
+            <s:String x:Key="RegSuccessMessage">Вы успешно зарегестрировались!</s:String>
+            
+            <!--Окно Администратора-->
+            <s:String x:Key="MainWindowTitle">Библиотека KNP</s:String>
+            <s:String x:Key="Home">Главная</s:String>
+            <s:String x:Key="Books">Книги</s:String>
+            <s:String x:Key="Users">Пользователи</s:String>
+            <s:String x:Key="MyPage">Moй профиль</s:String>
+            <s:String x:Key="AddBook">Добавить книгу</s:String>
+            <s:String x:Key="EditBook">Изменить книгу</s:String>
+            <s:String x:Key="DeleteBook">Удалить книгу</s:String>
+            <s:String x:Key="Exit">Выход</s:String>
+
+            <!-- Меню -->
+            <s:String x:Key="LangMenu">Язык</s:String>
+            <s:String x:Key="ChangeToRU">Сменить на Русский</s:String>
+            <s:String x:Key="ChangeToEN">Сменить на Английский</s:String>
+
+            <!-- Фильтры -->
+            <s:String x:Key="AuthorFilter">Авторы</s:String>
+            <s:String x:Key="GenreFilter">Жанры</s:String>
+            <s:String x:Key="From">От</s:String>
+            <s:String x:Key="To">До</s:String>
+            <s:String x:Key="FilterApply">Применить</s:String>
+
+            <!-- Окно добавления абонемента -->
+            <s:String x:Key="BookAddTitle">Добавление новой книги</s:String>
+            <s:String x:Key="Title">Название</s:String>
+            <s:String x:Key="SmallDesc">Краткое описание</s:String>
+            <s:String x:Key="Description">Описание</s:String>
+            <s:String x:Key="Amount">Количество</s:String>
+            <s:String x:Key="Authors">Авторы</s:String>
+            <s:String x:Key="AddAuthors">Добавить автора</s:String>
+            <s:String x:Key="Genres">Жанры</s:String>
+            <s:String x:Key="AddGenres">Добавить жанр</s:String>
+            <s:String x:Key="AddButton">Добавить</s:String>
+
+
+            <!-- Окно деталей абонемента -->
+            <s:String x:Key="SubscriptionDetailsTitle">Детали абонемента</s:String>
+            <s:String x:Key="EditButton">Редактировать</s:String>
+            <s:String x:Key="CloseButton">Закрыть</s:String>
+            <s:String x:Key="Reviews">Отзывы</s:String>
+            <s:String x:Key="AddReview">Добавить отзыв</s:String>
+            <s:String x:Key="Rating">Оценка</s:String>
+            <s:String x:Key="Comment">Комментарий</s:String>
+            <s:String x:Key="UserName">Имя пользователя</s:String>
+
+            <!-- Сообщения -->
+            <s:String x:Key="ValidationError">Ошибка валидации</s:String>
+            <s:String x:Key="RequiredField">Это поле обязательно для заполнения</s:String>
+            <s:String x:Key="InvalidPrice">Некорректная цена</s:String>
+            <s:String x:Key="SaveSuccess">Успешно сохранено</s:String>
+            <s:String x:Key="SaveError">Ошибка при сохранении</s:String>
+            <s:String x:Key="DeleteConfirmation">Вы уверены, что хотите удалить?</s:String>
+            <s:String x:Key="ConfirmationTitle">Подтверждение</s:String>
+
+            <!-- Типы абонементов -->
+            <s:String x:Key="AllTypes">Все типы</s:String>
+            <s:String x:Key="Unlimited">Безлимит</s:String>
+            <s:String x:Key="Standard">Обычный</s:String>
+            <s:String x:Key="Morning">Утренний</s:String>
+            <s:String x:Key="Personal">Персональный</s:String>
+
+            <!-- Длительности -->
+            <s:String x:Key="AllDurations">Любая длительность</s:String>
+            <s:String x:Key="OneMonth">1 месяц</s:String>
+            <s:String x:Key="ThreeMonths">3 месяца</s:String>
+            <s:String x:Key="SixMonths">6 месяцев</s:String>
+            <s:String x:Key="OneYear">12 месяцев</s:String>
+            <s:String x:Key="TenVisits">10 занятий</s:String>
+
+            <!-- Валидация -->
+            <s:String x:Key="NameRequired">Введите название</s:String>
+            <s:String x:Key="PriceRequired">Введите цену</s:String>
+            <s:String x:Key="TypeRequired">Выберите тип абонемента</s:String>
+            <s:String x:Key="DurationRequired">Выберите длительность</s:String>
+            <s:String x:Key="ImageRequired">Выберите изображение</s:String>
+            <s:String x:Key="RatingRequired">Выберите оценку</s:String>
+            <s:String x:Key="CommentRequired">Добавьте комментарий</s:String>
+
+            <!-- Добавим элементы подменю тренировок -->
+            <s:String x:Key="ScheduleClasses">Расписание занятий</s:String>
+            <s:String x:Key="PersonalTraining">Персональные тренировки</s:String>
+            <s:String x:Key="GroupClasses">Групповые занятия</s:String>
+
+            <!-- Новый ключ для локализации -->
+            <s:String x:Key="YourOpinionMatters">Ваше мнение очень важно!</s:String>
+
+            <!-- MessageBox строки для SubscriptionDetails.xaml.cs -->
+            <s:String x:Key="SavedSuccessfully">Изменения сохранены успешно!</s:String>
+            <s:String x:Key="SavedTitle">Сохранено</s:String>
+            <s:String x:Key="ErrorSaving">Ошибка при сохранении изменений: {0}</s:String>
+            <s:String x:Key="ErrorTitle">Ошибка</s:String>
+            <s:String x:Key="DeleteSubscriptionConfirm">Вы действительно хотите удалить абонемент?</s:String>
+            <s:String x:Key="DeleteConfirmTitle">Удалить?</s:String>
+            <s:String x:Key="SubscriptionDeleted">Абонемент был удален!</s:String>
+            <s:String x:Key="DeleteReviewConfirm">Вы действительно хотите удалить отзыв?</s:String>
+            <s:String x:Key="PleaseEnterName">Пожалуйста, введите имя</s:String>
+            <s:String x:Key="ValidationErrorTitle">Ошибка валидации</s:String>
+            <s:String x:Key="PleaseRateSubscription">Пожалуйста, оцените абонемент</s:String>
+            <s:String x:Key="PleaseEnterValidName">Пожалуйста, введите корректное имя</s:String>
+            <s:String x:Key="DeleteReviewButton">Удалить</s:String>
+            <s:String x:Key="SelectImageTitle">Выберите изображение</s:String>
+            <s:String x:Key="SubscriptionDetailsFormat">Детали абонемента - {0}</s:String>
+
+            <!-- MessageBox строки для MainWindow.xaml.cs -->
+            <s:String x:Key="ErrorLoadingData">Ошибка загрузки данных: {0}</s:String>
+            <s:String x:Key="ErrorSavingData">Ошибка при сохранении данных: {0}</s:String>
+            <s:String x:Key="ErrorLoadingImage">Ошибка загрузки изображения: {0}</s:String>
+
+            <!-- MessageBox строки для AddSubscription.xaml.cs -->
+            <s:String x:Key="InvalidName">Неверное введеное имя</s:String>
+            <s:String x:Key="EnterDescription">Введите описание!</s:String>
+            <s:String x:Key="SubscriptionAddedSuccess">Абонемент успешно добавлен!</s:String>
+            <s:String x:Key="SuccessTitle">Успех</s:String>
+            <s:String x:Key="ErrorSavingSubscription">Ошибка при сохранении: {0}</s:String>
+
+            <!-- MessageBox строки для App.xaml.cs -->
+            <s:String x:Key="CursorFileNotFound">Файл курсора не найден в ресурсах приложения</s:String>
+            <s:String x:Key="ErrorLoadingCursor">Ошибка загрузки курсора: {0}</s:String>
+            <s:String x:Key="IconNotFound">Иконка приложения не найдена в ресурсах.</s:String>
+            <s:String x:Key="ErrorLoadingIcon">Ошибка при загрузке иконки: {0}</s:String>
+
+            <!-- MessageBox строки для LanguageManager.cs -->
+            <s:String x:Key="ErrorChangingLanguage">Ошибка при смене языка: {0}</s:String>
+
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

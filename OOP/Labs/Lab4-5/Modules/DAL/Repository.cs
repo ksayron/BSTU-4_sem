@@ -1,6 +1,7 @@
 ﻿using Lab4_5.Modules.classes;
 using Lab4_5.Modules.db;
 using Lab4_5.Modules.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,7 +90,7 @@ namespace Lab4_5.Modules.DAL
 
         public List<Book> GetAllBooks()
         {
-            return this.context.Books.ToList();
+            return this.context.Books.Include(b=>b.Authors).Include(b=>b.Genres).ToList() ;
         }
 
         public List<User> GetAllUsers()
@@ -104,17 +105,22 @@ namespace Lab4_5.Modules.DAL
 
         public Book? GetBookById(int id)
         {
-            return this.context.Books.FirstOrDefault(u => u.Id == id);
+            return this.context.Books.Include(b=>b.Authors).Include(b => b.Genres).Include(b => b.Reviews).Include(b => b.IssuedOrders).FirstOrDefault(u => u.Id == id);
         }
 
         public int GetBookIdByName(string name)
         {
-            throw new NotImplementedException();
+            var pos_id = this.context.Books.FirstOrDefault(u => u.Title == name);
+            if (pos_id is null)
+            {
+                return 0;
+            }
+            return pos_id.Id;
         }
 
         public List<Book> GetRatedBooks(double rating)
         {
-            throw new NotImplementedException();
+            return this.context.Books.Include(b => b.Authors).Include(b => b.Genres).Where(b=> b.Rating > rating).ToList();
         }
 
         public User? GetUserByCardId(int id)
@@ -152,7 +158,30 @@ namespace Lab4_5.Modules.DAL
 
         public bool UpdateBook(int id, Book book)
         {
-            throw new NotImplementedException();
+            var updated_book = GetBookById(id);
+            if(updated_book is null)
+            {
+                return false;
+            }
+            updated_book.Title = book.Title;
+            updated_book.Authors = book.Authors;
+            updated_book.SmallDescription = book.SmallDescription;
+            updated_book.Description = book.Description;
+            updated_book.Genres = book.Genres;
+            updated_book.AmountAvailible = book.AmountAvailible;
+            updated_book.Reviews = book.Reviews;
+            updated_book.IssuedOrders = book.IssuedOrders;
+            updated_book.ImgPath = book.ImgPath;
+            this.context.Books.Update(updated_book);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
+
         }
 
         public bool UpdateUser(int id, User user)

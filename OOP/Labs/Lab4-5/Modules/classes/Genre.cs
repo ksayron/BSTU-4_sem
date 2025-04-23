@@ -19,6 +19,11 @@ namespace Lab4_5.Modules.classes
             Name = string.Empty;
             Books = new List<Book>();
         }
+        public Genre(string name)
+        {
+            Name = name;
+            Books = new List<Book>();
+        }
         public override string ToString()
         {
             return $"{Name}";

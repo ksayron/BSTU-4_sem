@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Lab4_5.Modules.classes;
 using Lab4_5.Modules.Hash;
 using Lab4_5.Modules.DAL;
+using Lab4_5.Modules.View;
 
 namespace Lab4_5
 {
@@ -84,6 +85,14 @@ namespace Lab4_5
             reg_form.Left = this.Left-20;
             reg_form.Show();
             this.Close();
+        }
+        private void RuButton_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.Instance.ChangeLanguage("ru-RU");
+        }
+        private void EnButton_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.Instance.ChangeLanguage("en-US");
         }
     }
 }

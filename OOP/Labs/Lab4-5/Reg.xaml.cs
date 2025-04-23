@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Lab4_5.Modules.View;
 
 namespace Lab4_5
 {
@@ -113,6 +114,14 @@ namespace Lab4_5
         private void EmailInput_TextChanged(object sender, TextChangedEventArgs e)//email regex
         {
 
+        }
+        private void RuButton_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.Instance.ChangeLanguage("ru-RU");
+        }
+        private void EnButton_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageManager.Instance.ChangeLanguage("en-US");
         }
     }
 }
