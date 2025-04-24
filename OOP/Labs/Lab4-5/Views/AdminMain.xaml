@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Lab4_5"
+        xmlns:ViewModel="clr-namespace:Lab4_5.ViewModels"
         mc:Ignorable="d"
         Title="AdminMain" Height="450" Width="1000">
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"></RowDefinition>
@@ -53,11 +55,9 @@
         </Border>
         <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0">
             <Border  Margin="20,10,20,10" Background="#FFFFF4D6" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
-                <TextBox Name="
-                         
-                         \" Margin="10,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" materialDesign:HintAssist.Hint="Поиск..." TextChanged="SearchBox_TextChanged" KeyDown="SearchBox_KeyDown"></TextBox>
+                <TextBox Name="SearchBox" Margin="10,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" materialDesign:HintAssist.Hint="Поиск..." TextChanged="SearchBox_TextChanged" KeyDown="SearchBox_KeyDown"></TextBox>
             </Border>
-        </Border>;;;
+        </Border>
         <ScrollViewer Grid.Row="2" Grid.Column="1">
             <DataGrid   AutoGenerateColumns="True" Name="BooksGrid" CellEditEnding="BooksGrid_CellEditEnding" AutoGeneratingColumn="BooksGrid_AutoGeneratingColumn">
                 <DataGrid.Columns>
@@ -69,18 +69,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Open"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+                        
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>

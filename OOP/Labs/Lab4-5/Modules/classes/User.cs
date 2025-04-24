@@ -5,43 +5,195 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Lab4_5.Modules.classes
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
-        
+        private int _id;
+        private int _cardId;
+        private string _username;
+        private string _passwordHash;
+        private string _email;
+        private int _profilePicId;
+        private int _roleId;
+        private Role _userRole;
+        private DateTime _createdAt;
+        private List<Order> _orders = new();
+        private List<Review> _reviews = new();
+
         [Key]
-        public int Id { get; set; }//primary key 
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged(nameof(Id));
+                }
+            }
+        }
+
         [Required]
-        public int CardId { get; set; }//номер читательского билета
+        public int CardId
+        {
+            get => _cardId;
+            set
+            {
+                if (_cardId != value)
+                {
+                    _cardId = value;
+                    OnPropertyChanged(nameof(CardId));
+                }
+            }
+        }
+
         [Required]
         [StringLength(25, MinimumLength = 3)]
-        public string Username { get; set; }
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+                    OnPropertyChanged(nameof(Username));
+                }
+            }
+        }
+
         [Required]
-        public string PasswordHash { get; set; }
+        public string PasswordHash
+        {
+            get => _passwordHash;
+            set
+            {
+                if (_passwordHash != value)
+                {
+                    _passwordHash = value;
+                    OnPropertyChanged(nameof(PasswordHash));
+                }
+            }
+        }
 
         [Required]
         [RegularExpression("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", ErrorMessage = "Wrong email format")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
+
         [Range(1, 10)]
-        public int ProfilePicId { get; set; } = 1;
+        public int ProfilePicId
+        {
+            get => _profilePicId;
+            set
+            {
+                if (_profilePicId != value)
+                {
+                    _profilePicId = value;
+                    OnPropertyChanged(nameof(ProfilePicId));
+                }
+            }
+        }
+
         [Required]
-        public int RoleId { get; set; }//foreign key
-        public Role UserRole { get; set; }
-        public DateTime CreatedAt { get; private set; }
-        public List<Order> Orders { get; set; }//all orders
+        public int RoleId
+        {
+            get => _roleId;
+            set
+            {
+                if (_roleId != value)
+                {
+                    _roleId = value;
+                    OnPropertyChanged(nameof(RoleId));
+                }
+            }
+        }
+
+        public Role UserRole
+        {
+            get => _userRole;
+            set
+            {
+                if (_userRole != value)
+                {
+                    _userRole = value;
+                    OnPropertyChanged(nameof(UserRole));
+                }
+            }
+        }
+
+        public DateTime CreatedAt
+        {
+            get => _createdAt;
+            private set
+            {
+                if (_createdAt != value)
+                {
+                    _createdAt = value;
+                    OnPropertyChanged(nameof(CreatedAt));
+                }
+            }
+        }
+
+        public List<Order> Orders
+        {
+            get => _orders;
+            set
+            {
+                if (_orders != value)
+                {
+                    _orders = value;
+                    OnPropertyChanged(nameof(Orders));
+                    OnPropertyChanged(nameof(ActiveBooks));
+                    OnPropertyChanged(nameof(HistoryLog));
+                }
+            }
+        }
+
         [NotMapped]
         public List<Order> ActiveBooks => Orders?.Where(o => o.IsActive).ToList() ?? [];
+
         [NotMapped]
         public List<Order> HistoryLog => Orders?.Where(o => !o.IsActive).ToList() ?? [];
-        public List<Review> Reviews { get; set; }// all user reviews
+
+        public List<Review> Reviews
+        {
+            get => _reviews;
+            set
+            {
+                if (_reviews != value)
+                {
+                    _reviews = value;
+                    OnPropertyChanged(nameof(Reviews));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
 
         public User()
         {
-            Username = string.Empty;
-            PasswordHash = string.Empty;
-            Email = string.Empty;
+            Username = "User";
+            PasswordHash = "Test";
+            Email = "Test@Test.test";
             RoleId = 1;
             UserRole = new Role();
             CreatedAt = DateTime.Now;
@@ -61,5 +213,7 @@ namespace Lab4_5.Modules.classes
             Reviews = [];
         }
 
+        
+       
     }
 }

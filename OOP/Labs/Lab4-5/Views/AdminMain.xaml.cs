@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Lab4_5.Modules.classes;
 using Lab4_5.Modules.DAL;
 using Lab4_5.Modules.View;
+using Lab4_5.ViewModels;
 namespace Lab4_5
 {
     /// <summary>
@@ -21,6 +22,7 @@ namespace Lab4_5
     /// </summary>
     public partial class AdminMain : Window
     {
+
         Repository repo = ((App)Application.Current).repository;
         User user;
         bool need_to_apply_filters = false;
@@ -30,6 +32,7 @@ namespace Lab4_5
         {
             user = new User();
             InitializeComponent();
+            this.DataContext = new AdminMainViewModel();
         }
         public AdminMain(User auth_user)
         {

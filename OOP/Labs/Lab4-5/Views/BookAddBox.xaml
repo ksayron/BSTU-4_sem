@@ -9,16 +9,16 @@
     Title="Добавить книгу" Height="700" Width="400">
     <Grid Background="#FF3E508E" Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.25*" />
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.00005*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.0000015*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
@@ -26,6 +26,7 @@
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
