@@ -25,8 +25,19 @@ namespace Lab4_5
             services.AddSingleton<Repository>(sp =>
                 new Repository(connStr)
             );
+
             services.AddTransient<AuthViewModel>();
             services.AddTransient<Auth>();
+
+            services.AddTransient<RegViewModel>();
+            services.AddTransient<Reg>();
+
+            services.AddTransient<AdminMainViewModel>();
+            services.AddTransient<AdminMain>();
+
+            services.AddTransient<BookAddVIewModel>();
+            services.AddTransient<BookAddBox>();
+
 
             ServiceProvider = services.BuildServiceProvider();
         }

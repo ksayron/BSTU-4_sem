@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Lab4_5"
+        xmlns:vm="clr-namespace:Lab4_5.ViewModels"
         mc:Ignorable="d"
     Title="Добавить книгу" Height="700" Width="400">
+    <Window.DataContext>
+        <vm:BookAddVIewModel/>
+    </Window.DataContext>
     <Grid Background="#FF3E508E" Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.05*" />
@@ -21,9 +25,9 @@
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.35*" />
             <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.15*" />
-            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.35*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.1*" />
@@ -51,24 +55,45 @@
         <Label Grid.Column="1" Grid.Row="13" Grid.ColumnSpan="3" Foreground="#FFEFE1E1" FontSize="16"
                FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Center">Жанры</Label>
 
-        <!-- Inputs -->
-        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="TitleInput" />
-        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center"
-                 Name="SmallDescInput" />
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="TitleInput" 
+                 Text="{Binding Title}"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="SmallDescInput" 
+                 Text="{Binding ShortDescription}"/>
         <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Top" TextWrapping="Wrap"
-                 AcceptsReturn="True" Height="100" Name="FullDescInput" />
-        <TextBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="AmountInput" />
+                 AcceptsReturn="True" Height="100" Name="FullDescInput" 
+                 Text="{Binding Description}"/>
+        <TextBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="AmountInput" 
+                 Text="{Binding Amount}"/>
 
-        <!-- Author Combobox + Add Button -->
-        <ComboBox Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Name="AuthorCombo1" />
-        <Button Grid.Row="12" Grid.Column="3" Content="➕" Click="AddAuthorCombo_Click" />
+        <ScrollViewer  Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3">
+            <ItemsControl ItemsSource="{Binding SelectedAuthors}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBox ItemsSource="{Binding DataContext.test, RelativeSource={RelativeSource AncestorType=Window}}"
+                        SelectedItem="{Binding ., Mode=TwoWay}"
+                        />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Grid.Row="13" Grid.Column="3" Content="➕" Command="{Binding AddAuthorComboCommand}" />
 
-        <!-- Genre Combobox + Add Button -->
-        <ComboBox Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2" Name="GenreCombo1" />
-        <Button Grid.Row="14" Grid.Column="3" Content="➕" Click="AddGenreCombo_Click" />
+        <ScrollViewer  Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="3">
+            <ItemsControl ItemsSource="{Binding SelectedGenres}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ComboBox ItemsSource="{Binding DataContext.Genres, RelativeSource={RelativeSource AncestorType=Window}}"
+              SelectedItem="{Binding ., Mode=TwoWay}"
+              DisplayMemberPath="Name"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Grid.Row="15" Grid.Column="3" Content="➕" Command="{Binding AddGenreComboCommand}" />
 
-        <!-- Submit Button -->
         <Button Grid.Column="1" Grid.Row="16" FontSize="14" FontWeight="Bold"
-                Grid.ColumnSpan="3" Margin="46,0,46,0" Click="AddBookButton_Click">Добавить книгу</Button>
+                Grid.ColumnSpan="3" Margin="46,0,46,0" 
+                Command="{Binding AddBookCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">Добавить книгу</Button>
     </Grid>
 </Window>

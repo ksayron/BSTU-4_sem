@@ -24,9 +24,10 @@
             <s:String x:Key="Books">Книги</s:String>
             <s:String x:Key="Users">Пользователи</s:String>
             <s:String x:Key="MyPage">Moй профиль</s:String>
+            <s:String x:Key="OpenBook">Открыть</s:String>
             <s:String x:Key="AddBook">Добавить книгу</s:String>
-            <s:String x:Key="EditBook">Изменить книгу</s:String>
-            <s:String x:Key="DeleteBook">Удалить книгу</s:String>
+            <s:String x:Key="EditBook">Изменить</s:String>
+            <s:String x:Key="DeleteBook">Удалить</s:String>
             <s:String x:Key="Exit">Выход</s:String>
 
             <!-- Меню -->

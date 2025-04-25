@@ -1,5 +1,6 @@
 ﻿using Lab4_5.Modules.classes;
 using Lab4_5.Modules.DAL;
+using Lab4_5.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,15 +29,21 @@ namespace Lab4_5
         {
             InitializeComponent();
 
-            // Setup initial ComboBoxes
-            AuthorCombo1.ItemsSource = repo.GetAllAuthors();
-            AuthorCombo1.SelectedIndex = 0;
+            
+            //AuthorCombo1.ItemsSource = repo.GetAllAuthors();
+            //AuthorCombo1.SelectedIndex = 0;
 
-            GenreCombo1.ItemsSource = repo.GetAllGenres();
-            GenreCombo1.SelectedIndex = 0;
+            //GenreCombo1.ItemsSource = repo.GetAllGenres();
+            //GenreCombo1.SelectedIndex = 0;
 
-            authorCombos.Add(AuthorCombo1);
-            genreCombos.Add(GenreCombo1);
+            //authorCombos.Add(AuthorCombo1);
+            //genreCombos.Add(GenreCombo1);
+
+        }
+        public BookAddBox(BookAddVIewModel vm) 
+        {
+            this.DataContext = vm;
+            InitializeComponent();
 
         }
         private void AddAuthorCombo_Click(object sender, RoutedEventArgs e)
@@ -67,7 +74,7 @@ namespace Lab4_5
 
             int newRow = startRow + targetList.Count * 2;
 
-            // Extend the Grid if needed
+            
             var rowDef = new RowDefinition { Height = new GridLength(0.15, GridUnitType.Star) };
             MainGrid.RowDefinitions.Insert(newRow, rowDef);
 
@@ -97,7 +104,7 @@ namespace Lab4_5
                 .Distinct()
                 .ToList();
 
-            // Example validation
+            
             if (string.IsNullOrWhiteSpace(title) || amount <= 0 || selectedAuthors.Count < 1 || selectedGenres.Count < 1)
             {
                 MessageBox.Show("Пожалуйста, заполните все обязательные поля.");

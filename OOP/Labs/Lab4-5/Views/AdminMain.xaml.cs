@@ -23,7 +23,7 @@ namespace Lab4_5
     public partial class AdminMain : Window
     {
 
-        Repository repo = ((App)Application.Current).repository;
+        //Repository repo = ((App)Application.Current).repository;
         User user;
         bool need_to_apply_filters = false;
         Author none_option_author = new Author("none","");
@@ -32,21 +32,11 @@ namespace Lab4_5
         {
             user = new User();
             InitializeComponent();
-            this.DataContext = new AdminMainViewModel();
         }
         public AdminMain(User auth_user)
         {
             user = auth_user;
             InitializeComponent();
-            this.BooksGrid.ItemsSource = repo.GetAllBooks();
-
-            List<Author> authors = repo.GetAllAuthors();
-            authors.Add(none_option_author);
-            this.AuthorFilter_Combo.ItemsSource = authors;
-
-            this.GenreFilter_Combo.ItemsSource = repo.GetAllGenres();
-            this.UserNameLabel.Content = user.Username;
-            
             switch (user.ProfilePicId)
             {
                 case 0:
@@ -71,9 +61,9 @@ namespace Lab4_5
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
-            var new_form = new BookAddBox();
-            new_form.ShowDialog();
-            this.BooksGrid.ItemsSource = repo.GetAllBooks();
+            //var new_form = new BookAddBox();
+            //new_form.ShowDialog();
+            //this.BooksGrid.ItemsSource = repo.GetAllBooks();
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -83,30 +73,30 @@ namespace Lab4_5
 
         private void SearchBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
-            {
-                if (!need_to_apply_filters)
-                {
-                    this.BooksGrid.ItemsSource = repo.GetAllBooks().Where(b => b.Title.Contains(SearchBox.Text));
-                }
-                else
-                {
-                    var search_res = repo.GetAllBooks().Where(b => b.Title.Contains(SearchBox.Text));
-                    apply_filter(search_res);
-                }
-            }
+            //if(e.Key == Key.Enter)
+            //{
+            //    if (!need_to_apply_filters)
+            //    {
+            //        this.BooksGrid.ItemsSource = repo.GetAllBooks().Where(b => b.Title.Contains(SearchBox.Text));
+            //    }
+            //    else
+            //    {
+            //        var search_res = repo.GetAllBooks().Where(b => b.Title.Contains(SearchBox.Text));
+            //        apply_filter(search_res);
+            //    }
+            //}
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var search_res = repo.GetAllBooks();
-            if (SearchBox.Text.Length>0)
-            {
-                search_res = search_res.Where(b => b.Title.Contains(SearchBox.Text)).ToList();
-            }
-            var filtered_items = apply_filter(search_res);
-            BooksGrid.ItemsSource = filtered_items;
-            need_to_apply_filters = true;
+            //var search_res = repo.GetAllBooks();
+            //if (SearchBox.Text.Length>0)
+            //{
+            //    search_res = search_res.Where(b => b.Title.Contains(SearchBox.Text)).ToList();
+            //}
+            //var filtered_items = apply_filter(search_res);
+            //BooksGrid.ItemsSource = filtered_items;
+            //need_to_apply_filters = true;
 
         }
         private IEnumerable<Book> apply_filter(IEnumerable<Book> search_result)
@@ -125,28 +115,34 @@ namespace Lab4_5
         private void BooksGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             
-            var new_item = e.Row.Item;
-            if( new_item is Book new_book)
-            {
-
-            }
+            e.Cancel = true;
         }
-        private void RuButton_Click(object sender, RoutedEventArgs e)
-        {
-            LanguageManager.Instance.ChangeLanguage("ru-RU");
-        }
-        private void EnButton_Click(object sender, RoutedEventArgs e)
-        {
-            LanguageManager.Instance.ChangeLanguage("en-US");
-        }
+        //private void RuButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    LanguageManager.Instance.ChangeLanguage("ru-RU");
+        //}
+        //private void EnButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    LanguageManager.Instance.ChangeLanguage("en-US");
+        //}
 
         private void BooksGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             string headername = e.Column.Header.ToString();
+            e.Column.IsReadOnly = true;
             if (headername == "Id")
             {
                 e.Column.IsReadOnly = true;
             }
+            if(headername == "Authors" && headername == "Reviews" && headername == "IssuedOrders" && headername =="ImgPath")
+            {
+                e.Cancel=true;
+            }
+            if(headername == "authors")
+            {
+                //set refrence here
+            }
+
         }
     }
 }

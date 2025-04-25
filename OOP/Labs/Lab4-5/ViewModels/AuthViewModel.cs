@@ -64,14 +64,24 @@ namespace Lab4_5.ViewModels
             {
                 case 1:
                     {
-                        var mainWindow = new UserMain(user);
+                        var vm = App.ServiceProvider.GetRequiredService<AdminMainViewModel>();
+                        vm.CurrnetUser = user;
+                        var mainWindow = new UserMain()
+                        {
+                            DataContext = vm
+                        };
                         mainWindow?.Show();
                         Close(obj);
                         break;
                     }
                 case 2:
                     {
-                        var mainWindow = new AdminMain(user);
+                        var vm = App.ServiceProvider.GetRequiredService<AdminMainViewModel>();
+                        vm.CurrnetUser = user;
+                        var mainWindow = new AdminMain()
+                        {
+                            DataContext = vm
+                        };
                         mainWindow?.Show();
                         Close(obj);
                         break;

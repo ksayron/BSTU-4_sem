@@ -5,10 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Lab4_5"
-        xmlns:ViewModel="clr-namespace:Lab4_5.ViewModels"
+        xmlns:vm="clr-namespace:Lab4_5.ViewModels"
+        xmlns:v="clr-namespace:Lab4_5.Modules.View"
         mc:Ignorable="d"
-        Title="AdminMain" Height="450" Width="1000">
-   
+        Title="{DynamicResource MainWindowTitle}" Height="450" Width="1000">
+    <Window.DataContext>
+        <vm:AdminMainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"></RowDefinition>
@@ -21,50 +27,61 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border  Grid.Column="0" Grid.Row="1" BorderThickness="0,0,3,0" BorderBrush="Black">
-            <Image Source="./Resources/Images/Library/logo.png"></Image>
+        <Border  Grid.Column="0" Grid.Row="1" BorderThickness="0,0,3,0" BorderBrush="Black" Background="#FF3E508E" >
+            <Image Source="../Resources/Images/Library/logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" />
         </Border>
         
-        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black">
+        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="#FF3E508E">
             <StackPanel>
                 <Label Content="{DynamicResource AuthorFilter}" HorizontalContentAlignment="Center"></Label>
-                <ComboBox Name="AuthorFilter_Combo"></ComboBox>
+                <ComboBox Name="AuthorFilter_Combo" ItemsSource="{Binding Authors}" SelectedItem="{Binding FilterAuthor}"></ComboBox>
                 <Label Content="{DynamicResource  GenreFilter}" HorizontalContentAlignment="Center"></Label>
-                <ComboBox Name="GenreFilter_Combo"></ComboBox>
-                <Button Click="Button_Click" Content="{DynamicResource FilterApply}" Margin="0,20,0,0"/>
+                <ComboBox Name="GenreFilter_Combo" ItemsSource="{Binding Genres}" SelectedItem="{Binding FilterGenre}"></ComboBox>
+                <Button  Content="{DynamicResource FilterApply}" Margin="0,20,0,0"
+                         Command="{Binding ApplyFilterCommand}"
+                         />
             </StackPanel>
         </Border>
         
-        <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2,0,0,0">
+        <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2,0,0,0" Background="#FF3E508E">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="./Resources/Images/ProfPic/1.jpg" Width="20" Name="ProfilePicImage"></Image>
-                    <Label HorizontalContentAlignment="Center" Content="UserName" Name="UserNameLabel"></Label>
+                    <Image Source="../Resources/Images/ProfPic/1.jpg" Width="20" Name="ProfilePicImage"></Image>
+                    <Label HorizontalContentAlignment="Center" Content="{Binding CurrnetUser.Username}" Name="UserNameLabel"></Label>
                 </StackPanel>
                 <Button Name="MyProfileButton" Content="{DynamicResource MyPage}"></Button>
             </StackPanel>
         </Border>
         <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="2,2,0,0" >
-            <StackPanel >
+            <StackPanel Background="#FF3E508E" >
             <Button Content="{DynamicResource Home}"></Button>
             <Button Content="{DynamicResource Users}"></Button>
             <Button Content="{DynamicResource Books}"></Button>
-                <Button Name="AddBookButton" Click="AddBookButton_Click" Content="{DynamicResource AddBook}"></Button>
-                <Button Content="{DynamicResource Exit}"></Button>
+            <Button Name="AddBookButton" Content="{DynamicResource AddBook}"
+                    Command="{Binding AddBookCommand}"/>
+            <Button Content="{DynamicResource Exit}"></Button>
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="#FF3E508E">
             <Border  Margin="20,10,20,10" Background="#FFFFF4D6" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
-                <TextBox Name="SearchBox" Margin="10,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" materialDesign:HintAssist.Hint="Поиск..." TextChanged="SearchBox_TextChanged" KeyDown="SearchBox_KeyDown"></TextBox>
+                <TextBox Name="SearchBox" Margin="10,0,0,0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18" materialDesign:HintAssist.Hint="Поиск..." TextChanged="SearchBox_TextChanged" KeyDown="SearchBox_KeyDown" ></TextBox>
             </Border>
         </Border>
         <ScrollViewer Grid.Row="2" Grid.Column="1">
-            <DataGrid   AutoGenerateColumns="True" Name="BooksGrid" CellEditEnding="BooksGrid_CellEditEnding" AutoGeneratingColumn="BooksGrid_AutoGeneratingColumn">
+            <DataGrid   AutoGenerateColumns="True" Name="BooksGrid" 
+                        AutoGeneratingColumn="BooksGrid_AutoGeneratingColumn"
+                        CanUserAddRows="False"
+                        ItemsSource="{Binding Books}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete"></Button>
+                    <DataGridTemplateColumn Width="80">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel >
+                                    <Button Content="{DynamicResource OpenBook}" Command="{Binding DataContext.OpenBookPageCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                                            CommandParameter="{Binding}" />
+                                    <Button Content="{DynamicResource EditBook}" Margin="2"  />
+                                    <Button Content="{DynamicResource DeleteBook}" Margin="2"  />
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -72,13 +89,18 @@
                         
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.CellStyle>
             </DataGrid>
         </ScrollViewer>
         <DockPanel Grid.ColumnSpan="5" Grid.Row="0" >
             <Menu DockPanel.Dock="Top" MinHeight="25">
                 <MenuItem Header="{DynamicResource LangMenu}">
-                    <MenuItem Header="{DynamicResource ChangeToRU}" Click="RuButton_Click"/>
-                    <MenuItem Header="{DynamicResource ChangeToEN}" Click="EnButton_Click"/>
+                    <MenuItem Header="{DynamicResource ChangeToRU}" Command="{Binding ChangeLanguageRuCommand}"/>
+                    <MenuItem Header="{DynamicResource ChangeToEN}" Command="{Binding ChangeLanguageEnCommand}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

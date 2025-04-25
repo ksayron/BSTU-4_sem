@@ -2,32 +2,34 @@
 using Lab4_5.Modules.Hash;
 using Lab4_5.Modules.View;
 using Lab4_5.Modules.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Lab4_5.ViewModels
 {
-    public class RegViewModel
+    public class RegViewModel : BaseViewModel
     {
         Repository _repository;
 
         public string Login { get; set; } = "";
         public string Password { get; set; } = "";
+        public string Email { get; set; } = "";
+        public int CardId { get; set; }
 
         public ICommand RegistrationCommand { get; }
         public ICommand OpenLoginCommand { get; }
         public ICommand ChangeLanguageRuCommand { get; }
         public ICommand ChangeLanguageEnCommand { get; }
 
-        //public RegViewModel()
-        //{
-        //    //_repository = ((App)Application.Current).repository;
-
-        //    LoginCommand = new RelayCommand(LoginExecute);
-        //    OpenRegisterCommand = new RelayCommand(OpenRegisterExecute);
-        //    ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
-        //    ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
-        //}
+        public RegViewModel()
+        {
+            //_repository = ((App)Application.Current).repository;
+            RegistrationCommand = new RelayCommand(RegistrationExecute);
+            OpenLoginCommand = new RelayCommand(OpenLoginExecute);
+            ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
+            ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
+        }
         public RegViewModel(Repository repository)
         {
             _repository = repository;
@@ -60,14 +62,14 @@ namespace Lab4_5.ViewModels
                     {
                         var mainWindow = new UserMain(user);
                         mainWindow?.Show();
-                        CloseAuthWindow(obj);
+                        Close(obj);
                         break;
                     }
                 case 2:
                     {
                         var mainWindow = new AdminMain(user);
                         mainWindow?.Show();
-                        CloseAuthWindow(obj);
+                        Close(obj);
                         break;
                     }
             }
@@ -77,14 +79,14 @@ namespace Lab4_5.ViewModels
 
         private void OpenLoginExecute(object? obj)
         {
-            var reg = new Reg();
+            var auth = App.ServiceProvider.GetRequiredService<Auth>();
             if (obj is Window currentWindow)
             {
-                reg.Top = currentWindow.Top - 20;
-                reg.Left = currentWindow.Left - 20;
+                auth.Top = currentWindow.Top + 20;
+                auth.Left = currentWindow.Left + 20;
             }
-            reg.Show();
-            CloseAuthWindow(obj);
+            auth.Show();
+            Close(obj);
         }
 
         private void ShowError(string message)
@@ -93,11 +95,13 @@ namespace Lab4_5.ViewModels
             msgBox.ShowDialog();
         }
 
-        private void CloseAuthWindow(object? window)
+        private void Close(object? window)
         {
             if (window is Window win)
+            {
                 win.Close();
+            }
         }
     }
 }
-}
+

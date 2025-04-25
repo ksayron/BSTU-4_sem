@@ -24,10 +24,23 @@
             <s:String x:Key="Books">Books</s:String>
             <s:String x:Key="Users">Users</s:String>
             <s:String x:Key="MyPage">My profile</s:String>
+            <s:String x:Key="OpenBook">Open</s:String>
             <s:String x:Key="AddBook">Add new book</s:String>
-            <s:String x:Key="EditBook">Edit book</s:String>
-            <s:String x:Key="DeleteBook">Delete book</s:String>
+            <s:String x:Key="EditBook">Edit</s:String>
+            <s:String x:Key="DeleteBook">Delete</s:String>
             <s:String x:Key="Exit">Exit</s:String>
+
+            <!--Data Grid книги-->
+            <s:String x:Key="Actions">Actions</s:String>
+            <s:String x:Key="Id">Id</s:String>
+            <s:String x:Key="Title">Title</s:String>
+            <s:String x:Key="SmallDesc">Short description</s:String>
+            <s:String x:Key="Description">Description</s:String>
+            <s:String x:Key="Amount">Amount</s:String>
+            <s:String x:Key="Authors">Authors</s:String>
+            <s:String x:Key="Genres">Genres</s:String>
+
+
 
 
             <!-- Меню -->
@@ -45,16 +58,9 @@
 
             <!-- Окно добавления абонемента -->
             <s:String x:Key="BookAddTitle">Adding new book</s:String>
-            <s:String x:Key="Title">Title</s:String>
-            <s:String x:Key="SmallDesc">Short description</s:String>
-            <s:String x:Key="Description">Description</s:String>
-            <s:String x:Key="Amount">Amount</s:String>
-            <s:String x:Key="Authors">Authors</s:String>
             <s:String x:Key="AddAuthors">Add Author</s:String>
-            <s:String x:Key="Genres">Genres</s:String>
             <s:String x:Key="AddGenres">Add Genres</s:String>
             <s:String x:Key="AddButton">Add</s:String>
-
 
             <!-- Окно деталей абонемента -->
             <s:String x:Key="SubscriptionDetailsTitle">Детали абонемента</s:String>

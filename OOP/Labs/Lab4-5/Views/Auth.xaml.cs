@@ -35,10 +35,14 @@ namespace Lab4_5
             InitializeComponent();
             DataContext = vm;
         }
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+
+
+        private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is AuthViewModel vm)
-                vm.Password = ((PasswordBox)sender).Password;
+            {
+                vm.Password = PasswordInput.Password;
+            }
         }
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{

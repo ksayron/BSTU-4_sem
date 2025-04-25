@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Lab4_5.Modules.View;
+using Lab4_5.ViewModels;
 
 namespace Lab4_5
 {
@@ -105,16 +106,6 @@ namespace Lab4_5
             AuthWind.Show();
             this.Close();
         }
-
-        private void CardInput_TextChanged(object sender, TextChangedEventArgs e)//regex only num
-        {
-
-        }
-
-        private void EmailInput_TextChanged(object sender, TextChangedEventArgs e)//email regex
-        {
-
-        }
         private void RuButton_Click(object sender, RoutedEventArgs e)
         {
             LanguageManager.Instance.ChangeLanguage("ru-RU");
@@ -122,6 +113,14 @@ namespace Lab4_5
         private void EnButton_Click(object sender, RoutedEventArgs e)
         {
             LanguageManager.Instance.ChangeLanguage("en-US");
+        }
+
+        private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RegViewModel vm)
+            {
+                vm.Password = PasswordInput.Password;
+            }
         }
     }
 }
