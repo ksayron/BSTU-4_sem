@@ -30,17 +30,19 @@ namespace Lab4_5.Modules.classes
         [Browsable(false)]
         public List<Author> Authors { get; set; }//all authors og the book many to many relation
         [NotMapped]
-        public string authors => string.Join("\n", Authors.Select(a => a.ToString()));
+        public string authors => string.Join(",\n", Authors.Select(a => a.ToString()));
         public List<Order> IssuedOrders { get; set; }//all copies of the book that were issied to readers
         public List<Review> Reviews { get; set; }//all reviews for this book
         public List<Genre> Genres { get; set; }//all genres for this book many to many relation
+        [NotMapped]
+        public string genres=> string.Join(",", Genres.Select(a => a.ToString()));
 
         public Book()
         {
-            Title = string.Empty;
-            Description = string.Empty;
-            SmallDescription = string.Empty;
-            ImgPath = "";
+            Title = "Test Title";
+            Description = "TestTestTestTestTestTestTestTest\nTestTestTestTestTest\nTestTestTestTestTest";
+            SmallDescription = "TestTestTest";
+            ImgPath = "../Resources/Images/BookImg/book.png";
             AmountAvailible = 0;
             Rating = 0;
             Authors = [];

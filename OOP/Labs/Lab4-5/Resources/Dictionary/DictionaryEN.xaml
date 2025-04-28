@@ -150,6 +150,9 @@
 
             <!-- MessageBox строки для LanguageManager.cs -->
             <s:String x:Key="ErrorChangingLanguage">Ошибка при смене языка: {0}</s:String>
+            
+            <!-- MessageBox строки для LanguageManager.cs -->
+            <s:String x:Key="DefaultBookImg">../Resources/Images/BookImg/book.png</s:String>
 
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
