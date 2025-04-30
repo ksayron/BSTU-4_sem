@@ -41,6 +41,9 @@
                VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" 
                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6"  Content="{Binding CurrentBook.genres}" VerticalContentAlignment="Center"/>
-
+        <Border Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="5" Grid.RowSpan="4" Background="#FF98B8ED"
+                CornerRadius="35">
+            
+        </Border>
     </Grid>
 </Window>
