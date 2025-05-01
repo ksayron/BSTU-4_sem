@@ -41,9 +41,20 @@
                VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="14" 
                VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6"  Content="{Binding CurrentBook.genres}" VerticalContentAlignment="Center"/>
+        
         <Border Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="5" Grid.RowSpan="4" Background="#FF98B8ED"
                 CornerRadius="35">
             
         </Border>
+        <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,10,0" Content="В наличии:" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="75,0,10,0" Content="{Binding CurrentBook.AmountAvailible}" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,10,0" Content="Выдано:" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="60,0,10,0" Content="{Binding CurrentBook.IssuedOrders.Count}" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="10,0,10,0" Content="Рейтинг:" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="60,0,10,0" Content="{Binding CurrentBook.Rating}" VerticalContentAlignment="Center"/>
+        <Button Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="3"  VerticalAlignment="Center" MinHeight="20" Content="Изменеить" Margin="10,0,10,0"/>
+        <Button Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="3"  VerticalAlignment="Center" MinHeight="20" Content="Удалить" Margin="10,0,10,0"/>
+        <Button Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="3"  VerticalAlignment="Center" MinHeight="20" Content="Отзывы" Margin="10,0,10,0"/>
+        <Button Grid.Column="4" Grid.Row="8" Grid.ColumnSpan="3"  VerticalAlignment="Center" MinHeight="20" Content="Заказы" Margin="10,0,10,0"/>
     </Grid>
 </Window>
