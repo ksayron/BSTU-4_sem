@@ -14,6 +14,7 @@ using System.DirectoryServices;
 using Lab4_5.Modules.Interfaces;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using Lab4_5.Views;
 
 namespace Lab4_5.ViewModels
 {
@@ -97,9 +98,14 @@ namespace Lab4_5.ViewModels
 
         private void AddBookExecute(object? obj)
         {
-            var win = App.ServiceProvider.GetRequiredService<BookAddBox>();
+            var win_vm = App.ServiceProvider.GetRequiredService<BookAddVIewModel>();
+            var win = new BookAddBox()
+            {
+                DataContext = win_vm
+            };
             win.ShowDialog();
             Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+            OnPropertyChanged(nameof(Books));
         }
         private bool canAddBookExecute(object? obj)
         {
@@ -107,26 +113,40 @@ namespace Lab4_5.ViewModels
         }
         private void EditBookExecute(object? obj)
         {
-            throw new NotImplementedException();
+            if(obj is Book book){var repository = App.ServiceProvider.GetRequiredService<Repository>();
+            var win_vm = new EditBookViewModel(repository, book);
+            var win = new EditBook()
+            {
+                DataContext = win_vm
+            };
+            win.ShowDialog();
+            Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+                OnPropertyChanged(nameof(Books));
+            }
         }
         
         private bool CanEditBookExecute(object? obj)
         {
-            throw new NotImplementedException();
+            return Books is not null;
         }
 
         private void DeleteBookExecute(object? obj)
         {
-            throw new NotImplementedException();
+            if(obj is Book book)
+            {
+                _repository.DeleteBookById(book.Id);
+                Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+                OnPropertyChanged(nameof(Books)); 
+            }
         }
 
         private bool CanDeleteBookExecute(object? obj)
         {
-            throw new NotImplementedException();
+            return Books is not null;
         }
         private void ApplyFilterExecute(object? obj)
         {
-            var new_books = Books;
+            var new_books = new ObservableCollection<Book>(_repository.GetAllBooks());
             if (FilterAuthor != null)
             {
                 if(FilterAuthor.Name != "none") { new_books = new ObservableCollection<Book>(new_books.Where(b => b.Authors.Contains(FilterAuthor)).ToList()); }
@@ -146,7 +166,21 @@ namespace Lab4_5.ViewModels
         private void OpenBookPageExecute(object? obj)
         {
             var what_is = obj.GetType();
-            var mes = new Message("fix", "pls");
+            if (obj is Book book)
+            {
+                var book_page_vm = new BookPageViewModel(book);
+                var book_page = new BookPage()
+                {
+                    DataContext = book_page_vm
+                };
+                book_page.ShowDialog();
+                OnPropertyChanged(nameof(Books));
+            }
+            else
+            {
+                var mes = new Message("fix", "pls");
+                mes.Show();
+            }
         }
         private bool CanOpenBookPageExecute(object? obj)
         {
@@ -213,15 +247,7 @@ namespace Lab4_5.ViewModels
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged = delegate { };
-        private void OnDelete()
-        {
-
-        }
-        private bool CanDelete()
-        {
-            return true;
-        }
-        //public Commands DeleteCommand = new RelayCommand(OnDelete, CanDelete);
+ 
 
     }
 }

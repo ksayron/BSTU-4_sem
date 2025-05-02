@@ -27,7 +27,6 @@ namespace Lab4_5.Modules.classes
         public bool IsAvailible { get => (AmountAvailible>0); }
         [Range(0,10)]
         public double Rating { get; set; }
-        [Browsable(false)]
         public List<Author> Authors { get; set; }//all authors og the book many to many relation
         [NotMapped]
         public string authors => string.Join(",\n", Authors.Select(a => a.ToString()));
@@ -35,7 +34,7 @@ namespace Lab4_5.Modules.classes
         public List<Review> Reviews { get; set; }//all reviews for this book
         public List<Genre> Genres { get; set; }//all genres for this book many to many relation
         [NotMapped]
-        public string genres=> string.Join(",", Genres.Select(a => a.ToString()));
+        public string genres => string.Join(",", Genres.Select(a => a.ToString()));
 
         public Book()
         {

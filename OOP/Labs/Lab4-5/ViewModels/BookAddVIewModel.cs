@@ -11,6 +11,7 @@ using Lab4_5.Modules.View;
 using System.Diagnostics.Metrics;
 using System.Collections.ObjectModel;
 using System.Windows;
+using static Lab4_5.ViewModels.EditBookViewModel;
 
 namespace Lab4_5.ViewModels
 {
@@ -21,13 +22,10 @@ namespace Lab4_5.ViewModels
         public string ShortDescription { get; set; } = "";
         public string Description { get; set; } = "";
         public int Amount { get; set; } = 1;
-        public ObservableCollection<Author> SelectedAuthors { get; set; } = [];
+        public ObservableCollection<AuthorSelection> AuthorSelections { get; set; } = [];
         public ObservableCollection<Author> Authors { get; set; }
-        public List<Author> Authors_l { get; set; } = [];
-        public ObservableCollection<Genre> SelectedGenres { get; set; } = [];
+        public ObservableCollection<GenreSelection> GenreSelections { get; set; } = [];
         public ObservableCollection<Genre> Genres { get; set; } = [];
-        public List<Genre> Genres_l { get; set; } = [];
-        public List<string> test = new List<string> { "123", "23" };
 
         public ICommand AddBookCommand { get; }
         public ICommand AddAuthorComboCommand { get; }
@@ -36,13 +34,13 @@ namespace Lab4_5.ViewModels
         public ICommand ChangeLanguageEnCommand { get; }
         public BookAddVIewModel()
         {
-            SelectedAuthors.Add(null);
+            AuthorSelections.Add(new AuthorSelection());
 
-            SelectedGenres.Add(null);
+            GenreSelections.Add(new GenreSelection());
 
             AddBookCommand = new RelayCommand(AddBookExecute,CanAddBookExecute);
-            AddAuthorComboCommand = new RelayCommand(_ => SelectedAuthors.Add(null));
-            AddGenreComboCommand = new RelayCommand(_ => SelectedGenres.Add(null));
+            AddAuthorComboCommand = new RelayCommand(_ => AuthorSelections.Add(new AuthorSelection()));
+            AddGenreComboCommand = new RelayCommand(_ => GenreSelections.Add(new GenreSelection()));
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
         }
@@ -50,26 +48,34 @@ namespace Lab4_5.ViewModels
         {
             _repository = repository;
 
-            SelectedAuthors.Add(null);
-            SelectedGenres.Add(null);
+            AuthorSelections.Add(new AuthorSelection());
+            GenreSelections.Add(new GenreSelection());
 
             AddBookCommand = new RelayCommand(AddBookExecute, CanAddBookExecute);
-            AddAuthorComboCommand = new RelayCommand(_ => SelectedAuthors.Add(null));
-            AddGenreComboCommand = new RelayCommand(_ => SelectedGenres.Add(null));
+            AddAuthorComboCommand = new RelayCommand(_ => AuthorSelections.Add(new AuthorSelection()));
+            AddGenreComboCommand = new RelayCommand(_ => GenreSelections.Add(new GenreSelection()));
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
 
-            Authors = new ObservableCollection<Author>(_repository.GetAllAuthors());   
-            Authors_l = new List<Author>(_repository.GetAllAuthors());            
+            Authors = new ObservableCollection<Author>(_repository.GetAllAuthors());                          
             Genres = new ObservableCollection<Genre>(_repository.GetAllGenres());
-            Genres_l = new List<Genre>(_repository.GetAllGenres());
         }
 
         
 
         private void AddBookExecute(object? obj)
         {
-            Close(obj);
+            var book = new Book();
+            book.Title = Title;
+            book.AmountAvailible = Amount;
+            book.Description = Description;
+            book.SmallDescription = ShortDescription;
+            book.Authors  = AuthorSelections.Where(a => a.SelectedAuthor != null).Select(a => a.SelectedAuthor!).ToList();
+            book.Genres = GenreSelections.Where(g => g.SelectedGenre != null).Select(g => g.SelectedGenre!).ToList();
+            if(_repository.AddBook(book))
+            {
+                Close(obj);
+            }
         }
         private bool CanAddBookExecute(object? obj)
         {
@@ -86,6 +92,32 @@ namespace Lab4_5.ViewModels
             if (window is Window win)
             {
                 win.Close();
+            }
+        }
+    }
+    public class AuthorSelection : BaseViewModel
+    {
+        private Author? _selectedAuthor;
+        public Author? SelectedAuthor
+        {
+            get => _selectedAuthor;
+            set
+            {
+                _selectedAuthor = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public class GenreSelection : BaseViewModel
+    {
+        private Genre? _selectedGenre;
+        public Genre? SelectedGenre
+        {
+            get => _selectedGenre;
+            set
+            {
+                _selectedGenre = value;
+                OnPropertyChanged();
             }
         }
     }

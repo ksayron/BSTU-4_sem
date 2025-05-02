@@ -6,6 +6,8 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using System;
+using System.Windows.Media;
+using Lab4_5.Views;
 
 namespace Lab4_5
 {
@@ -37,6 +39,9 @@ namespace Lab4_5
 
             services.AddTransient<BookAddVIewModel>();
             services.AddTransient<BookAddBox>();
+
+            services.AddTransient<EditBookViewModel>();
+            services.AddTransient<EditBook>();
 
 
             ServiceProvider = services.BuildServiceProvider();

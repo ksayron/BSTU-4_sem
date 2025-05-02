@@ -20,8 +20,14 @@ namespace Lab4_5.ViewModels
     class BookPageViewModel : BaseViewModel
     {
         public Book CurrentBook { get; set; }
-        Repository _repository;
-        public string ImgSource { get; set; } //std pic if no pic;
+        public string ImgSource { get; set; } 
+
+        public ICommand EditBookCommand { get; }
+        public ICommand DeleteBookCommand { get; }
+        public ICommand ShowOrdersCommand { get; }
+        public ICommand ShowReviewsCommand { get; }
+        public ICommand ChangeLanguageEnCommand { get; }
+        public ICommand ChangeLanguageRuCommand { get; }
         public BookPageViewModel()
         {
             var test_author= new Author("Pudgo","Pudgovanna");
@@ -32,12 +38,13 @@ namespace Lab4_5.ViewModels
             CurrentBook.Authors.Add(test_author);
             CurrentBook.Genres.Add(test_Genre);
             CurrentBook.Genres.Add(test_Genre2);
-            ImgSource = "../Resources/Images/BookImg/book.png";
+            ImgSource = "../Resources/Images/BookImg/book.png";//std pic if no pic;
             OnPropertyChanged(nameof(ImgSource));
         }
-        public BookPageViewModel(Book currentBook, Repository repository)
+        public BookPageViewModel(Book currentBook)
         {
-            _repository = repository;
+            CurrentBook = currentBook;
+            ImgSource = CurrentBook.ImgPath;
         }
     }
 }

@@ -79,7 +79,22 @@ namespace Lab4_5.Modules.DAL
 
         public bool DeleteBookById(int id)
         {
-            throw new NotImplementedException();
+            var book = GetBookById(id);
+            if (book is null)
+            {
+                var error = new Message("Error","No id found");
+                error.Show();
+                return false;
+            }
+            this.context.Books.Remove(book);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
         public bool DeleteUserById(int id)
         {

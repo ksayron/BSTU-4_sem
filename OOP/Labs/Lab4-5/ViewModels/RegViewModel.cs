@@ -1,4 +1,5 @@
-﻿using Lab4_5.Modules.DAL;
+﻿using Lab4_5.Modules.classes;
+using Lab4_5.Modules.DAL;
 using Lab4_5.Modules.Hash;
 using Lab4_5.Modules.View;
 using Lab4_5.Modules.ViewModel;
@@ -42,37 +43,52 @@ namespace Lab4_5.ViewModels
 
         private void RegistrationExecute(object? obj)
         {
-            var userId = _repository.GetUserIdByUsername(Login);
-            if (userId == 0)
+            var card_input = CardId;
+
+            var login_input = Login;
+            var password_input = Password;
+            var email_input = Email;
+            if (_repository.GetUserByCardId(card_input) is not null)
             {
-                ShowError("Неверный логин или пароль");
+                ShowError("Данная карта читателя уже занята");
                 return;
             }
-
-            var user = _repository.GetUserByCardId(userId);
-            if (user == null || !SecurePasswordHasher.Verify(Password, user.PasswordHash))
+            else
             {
-                ShowError("Неверный логин или пароль");
-                return;
+                if (_repository.GetUserIdByUsername(login_input) != 0)
+                {
+                   
+                    ShowError("Данный логин уже занят");
+                    return;
+                }
+                else
+                {
+                    if (_repository.GetUserIdByUsername(email_input) != 0)
+                    {
+                        ShowError("Данная почта уже занята");
+                        return;
+                    }
+                    else
+                    {
+                        var hashed_password = SecurePasswordHasher.Hash(password_input);
+                        var new_user = new User(card_input, login_input, hashed_password, email_input, 2);
+                        if (_repository.AddUser(new_user))
+                        {
+                            var message_box = new Message("Регистрация завершена", "Вы успешно зарегестрировались");
+                            message_box.Show();
+                            Close(obj);
+                            var auth_box = new Auth();
+                            auth_box.Show();
+                        }
+                        else
+                        {
+                            ShowError("Неопознная ошибка.повторите позже");
+                        }
+
+                    }
+                }
             }
 
-            switch (user.RoleId)
-            {
-                case 1:
-                    {
-                        var mainWindow = new UserMain(user);
-                        mainWindow?.Show();
-                        Close(obj);
-                        break;
-                    }
-                case 2:
-                    {
-                        var mainWindow = new AdminMain(user);
-                        mainWindow?.Show();
-                        Close(obj);
-                        break;
-                    }
-            }
 
 
         }
@@ -91,7 +107,7 @@ namespace Lab4_5.ViewModels
 
         private void ShowError(string message)
         {
-            var msgBox = new Message("Ошибка при входе", message);
+            var msgBox = new Message("Ошибка при регестрации", message);
             msgBox.ShowDialog();
         }
 

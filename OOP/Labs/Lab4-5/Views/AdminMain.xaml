@@ -77,10 +77,15 @@
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
                                 <StackPanel >
-                                    <Button Content="{DynamicResource OpenBook}" Command="{Binding DataContext.OpenBookPageCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
-                                            CommandParameter="{Binding}" />
-                                    <Button Content="{DynamicResource EditBook}" Margin="2"  />
-                                    <Button Content="{DynamicResource DeleteBook}" Margin="2"  />
+                                    <Button Content="{DynamicResource OpenBook}" 
+                                            Command="{Binding DataContext.OpenBookPageCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                                            CommandParameter="{Binding .}" />
+                                    <Button Content="{DynamicResource EditBook}" 
+                                            Command="{Binding DataContext.EditBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                                            CommandParameter="{Binding .}"  />
+                                    <Button Content="{DynamicResource DeleteBook}"  
+                                            Command="{Binding DataContext.DeleteBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                                            CommandParameter="{Binding .}"  />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
