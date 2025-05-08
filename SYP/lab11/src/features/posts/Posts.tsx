@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchPosts, createPost, updatePost, deletePost } from './postsSlice';
-import { Post, NewPost } from './types';
+import { Post } from './types';
 import PostForm from '../../components/PostForm';
 import PostItem from '../../components/PostItem';
 
@@ -27,7 +27,7 @@ export default function Posts() {
                     }
                     setEditingPost(null);
                 }}
-                onCancel={() => setEditingPost(null)}
+                onCancel={() => setEditXingPost(null)}
             />
 
             {loading && <p>Загрузка...</p>}

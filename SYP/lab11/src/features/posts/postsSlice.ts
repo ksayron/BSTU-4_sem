@@ -35,7 +35,7 @@ const postsSlice = createSlice({
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message || 'Error fetching posts';
+                state.error = action.error.message || 'error';
             })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts.unshift(action.payload);
