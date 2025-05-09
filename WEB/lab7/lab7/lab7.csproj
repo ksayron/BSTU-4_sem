@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="lab6_LIB">
+      <HintPath>..\..\lab6\lab6_LIB\obj\Debug\net8.0\lab6_LIB.dll</HintPath>
+    </Reference>
     <Reference Include="lab6_MSSQL_LIB">
       <HintPath>..\..\lab6\lab6_MSSQL_LIB\obj\Debug\net8.0\lab6_MSSQL_LIB.dll</HintPath>
     </Reference>

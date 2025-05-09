@@ -1,22 +1,31 @@
 using System.Diagnostics;
 using lab7.Models;
 using Microsoft.AspNetCore.Mvc;
+using lab6_MSSQL_LIB;
 
 namespace lab7.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IRepository repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IRepository repo) : base()
         {
-            _logger = logger;
+
+            this.repo = repo;
+
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(this.repo);
         }
+
+        //public IActionResult Index(IRepository repository)
+        //{
+        //    return View(repository);
+        //}
 
         public IActionResult Privacy()
         {
