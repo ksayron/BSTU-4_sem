@@ -19,6 +19,8 @@ namespace Lab4_5.Modules.classes
         [Required]
         public string ImgPath { get; set; }
         [StringLength(1000)]
+        public string FilePath { get; set; }
+        [StringLength(1000)]
         public string Description { get; set; }
         [StringLength(255)]
         public string SmallDescription { get; set; }
