@@ -46,6 +46,7 @@ namespace lab7
 
     static class BuilderExtension
     {
+        
         public static IServiceCollection AddCelebritiesConfig(this WebApplicationBuilder builder, string CelebrityJson = "Celebrities.config.json")
         {
             builder.Configuration.AddJsonFile(CelebrityJson);
