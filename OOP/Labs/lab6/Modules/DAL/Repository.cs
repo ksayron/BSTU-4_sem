@@ -98,7 +98,22 @@ namespace Lab4_5.Modules.DAL
         }
         public bool DeleteUserById(int id)
         {
-            throw new NotImplementedException();
+            var user = GetUserByCardId(id);
+            if (user is null)
+            {
+                var error = new Message("Error", "No id found");
+                error.Show();
+                return false;
+            }
+            this.context.Users.Remove(user);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
 
      
