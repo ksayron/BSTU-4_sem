@@ -1,0 +1,23 @@
+﻿@using lab6_MSSQL_LIB;
+@model Celebrity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.FullName</title>
+</head>
+<body>
+    <h2>Celebrity Details</h2>
+
+    <p><strong>Full Name:</strong> @Model.FullName</p>
+    <p><strong>Nationality:</strong> @Model.Nationality</p>
+
+    @if (!string.IsNullOrEmpty(Model.ReqPhotoPath))
+    {
+            <div>
+            <img src="~/img/@Model.ReqPhotoPath" alt="@Model.FullName" style="max-width: 300px;" />
+            </div>
+    }
+</body>
+</html>

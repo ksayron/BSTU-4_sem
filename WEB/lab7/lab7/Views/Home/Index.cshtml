@@ -2,7 +2,7 @@
 @model IRepository
 @{
 	<h1>Celebrities</h1>
-	<img src="~/img/Dijsktra.jpg"/>
+	<a asp-controller="Home" asp-action="Form" asp-area=""><img src="~/img/Dijsktra.jpg" /></a>
 	@foreach (var celebrity in Model.GetAllCelebrity())
 	{
 

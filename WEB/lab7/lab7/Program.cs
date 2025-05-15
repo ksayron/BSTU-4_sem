@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using lab7.Models;
 
 namespace lab7
 {
@@ -15,6 +16,7 @@ namespace lab7
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
             builder.AddCelebritiesConfig();
             builder.AddCelebritiesServices();
             IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("Celebrities.config.json").Build();
@@ -65,12 +67,12 @@ namespace lab7
         {
             var cel = routeBuilder.MapGroup("/api/Celebrities");
             cel.MapGet("/", (IRepository repo) => repo.GetAllCelebrity());
-            cel.MapGet("/{id:int:min(1)}", (IRepository repo, int id) =>
-            {
-                Celebrity? celebrity = repo.GetCelebById(id);
-                if (celebrity == null) { throw new FoundByIDException($"Celebrity ID = ({id})"); }
-                return celebrity;
-            });
+            //cel.MapGet("/{id:int:min(1)}", (IRepository repo, int id) =>
+            //{
+            //    Celebrity? celebrity = repo.GetCelebById(id);
+            //    if (celebrity == null) { throw new FoundByIDException($"Celebrity ID = ({id})"); }
+            //    return celebrity;
+            //});
             cel.MapGet("/LifeEvents/{id:int:min(1)}", (IRepository repo, int id) =>
             {
                 Celebrity? celebrity = repo.GetCelebByEventId(id);
@@ -82,12 +84,41 @@ namespace lab7
                 if (repo.DelCelebrity(id)) { return $"Celebrity with id:{id} deleted"; }
                 else { throw new DeleteByIDException($"DELETE /Celebrities error, Id = {id}"); }
             });
-            cel.MapPost("/", (IRepository repo, Celebrity celebrity) =>
+            cel.MapPost("/", async (HttpRequest request, IRepository repo, IWebHostEnvironment env) =>
             {
+                var form = await request.ReadFormAsync();
 
-                if (!repo.AddCelebrity(celebrity)) { throw new SaveException("/Celebrities error SaveChanges <= 0"); }
-                else celebrity.Id = repo.GetCelebdByName(celebrity.FullName);
-                return celebrity;
+                var name = form["FullName"];
+                var nationality = form["Nationality"];
+                var file = form.Files.GetFile("UploadedPhoto");
+
+                if (file is null || file.Length == 0)
+                    return Results.BadRequest("File is required");
+
+                var uploads = Path.Combine(env.WebRootPath, "img");
+                Directory.CreateDirectory(uploads);
+
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                var celebrity = new Celebrity
+                {
+                    FullName = name!,
+                    Nationality = nationality!,
+                    ReqPhotoPath = $"{fileName}"
+                };
+
+                if (!repo.AddCelebrity(celebrity))
+                    throw new SaveException("/Celebrities error SaveChanges <= 0");
+
+                celebrity.Id = repo.GetCelebdByName(celebrity.FullName);
+
+                return Results.Redirect($"/api/Celebrities/{celebrity.Id}");
             });
             cel.MapPut("/{id:int:min(1)}", (IRepository repo, int id, Celebrity celebrity) =>
             {
