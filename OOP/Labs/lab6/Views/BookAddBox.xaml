@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Lab4_5"
         xmlns:vm="clr-namespace:Lab4_5.ViewModels"
         mc:Ignorable="d"
-    Title="Добавить книгу" Height="700" Width="400">
+    Title="Добавить книгу" Height="800" Width="400">
     <Window.DataContext>
         <vm:BookAddVIewModel/>
     </Window.DataContext>
@@ -29,6 +29,10 @@
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.35*" />
             <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
@@ -95,7 +99,14 @@
         </ScrollViewer>
         <Button Grid.Row="15" Grid.Column="3" Content="➕" Command="{Binding AddGenreComboCommand}" />
 
-        <Button Grid.Column="1" Grid.Row="16" FontSize="14" FontWeight="Bold"
+        <Label Grid.Row="16" Grid.Column="1" Grid.ColumnSpan="3" Foreground="White"
+               FontFamily="Segoe UI" FontWeight="Bold" FontSize="18" >Изображение книги</Label>
+        <Button Grid.Row="16" Grid.Column="3" Content="📁" Command="{Binding SelectImageCommand}" />
+
+        <Label Grid.Row="18" Grid.Column="1" Grid.ColumnSpan="3" Foreground="White"
+               FontFamily="Segoe UI" FontWeight="Bold" FontSize="18">PDF файл книги</Label>
+        <Button Grid.Row="18" Grid.Column="3" Content="📁" Command="{Binding SelectPdfCommand}" />
+        <Button Grid.Column="1" Grid.Row="20" FontSize="14" FontWeight="Bold"
                 Grid.ColumnSpan="3" Margin="46,0,46,0" 
                 Command="{Binding AddBookCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">Добавить книгу</Button>
