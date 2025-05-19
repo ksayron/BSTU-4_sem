@@ -1,6 +1,6 @@
-﻿using Lab4_5.Modules.classes;
-using Lab4_5.Modules.db;
-using Lab4_5.Modules.Interfaces;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.db;
+using KNP_Library.Modules.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Lab4_5.Modules.DAL
+namespace KNP_Library.Modules.DAL
 {
     public interface IRepository : IRepository<User, Book,Author,Genre> { }
     public class Repository 

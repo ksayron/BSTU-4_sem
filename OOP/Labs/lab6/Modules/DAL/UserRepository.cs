@@ -1,13 +1,13 @@
-﻿using Lab4_5.Modules.classes;
-using Lab4_5.Modules.Interfaces;
-using Lab4_5.Modules.db;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.Interfaces;
+using KNP_Library.Modules.db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.DAL
+namespace KNP_Library.Modules.DAL
 {
     public class UserRepository : IUser<User>
     {

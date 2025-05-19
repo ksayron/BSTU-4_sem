@@ -1,13 +1,14 @@
-﻿using Lab4_5.Modules.classes;
-using Lab4_5.Modules.db;
-using Lab4_5.Modules.Interfaces;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.db;
+using KNP_Library.Modules.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.DAL
+namespace KNP_Library.Modules.DAL
 {
     public class AuthorGenreRepository : IAuthor<Author>, IGenre<Genre>
     {
@@ -27,27 +28,71 @@ namespace Lab4_5.Modules.DAL
 
         public bool AddAuthor(Author author)
         {
-            throw new NotImplementedException();
+            this.context.Authors.Add(author);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                return false;
+            }
+            return true;
         }
 
         public bool AddGenre(Genre genre)
         {
-            throw new NotImplementedException();
+            this.context.Genres.Add(genre);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                return false;
+            }
+            return true;
         }
 
         public bool DeleteAuthorById(int id)
         {
-            throw new NotImplementedException();
+            var author = GetAuthorById(id);
+            if (author is null)
+            {
+                var error = new Message("Error", "No id found");
+                error.Show();
+                return false;
+            }
+            this.context.Authors.Remove(author);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
 
         public bool DeleteGenreById(int id)
         {
-            throw new NotImplementedException();
+            var genre = GetGenreById(id);
+            if (genre is null)
+            {
+                var error = new Message("Error", "No id found");
+                error.Show();
+                return false;
+            }
+            this.context.Genres.Remove(genre);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+
         }
 
         public List<Author> GetAllAuthors()
@@ -62,32 +107,17 @@ namespace Lab4_5.Modules.DAL
 
         public Author? GetAuthorById(int id)
         {
-            throw new NotImplementedException();
+            return this.context.Authors.Include(b => b.Books).FirstOrDefault(u => u.Id == id);
         }
 
-        public int GetAuthorBySurname(string surname)
-        {
-            throw new NotImplementedException();
-        }
 
         public Genre? GetGenreById(int id)
         {
-            throw new NotImplementedException();
+            return this.context.Genres.Include(b => b.Books).FirstOrDefault(u => u.Id == id);
         }
 
-        public int GetGenreByName(string name)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool UpdateAuthor(int id, Author author)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool UpdateGenre(int id, Genre genre)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

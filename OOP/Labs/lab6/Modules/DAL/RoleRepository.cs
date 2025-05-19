@@ -1,13 +1,14 @@
-﻿using Lab4_5.Modules.classes;
-using Lab4_5.Modules.db;
-using Lab4_5.Modules.Interfaces;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.db;
+using KNP_Library.Modules.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.DAL
+namespace KNP_Library.Modules.DAL
 {
     public class RoleRepository : IRole<Role>
     {
@@ -40,32 +41,39 @@ namespace Lab4_5.Modules.DAL
 
         public bool DeleteRoleById(int id)
         {
-            throw new NotImplementedException();
+            var role = GetRoleById(id);
+            if (role is null)
+            {
+                var error = new Message("Error", "No id found");
+                error.Show();
+                return false;
+            }
+            this.context.Roles.Remove(role);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+
         }
 
         public List<Role> GetAllRoles()
         {
-            throw new NotImplementedException();
+            return this.context.Roles.Include(b => b.Users).ToList();
         }
 
         public Role? GetRoleById(int id)
         {
-            throw new NotImplementedException();
+            return this.context.Roles.Include(b => b.Users).FirstOrDefault(u => u.Id == id);
         }
 
-        public int GetRoleIdByName(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateRole(int id, Role role)
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }
