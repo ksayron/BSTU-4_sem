@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Windows;
 
-namespace Lab4_5.Modules.View
+namespace KNP_Library.Modules.View
 {
     public class LanguageManager
     {

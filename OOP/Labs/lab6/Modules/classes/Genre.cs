@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.classes
+namespace KNP_Library.Modules.classes
 {
     public class Genre
     {

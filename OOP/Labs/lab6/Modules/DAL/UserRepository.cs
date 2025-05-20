@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KNP_Library.Modules.DAL
 {
@@ -63,7 +64,11 @@ namespace KNP_Library.Modules.DAL
 
         public User? GetUserByCardId(int id)
         {
-            return this.context.Users.FirstOrDefault(u => u.CardId == id);
+            return this.context.Users.Include(u=>u.Orders).Include(u=>u.Reviews).Include(u=>u.UserRole).FirstOrDefault(u => u.CardId == id);
+        }
+        public User? GetUserById(int id)
+        {
+            return this.context.Users.Include(u => u.Orders).Include(u => u.Reviews).Include(u => u.UserRole).FirstOrDefault(u => u.Id == id);
         }
 
         public int GetUserIdByEmail(string email)
@@ -105,7 +110,7 @@ namespace KNP_Library.Modules.DAL
             updated_user.UserRole = user.UserRole;
             updated_user.Orders = user.Orders;
             updated_user.Reviews = user.Reviews;
-            updated_user.ProfilePicId = user.ProfilePicId;
+            updated_user.ProfilePicImage = user.ProfilePicImage;
             this.context.Users.Update(updated_user);
             try { this.context.SaveChanges(); }
             catch (Exception ex)

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Lab4_5.Modules.classes
+namespace KNP_Library.Modules.classes
 {
     public class Review
     {
@@ -14,6 +15,9 @@ namespace Lab4_5.Modules.classes
         [Required]
         public int UserId { get; set; }
         public User ReviewUser { get; set; }
+        [Required]
+        public int BookId { get; set; }
+        public Book ReviewBook { get; set; }
         [Required]
         [Range(1, 10)]
         public int Assessment { get; set; }
@@ -33,5 +37,19 @@ namespace Lab4_5.Modules.classes
             Text = text;
             CreatedAt = DateTime.Now;
         }
+        [NotMapped]
+        public string StarAssessment { get
+            {
+                string star_text = "";
+                for(int i = 0; i < Assessment; i=i+2)
+                {
+                    star_text += "★";
+                }
+                if(Assessment % 2 ==1)
+                {
+                    star_text += "⯨";
+                }
+                return star_text;
+            } }
     }
 }

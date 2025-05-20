@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Lab4_5.Modules.classes
+namespace KNP_Library.Modules.classes
 {
     public class User : INotifyPropertyChanged
     {
@@ -17,7 +17,7 @@ namespace Lab4_5.Modules.classes
         private string _username;
         private string _passwordHash;
         private string _email;
-        private int _profilePicId;
+        private string _profilePicImage;
         private int _roleId;
         private Role _userRole;
         private DateTime _createdAt;
@@ -96,16 +96,16 @@ namespace Lab4_5.Modules.classes
             }
         }
 
-        [Range(1, 10)]
-        public int ProfilePicId
+        [StringLength(1000)]
+        public string ProfilePicImage
         {
-            get => _profilePicId;
+            get => _profilePicImage;
             set
             {
-                if (_profilePicId != value)
+                if (_profilePicImage != value)
                 {
-                    _profilePicId = value;
-                    OnPropertyChanged(nameof(ProfilePicId));
+                    _profilePicImage = value;
+                    OnPropertyChanged(nameof(ProfilePicImage));
                 }
             }
         }
@@ -194,11 +194,10 @@ namespace Lab4_5.Modules.classes
             Username = "User";
             PasswordHash = "Test";
             Email = "Test@Test.test";
+            ProfilePicImage = "";
             RoleId = 1;
-            UserRole = new Role();
             CreatedAt = DateTime.Now;
-            Orders = [];
-            Reviews = [];
+
         }
         public User(int carrd_id,string username, string password, string email, int roleid)
         {
@@ -207,10 +206,9 @@ namespace Lab4_5.Modules.classes
             PasswordHash = password;
             Email = email;
             RoleId = roleid;
-            UserRole = new Role();
+            ProfilePicImage = "";
             CreatedAt = DateTime.Now;
-            Orders = [];
-            Reviews = [];
+
         }
 
         

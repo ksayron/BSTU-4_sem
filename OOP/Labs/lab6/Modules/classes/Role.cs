@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.classes
+namespace KNP_Library.Modules.classes
 {
     public class Role
     {
@@ -16,7 +16,7 @@ namespace Lab4_5.Modules.classes
         public List<User> Users { get; set; }
         public Role()
         {
-            Name = string.Empty;
+            Name = "Role_Test";
             Users = [];
         }
         public Role(string NAME)

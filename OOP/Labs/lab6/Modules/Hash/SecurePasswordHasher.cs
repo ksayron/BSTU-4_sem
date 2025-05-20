@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.Hash
+namespace KNP_Library.Modules.Hash
 {
     public static class SecurePasswordHasher
     {

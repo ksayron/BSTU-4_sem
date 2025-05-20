@@ -59,7 +59,7 @@ namespace KNP_Library.Modules.DAL
 
         public List<Book> GetAllBooks()
         {
-            return this.context.Books.Include(b => b.Authors).Include(b => b.Genres).ToList();
+            return this.context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b=>b.Reviews).Include(b=>b.IssuedOrders).ToList();
         }
 
         public List<Book> GetAvaibleBooks()

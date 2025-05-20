@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Lab4_5.Modules.ViewModel
+namespace KNP_Library.Modules.ViewModel
 {
     public class Commands : INotifyPropertyChanged
     {

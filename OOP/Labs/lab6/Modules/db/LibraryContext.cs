@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lab4_5.Modules.classes;
+using KNP_Library.Modules.classes;
 
-namespace Lab4_5.Modules.db
+namespace KNP_Library.Modules.db
 {
-    internal class LibraryContext : DbContext
+    public class LibraryContext : DbContext
     {
         public string ConnectionString { get; private set; } = @"Server=WIN-UCLB12VI625\SQLEXPRESS; Database = LibraryDB; TrustServerCertificate=True; " +
                                                                 @"Trusted_Connection=true; User Id=Library_User; Password=password;";
@@ -44,7 +44,7 @@ namespace Lab4_5.Modules.db
             modelBuilder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(25);
             modelBuilder.Entity<User>().Property(p => p.PasswordHash).IsRequired();
             modelBuilder.Entity<User>().Property(p => p.Email).IsRequired();
-            modelBuilder.Entity<User>().Property(p => p.ProfilePicId).IsRequired();
+            modelBuilder.Entity<User>().Property(p => p.ProfilePicImage).HasMaxLength(1000);
             modelBuilder.Entity<User>().Property(p => p.RoleId).IsRequired();
             modelBuilder.Entity<User>().Property(p => p.CreatedAt).IsRequired();
 
@@ -58,6 +58,7 @@ namespace Lab4_5.Modules.db
             modelBuilder.Entity<Book>().Property(p => p.Id).IsRequired();
             modelBuilder.Entity<Book>().Property(p => p.Title).IsRequired().HasMaxLength(255);
             modelBuilder.Entity<Book>().Property(p => p.ImgPath).IsRequired();
+            modelBuilder.Entity<Book>().Property(p => p.FilePath).HasMaxLength(1000);
             modelBuilder.Entity<Book>().Property(p => p.Description).IsRequired().HasMaxLength(1000);
             modelBuilder.Entity<Book>().Property(p => p.SmallDescription).IsRequired().HasMaxLength(255);
             modelBuilder.Entity<Book>().Property(p => p.AmountAvailible).IsRequired();
@@ -108,6 +109,11 @@ namespace Lab4_5.Modules.db
                 HasMany(u => u.Reviews).
                 WithOne(r => r.ReviewUser).
                 HasForeignKey(r => r.UserId).
+                OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Book>().
+                HasMany(b => b.Reviews).
+                WithOne(r => r.ReviewBook).
+                HasForeignKey(r => r.BookId).
                 OnDelete(DeleteBehavior.Restrict); ;
 
             base.OnModelCreating(modelBuilder);

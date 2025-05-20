@@ -33,6 +33,7 @@ namespace KNP_Library.Modules.DAL
             catch (Exception ex)
             {
                 var error = new Message("Error", ex.Message);
+                error.ShowDialog();
                 return false;
             }
             return true;
@@ -85,7 +86,24 @@ namespace KNP_Library.Modules.DAL
 
         public bool UpdateOrderById(int id, Order new_order)
         {
-            throw new NotImplementedException();
+            var updated_order = GetOrderById(id);
+            if (updated_order is null)
+            {
+                return false;
+            }
+            updated_order.UserId = new_order.UserId;
+            updated_order.BookId = new_order.BookId;
+            updated_order.DueAt = new_order.DueAt;
+            updated_order.ClosedAt = new_order.ClosedAt;
+            this.context.Orders.Update(updated_order);
+            try { this.context.SaveChanges(); }
+            catch (Exception ex)
+            {
+                var error = new Message("Error", ex.Message);
+                error.Show();
+                return false;
+            }
+            return true;
         }
     }
 }

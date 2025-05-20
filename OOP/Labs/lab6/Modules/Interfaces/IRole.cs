@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab4_5.Modules.Interfaces
+namespace KNP_Library.Modules.Interfaces
 {
-    interface IRole
+    interface IRole<T> : IDisposable
     {
+        List<T> GetAllRoles();
+        T? GetRoleById(int id);
+        bool AddRole(T role);
+        bool DeleteRoleById(int id);
+
     }
 }

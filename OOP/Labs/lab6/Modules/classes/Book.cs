@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Lab4_5.Modules.classes
+namespace KNP_Library.Modules.classes
 {
     public class Book
     {

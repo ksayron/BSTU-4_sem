@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lab4_5.Modules.classes;
+using KNP_Library.Modules.classes;
 
-namespace Lab4_5.Modules.Interfaces
+namespace KNP_Library.Modules.Interfaces
 {
     public interface IUser<T> : IDisposable
     {
