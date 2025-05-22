@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Lab4_5
+namespace KNP_Library
 {
     /// <summary>
     /// Логика взаимодействия для Message.xaml
@@ -27,7 +27,7 @@ namespace Lab4_5
         {
             InitializeComponent();
             this.Title = title;
-            this.MessageLabel.Content = message;
+            this.MessageLabel.Text = message;
             
         }
         public Message(string title, string message,double top,double left)
@@ -36,7 +36,7 @@ namespace Lab4_5
             this.Left = left;
             InitializeComponent();
             this.Title = title;
-            this.MessageLabel.Content = message;
+            this.MessageLabel.Text = message;
 
         }
 

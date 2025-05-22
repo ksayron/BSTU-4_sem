@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Lab4_5.Views
+namespace KNP_Library.Views
 {
     /// <summary>
     /// Логика взаимодействия для BookPage.xaml

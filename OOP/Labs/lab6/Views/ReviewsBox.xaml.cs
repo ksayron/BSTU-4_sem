@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KNP_Library.Modules.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KNP_Library.Views
+namespace Lab4_5.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для ReviewsBox.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class ReviewsBox : Window
     {
-        public EditBook()
+        public List<Review> Reviews { get; set; }
+        public ReviewsBox()
         {
             InitializeComponent();
         }

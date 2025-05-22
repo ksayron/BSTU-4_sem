@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KNP_Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +13,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace KNP_Library.Views
+namespace Lab4_5.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для NotificationBox.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class NotificationBox : Window
     {
-        public EditBook()
+        public NotificationBox(string message)
         {
             InitializeComponent();
-        }
-        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !int.TryParse(e.Text, out _);
+            this.DataContext = new { Message = message };
+
+            Task.Delay(8000).ContinueWith(_ =>
+            {
+                Dispatcher.Invoke(Close);
+            });
         }
     }
 }

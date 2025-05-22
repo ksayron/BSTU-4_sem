@@ -1,0 +1,84 @@
+﻿<Window x:Class="KNP_Library.Views.GenreAddBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KNP_Library.Views"
+                      xmlns:vm="clr-namespace:KNP_Library.ViewModels"
+        mc:Ignorable="d"
+                Icon="../Resources/Images/book_icon.ico"
+    Title="{DynamicResource GenreAddTitle}" Height="400" Width="400">
+    <Window.DataContext>
+        <vm:GenreAddBoxViewModel/>
+    </Window.DataContext>
+    <Grid Background="#FF3E508E" Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.00005*" />
+            <RowDefinition Height="0.2*" />
+
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.15*" />
+
+
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="46*" />
+            <ColumnDefinition Width="46*" />
+            <ColumnDefinition Width="115*" />
+            <ColumnDefinition Width="46*" />
+            <ColumnDefinition Width="46*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.ColumnSpan="8" Grid.Row="0" Margin="0,0,0,10" >
+            <Menu DockPanel.Dock="Top" MinHeight="25">
+                <MenuItem Header="{DynamicResource LangMenu}">
+                    <MenuItem Header="{DynamicResource ChangeToRU}" Command="{Binding ChangeLanguageRuCommand}"/>
+                    <MenuItem Header="{DynamicResource ChangeToEN}" Command="{Binding ChangeLanguageEnCommand}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Foreground="#FFEFE1E1" FontSize="16"
+               FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource Name}"></Label>
+
+
+        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="TitleInput" 
+                 Text="{Binding Name}"/>
+
+
+
+        <Button Grid.Column="1" Grid.Row="7" FontSize="14" FontWeight="Bold"
+                Grid.ColumnSpan="3" Margin="46,0,46,0" 
+                Command="{Binding AddGenreCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="{DynamicResource AddButton}"></Button>
+    </Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border 
+                CornerRadius="4" 
+                Background="{TemplateBinding Background}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+</Window>

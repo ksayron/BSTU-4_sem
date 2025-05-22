@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KNP_Library.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,22 @@ using System.Windows.Shapes;
 namespace KNP_Library.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для ReviewAddBox.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class ReviewAddBox : Window
     {
-        public EditBook()
+        public ReviewAddBox()
         {
             InitializeComponent();
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(DataContext is ReviewAddBoxViewModel vm)
+            {
+                var textRange = new TextRange(ReviewTextBox.Document.ContentStart, ReviewTextBox.Document.ContentEnd);
+                vm.ReviewText = textRange.Text;
+            }
         }
         private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
         {

@@ -11,11 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Lab4_5.Modules.classes;
-using Lab4_5.Modules.DAL;
-using Lab4_5.Modules.View;
-using Lab4_5.ViewModels;
-namespace Lab4_5
+using KNP_Library.Modules.classes;
+using KNP_Library.Modules.DAL;
+using KNP_Library.Modules.View;
+using KNP_Library.ViewModels;
+namespace KNP_Library
 {
     /// <summary>
     /// Логика взаимодействия для AdminMain.xaml
@@ -37,26 +37,7 @@ namespace Lab4_5
         {
             user = auth_user;
             InitializeComponent();
-            switch (user.ProfilePicId)
-            {
-                case 0:
-                    {
-                        this.ProfilePicImage.Visibility = Visibility.Hidden;
-                        break;
-                    };
-                case 1:
-                    {
-                        //BitmapImage ProfPic = new BitmapImage();
-                        //ProfPic.BeginInit();
-                        //ProfPic.UriSource = new Uri("./Resources/Images/ProfPic/2.jpg");
-                        //ProfPic.EndInit();
-                        //this.ProfilePicImage.Source = ProfPic;
-                        this.ProfilePicImage.Visibility = Visibility.Visible;
-                        break;
-                    }
-                
-
-            }
+         
         }
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)

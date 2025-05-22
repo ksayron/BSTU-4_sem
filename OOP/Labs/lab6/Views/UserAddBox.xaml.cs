@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KNP_Library.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,20 @@ using System.Windows.Shapes;
 namespace KNP_Library.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для UserAddBox.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class UserAddBox : Window
     {
-        public EditBook()
+        public UserAddBox()
         {
             InitializeComponent();
+        }
+        private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is UserAddBoxViewModel vm)
+            {
+                vm.Password = PasswordInput.Password;
+            }
         }
         private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
         {

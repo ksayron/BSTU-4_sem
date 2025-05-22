@@ -1,0 +1,53 @@
+﻿<Window x:Class="Lab4_5.Views.OrdersBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab4_5.Views"
+               xmlns:vm="clr-namespace:KNP_Library.ViewModels"
+                Icon="../Resources/Images/book_icon.ico"
+        mc:Ignorable="d"
+        Title="{DynamicResource Orders}" Height="320" Width="500">
+    <Window.DataContext>
+        <vm:OrdersBoxViewModel/>
+    </Window.DataContext>
+    <Grid Background="#FF5168B7">
+        <DockPanel Grid.ColumnSpan="8" Grid.Row="0" Margin="0,0,0,285" >
+            <Menu DockPanel.Dock="Top" MinHeight="25">
+                <MenuItem Header="{DynamicResource LangMenu}">
+                    <MenuItem Header="{DynamicResource ChangeToRU}" Command="{Binding ChangeLanguageRuCommand}"/>
+                    <MenuItem Header="{DynamicResource ChangeToEN}" Command="{Binding ChangeLanguageEnCommand}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label Content="{DynamicResource Orders}" Margin="50,20,50,250" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#fff" FontWeight="Bold" FontSize="16"></Label>
+        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30,60,30,30">
+            <ItemsControl ItemsSource="{Binding CurrentBook.IssuedOrders}" Margin="0,0,0,0">
+
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="10" Background="#1E1E2F" Padding="10" Margin="0" 
+                        BorderBrush="#333" BorderThickness="1">
+                            <StackPanel>
+
+
+
+                                <StackPanel Orientation="Horizontal" Margin="0,4,0,0" VerticalAlignment="Center" >
+                                    <TextBlock Text="{Binding OrderId}" Foreground="White" FontSize="12" Margin="0,0,0,0" />
+                                    <TextBlock Text="{Binding Book.Title}" Foreground="#FF91CAF1" FontSize="12" FontWeight="Bold" Margin="10,0,0,0" />
+                                    
+                                    <TextBlock Text="{Binding IssuedAt.Date,StringFormat='{}{0:dd/MM/yyyy}'}" Foreground="Lavender"  Margin="10,0,10,0" Width="60"/>
+                                    <TextBlock Text="{Binding DueAt.Date,StringFormat='{}{0:dd/MM/yyyy}'}" Foreground="Lavender"  Margin="10,0,10,0" Width="60"/>
+                                    <TextBlock Text="{Binding ClosedAt.Date,StringFormat='{}{0:dd/MM/yyyy}'}" Foreground="Lavender"  Margin="10,0,10,0" Width="60"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

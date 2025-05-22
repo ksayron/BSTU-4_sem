@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Lab4_5.Modules.classes;
+using KNP_Library.Modules.classes;
 
-namespace Lab4_5
+namespace KNP_Library
 {
     /// <summary>
     /// Логика взаимодействия для UserMain.xaml

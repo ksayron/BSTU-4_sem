@@ -1,0 +1,84 @@
+﻿<Window x:Class="Lab4_5.Views.NotificationDataGrid"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab4_5.Views"
+                               xmlns:vm="clr-namespace:KNP_Library.ViewModels"
+                Icon="../Resources/Images/book_icon.ico"
+        mc:Ignorable="d"
+    Title="{DynamicResource AuthorAddTitle}" Height="600" Width="800">
+    <Window.DataContext>
+        <vm:NotificationDataGrid/>
+    </Window.DataContext>
+    <Grid Background="#FF3E508E" Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.10*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.00005*" />
+            <RowDefinition Height="0.2*" />
+
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="0.15*" />
+
+
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="46*" />
+            <ColumnDefinition Width="115*" />
+            <ColumnDefinition Width="46*" />
+            <ColumnDefinition Width="20*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.ColumnSpan="8" Grid.Row="0" Margin="0,0,0,10" >
+            <Menu DockPanel.Dock="Top" MinHeight="25">
+                <MenuItem Header="{DynamicResource LangMenu}">
+                    <MenuItem Header="{DynamicResource ChangeToRU}" Command="{Binding ChangeLanguageRuCommand}"/>
+                    <MenuItem Header="{DynamicResource ChangeToEN}" Command="{Binding ChangeLanguageEnCommand}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FFEFE1E1" FontSize="16"
+               FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Center" Content="Notifications"/>
+        
+
+        <ScrollViewer Grid.Row="2" Grid.Column="1"  Grid.ColumnSpan="3" Grid.RowSpan="6">
+            <DataGrid   AutoGenerateColumns="True" Name="OrdersGrid" 
+ 
+        CanUserAddRows="False"
+        
+        ItemsSource="{Binding Notifications}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel >
+                                    <Button Content="{DynamicResource DeleteBook}"  
+                            Command="{Binding DataContext.DeleteNotification,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                            CommandParameter="{Binding .}"  />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+
+        </ScrollViewer>
+
+
+        
+    </Grid>
+</Window>

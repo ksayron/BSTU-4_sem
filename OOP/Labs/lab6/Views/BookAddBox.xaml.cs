@@ -1,6 +1,6 @@
-﻿using Lab4_5.Modules.classes;
-using Lab4_5.Modules.DAL;
-using Lab4_5.ViewModels;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.DAL;
+using KNP_Library.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Lab4_5
+namespace KNP_Library
 {
     /// <summary>
     /// Логика взаимодействия для BookAddBox.xaml
@@ -35,6 +35,10 @@ namespace Lab4_5
             this.DataContext = vm;
             InitializeComponent();
 
+        }
+        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !int.TryParse(e.Text, out _);
         }
         //private void AddAuthorCombo_Click(object sender, RoutedEventArgs e)
         //{
@@ -63,7 +67,7 @@ namespace Lab4_5
 
         //    int newRow = startRow + targetList.Count * 2;
 
-            
+
         //    var rowDef = new RowDefinition { Height = new GridLength(0.15, GridUnitType.Star) };
         //    MainGrid.RowDefinitions.Insert(newRow, rowDef);
 
@@ -80,7 +84,7 @@ namespace Lab4_5
         //    string smallDesc = SmallDescInput.Text;
         //    string fullDesc = FullDescInput.Text;
         //    int.TryParse(AmountInput.Text, out int amount);
-            
+
         //    var selectedAuthors = authorCombos
         //        .Select(cb => cb.SelectedItem as Author)
         //        .Where(author => author != null)
@@ -93,7 +97,7 @@ namespace Lab4_5
         //        .Distinct()
         //        .ToList();
 
-            
+
         //    if (string.IsNullOrWhiteSpace(title) || amount <= 0 || selectedAuthors.Count < 1 || selectedGenres.Count < 1)
         //    {
         //        MessageBox.Show("Пожалуйста, заполните все обязательные поля.");
@@ -115,8 +119,8 @@ namespace Lab4_5
         //    {
         //        Message.ShowM("Ошибка при регистрации", "Неопознная ошибка. повторите позже");
         //    }
-            
-            
-        
+
+
+
     }
 }

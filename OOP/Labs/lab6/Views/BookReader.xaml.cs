@@ -15,17 +15,21 @@ using System.Windows.Shapes;
 namespace KNP_Library.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для BookReader.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class BookReader : Window
     {
-        public EditBook()
+        public BookReader()
         {
             InitializeComponent();
         }
-        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
+        public BookReader(string pdfFilePath)
         {
-            e.Handled = !int.TryParse(e.Text, out _);
+            InitializeComponent();
+
+            var pdfUri = new Uri(pdfFilePath);
+
+            PdfWebViewer.Navigate(pdfUri);
         }
     }
 }

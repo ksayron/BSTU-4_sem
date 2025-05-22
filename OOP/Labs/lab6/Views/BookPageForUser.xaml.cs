@@ -15,17 +15,13 @@ using System.Windows.Shapes;
 namespace KNP_Library.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditBook.xaml
+    /// Логика взаимодействия для BookPageForUser.xaml
     /// </summary>
-    public partial class EditBook : Window
+    public partial class BookPageForUser : Window
     {
-        public EditBook()
+        public BookPageForUser()
         {
             InitializeComponent();
-        }
-        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !int.TryParse(e.Text, out _);
         }
     }
 }
