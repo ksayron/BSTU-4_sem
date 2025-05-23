@@ -5,38 +5,105 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lab4_5.Modules.classes;
-using Lab4_5.Modules.DAL;
-using Lab4_5.Modules.View;
-using Lab4_5.Modules.ViewModel;
-using Lab4_5;
+using KNP_Library.Modules.classes;
+using KNP_Library.Modules.DAL;
+using KNP_Library.Modules.View;
+using KNP_Library.Modules.ViewModel;
+using KNP_Library;
 using System.DirectoryServices;
-using Lab4_5.Modules.Interfaces;
+using KNP_Library.Modules.Interfaces;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using KNP_Library.Views;
+using System.Windows;
 using Lab4_5.Views;
 
-namespace Lab4_5.ViewModels
+namespace KNP_Library.ViewModels
 {
     public class AdminMainViewModel : BaseViewModel
     {
         public User CurrnetUser { get; set; }
         public Author FilterAuthor { get; set; }
         public Genre FilterGenre { get; set; }
+        public string SearchQuery { get; set; } = "Search...";
+        public string UserSearchQuery { get; set; } = "User Search...";
+
+        public string BookNameSearch { get; set; } = "";
+        public int UserCardIdSearch { get; set; } = 0;
+
+        private Visibility _booksVisibility = Visibility.Visible;
+        private Visibility _usersVisibility = Visibility.Collapsed;
+        private Visibility _ordersVisibility = Visibility.Collapsed;
+        public Visibility BooksVisibility
+        {
+            get => _booksVisibility;
+            set
+            {
+                _booksVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility UsersVisibility
+        {
+            get => _usersVisibility;
+            set
+            {
+                _usersVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        public Visibility OrdersVisibility
+        {
+            get => _ordersVisibility;
+            set
+            {
+                _ordersVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         Repository _repository;
         public ICommand AddBookCommand { get; }
         public ICommand EditBookCommand { get; }
         public ICommand DeleteBookCommand { get; }
+
+        public ICommand AddUserCommand { get; }
+        public ICommand EditUserCommand { get; }
+        public ICommand DeleteUserCommand { get; }
+
+        public ICommand AddNotificationCommand { get; }
+        public ICommand CloseOrderCommand { get; }
+
+
         public ICommand OpenBookPageCommand { get; }
-        public ICommand OpenHomeCommand { get; }
+        public ICommand OpenUserPageCommand { get; }
+        public ICommand OpenOrderPageCommand { get; }
+
         public ICommand OpenMyProfileCommand { get; }
+
         public ICommand OpenUserTableCommand { get; }
         public ICommand OpenBookTableCommand { get; }
+        public ICommand OpenOrderTableCommand { get; }
+        public ICommand OpenNotificationTableCommand { get; }
+
         public ICommand ApplyFilterCommand { get; }
+        public ICommand ApplySearchCommand { get; }
+        public ICommand ApplyUserSearchCommand { get; }
+        public ICommand ApplyOrderSearchCommand { get; }
+
         public ICommand ChangeLanguageRuCommand { get; }
         public ICommand ChangeLanguageEnCommand { get; }
         public ICommand ExitCommand { get; }
+
+        public ObservableCollection<CustomNotification> Notifications { get; set; } = new();
+        public NotificationType Type { get; set; } = NotificationType.Error;
+
+        public ICommand ShowSuccessCommand { get; }
+        public ICommand ShowErrorCommand { get; }
+        public ICommand ShowWarningCommand { get; }
         public AdminMainViewModel()
         {
             //_repository = repository;
@@ -45,12 +112,24 @@ namespace Lab4_5.ViewModels
             AddBookCommand = new RelayCommand(AddBookExecute,canAddBookExecute);
             EditBookCommand = new RelayCommand(EditBookExecute, CanEditBookExecute);
             DeleteBookCommand = new RelayCommand(DeleteBookExecute, CanDeleteBookExecute);
+
+            AddUserCommand = new RelayCommand(AddBookExecute, canAddBookExecute);
+            EditUserCommand = new RelayCommand(EditBookExecute, CanEditBookExecute);
+            DeleteUserCommand = new RelayCommand(DeleteBookExecute, CanDeleteBookExecute);
+
             OpenBookPageCommand = new RelayCommand(OpenBookPageExecute, CanOpenBookPageExecute);
-            OpenHomeCommand = new RelayCommand(OpenHomeExecute);
-            OpenMyProfileCommand = new RelayCommand(OpenHomeExecute);
-            OpenUserTableCommand = new RelayCommand(OpenHomeExecute);
-            OpenBookTableCommand = new RelayCommand(OpenHomeExecute);
+            OpenUserPageCommand = new RelayCommand(OpenUserPageExecute, CanOpenUserPageExecute);
+
+            OpenMyProfileCommand = new RelayCommand(OpenMyProfileExecute);
+
+            OpenUserTableCommand = new RelayCommand(OpenUsersExecute);
+            OpenBookTableCommand = new RelayCommand(OpenBooksExecute);
+
             ApplyFilterCommand = new RelayCommand(ApplyFilterExecute);
+            ApplySearchCommand = new RelayCommand(ApplySearchExecute);
+
+            ApplyUserSearchCommand = new RelayCommand(ApplyUserSearchExecute);
+
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
             ExitCommand = new RelayCommand(ExitExecute);
@@ -63,9 +142,13 @@ namespace Lab4_5.ViewModels
             Authors.Add(none_option_author);
             Genres = [];
             Genres.Add(none_option_genre);
+
+            UsersVisibility = Visibility.Collapsed;
+            BooksVisibility = Visibility.Visible;
+            OrdersVisibility = Visibility.Collapsed;
         }
 
-        
+
 
         public AdminMainViewModel(Repository repository)
         {
@@ -73,27 +156,190 @@ namespace Lab4_5.ViewModels
             CurrnetUser = new User();
 
             AddBookCommand = new RelayCommand(AddBookExecute, canAddBookExecute);
-            EditBookCommand = new RelayCommand(EditBookExecute,CanEditBookExecute);
-            DeleteBookCommand = new RelayCommand(DeleteBookExecute,CanDeleteBookExecute);
-            OpenBookPageCommand = new RelayCommand(OpenBookPageExecute,CanOpenBookPageExecute);
-            OpenHomeCommand = new RelayCommand(OpenHomeExecute);
-            OpenMyProfileCommand = new RelayCommand(OpenHomeExecute);
-            OpenUserTableCommand = new RelayCommand(OpenHomeExecute);
-            OpenBookTableCommand = new RelayCommand(OpenHomeExecute);
+            EditBookCommand = new RelayCommand(EditBookExecute, CanEditBookExecute);
+            DeleteBookCommand = new RelayCommand(DeleteBookExecute, CanDeleteBookExecute);
+
+            AddUserCommand = new RelayCommand(AddUserExecute, canAddUserExecute);
+            EditUserCommand = new RelayCommand(EditUserExecute, CanEditUserExecute);
+            DeleteUserCommand = new RelayCommand(DeleteUserExecute, CanDeleteUserExecute);
+
+            AddNotificationCommand = new RelayCommand(AddNotificationExecute);
+            CloseOrderCommand = new RelayCommand(CloseOrderExecute, CanCloseOrderExecute);
+
+            OpenBookPageCommand = new RelayCommand(OpenBookPageExecute, CanOpenBookPageExecute);
+            OpenUserPageCommand = new RelayCommand(OpenUserPageExecute, CanOpenUserPageExecute);
+
+            OpenMyProfileCommand = new RelayCommand(OpenMyProfileExecute);
+
+            OpenUserTableCommand = new RelayCommand(OpenUsersExecute);
+            OpenBookTableCommand = new RelayCommand(OpenBooksExecute);
+            OpenOrderTableCommand = new RelayCommand(OpenOrderExecute);
+            OpenNotificationTableCommand = new RelayCommand(OpenNotificationExecute);
+
             ApplyFilterCommand = new RelayCommand(ApplyFilterExecute);
+            ApplySearchCommand = new RelayCommand(ApplySearchExecute);
+            ApplyUserSearchCommand = new RelayCommand(ApplyUserSearchExecute);
+            ApplyOrderSearchCommand = new RelayCommand(ApplyOrderSearchExecute, CanApplyOrderSearchExecute);
+
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
             ExitCommand = new RelayCommand(ExitExecute);
 
-            Books = new ObservableCollection<Book>(_repository.GetAllBooks());
-            Users = new ObservableCollection<User>(_repository.GetAllUsers());
+            Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
+            Users = new ObservableCollection<User>(_repository.Users.GetAllUsers());
+            Orders = new ObservableCollection<Order>(_repository.Orders.GetAllOrders());
 
             Author none_option_author = new Author("none", "");
             Genre none_option_genre = new Genre("none");
-            Authors = new ObservableCollection<Author>(_repository.GetAllAuthors());
+            Authors = new ObservableCollection<Author>(_repository.AuthorsGenres.GetAllAuthors());
             Authors.Add(none_option_author);
-            Genres = new ObservableCollection<Genre>(_repository.GetAllGenres());
+            Genres = new ObservableCollection<Genre>(_repository.AuthorsGenres.GetAllGenres());
             Genres.Add(none_option_genre);
+            UsersVisibility = Visibility.Collapsed;
+            OrdersVisibility = Visibility.Collapsed;
+            BooksVisibility = Visibility.Visible;
+
+            ShowSuccessCommand = new RelayCommand(_ => AddNotification("Успех", NotificationType.Success));
+            ShowErrorCommand = new RelayCommand(_ => AddNotification("Произошла ошибка", NotificationType.Error));
+            ShowWarningCommand = new RelayCommand(_ => AddNotification("Предупреждение", NotificationType.Warning));
+        }
+        private void AddNotification(string message, NotificationType type)
+        {
+            Notifications.Add(new CustomNotification { Message = message, Type = type });
+            OnPropertyChanged(nameof(Notifications));
+        }
+        private void OpenNotificationExecute(object? obj)
+        {
+            var notif_add_vm = new NotificationDataGrid(_repository);
+            
+            var notif_add = new Lab4_5.Views.NotificationDataGrid()
+            {
+                DataContext = notif_add_vm
+            };
+            notif_add.ShowDialog();
+        }
+
+        private void AddNotificationExecute(object? obj)
+        {
+            var notif_add_vm = new NotificationAddBoxViewModel()
+            {
+                _repository = _repository,
+            };
+            var notif_add = new NotificationAddBox()
+            {
+                DataContext = notif_add_vm
+            };
+            notif_add.ShowDialog();
+        }
+
+        private void CloseOrderExecute(object? obj)
+        {
+            if(obj is Order order)
+            {
+                order.CloseOrder();
+                var book = _repository.Books.GetBookById(order.BookId);
+                book.AmountAvailible += 1;
+                _repository.Orders.UpdateOrderById(order.OrderId, order);
+                _repository.Books.UpdateBook(book.Id, book);
+                ApplyOrderSearchExecute(obj);
+            }
+        }
+
+        private bool CanCloseOrderExecute(object? obj)
+        {
+            if(obj is Order order)
+            {
+                return order.IsActive;
+            }
+            return false;
+        }
+
+        private void ApplyOrderSearchExecute(object? obj)
+        {
+            var new_orders = new ObservableCollection<Order>(_repository.Orders.GetAllOrders());
+            if (BookNameSearch != "")
+            {
+                new_orders = new ObservableCollection<Order>(new_orders.Where(b => b.Book.Title.Contains(BookNameSearch)).ToList()); 
+            }
+            if (UserCardIdSearch > 99999 & UserCardIdSearch < 1000000)
+            {
+                new_orders = new ObservableCollection<Order>(new_orders.Where(b => b.User.CardId==UserCardIdSearch));
+            }
+            Orders = new_orders;
+            OnPropertyChanged(nameof(Orders));
+        }
+
+        private bool CanApplyOrderSearchExecute(object? obj)
+        {
+            return true;
+        }
+        private void OpenOrderExecute(object? obj)
+        {
+            UsersVisibility = Visibility.Collapsed;
+            OrdersVisibility = Visibility.Visible;
+            BooksVisibility = Visibility.Collapsed;
+        }
+
+        private void OpenUserPageExecute(object? obj)
+        {
+            if(obj is User user)
+            {
+                bool isSelf = false;
+                if(user.Id == CurrnetUser.Id)
+                {
+                    isSelf = true;
+                }
+                var user_page_vm = new UserPageViewModel(user) 
+                {
+                    IsSelf = isSelf,
+                    _repository = _repository 
+                };
+                var user_page = new UserPage()
+                {
+                    DataContext = user_page_vm,
+                };
+                user_page.ShowDialog();
+            }
+            ApplyUserSearchExecute(obj);
+            OnPropertyChanged(nameof(Users));
+        }
+
+        private bool CanOpenUserPageExecute(object? obj)
+        {
+            return Users is not null;
+        }
+
+        private void OpenBooksExecute(object? obj)
+        {
+            UsersVisibility = Visibility.Collapsed;
+            OrdersVisibility = Visibility.Collapsed;
+            BooksVisibility = Visibility.Visible;
+        }
+
+        private void OpenUsersExecute(object? obj)
+        {
+            UsersVisibility = Visibility.Visible;
+            BooksVisibility = Visibility.Collapsed;
+            OrdersVisibility = Visibility.Collapsed;
+        }
+
+        private void OpenMyProfileExecute(object? obj)
+        {
+            
+                
+                var user_page_vm = new UserPageViewModel(CurrnetUser)
+                {
+                    IsSelf = true,
+                    _repository = _repository
+                };
+                var user_page = new UserPage()
+                {
+                    DataContext = user_page_vm,
+                };
+                user_page.ShowDialog();
+            
+            ApplyUserSearchExecute(obj);
+            OnPropertyChanged(nameof(Users));
         }
 
         private void AddBookExecute(object? obj)
@@ -104,12 +350,28 @@ namespace Lab4_5.ViewModels
                 DataContext = win_vm
             };
             win.ShowDialog();
-            Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+            Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
             OnPropertyChanged(nameof(Books));
         }
         private bool canAddBookExecute(object? obj)
         {
             return Books is not null;
+        }
+
+        private void AddUserExecute(object? obj)
+        {
+            var win_vm = App.ServiceProvider.GetRequiredService<UserAddBoxViewModel>();
+            var win = new UserAddBox()
+            {
+                DataContext = win_vm
+            };
+            win.ShowDialog();
+            ApplyUserSearchExecute(obj);
+            OnPropertyChanged(nameof(Users));
+        }
+        private bool canAddUserExecute(object? obj)
+        {
+            return Users is not null;
         }
         private void EditBookExecute(object? obj)
         {
@@ -120,7 +382,7 @@ namespace Lab4_5.ViewModels
                 DataContext = win_vm
             };
             win.ShowDialog();
-            Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+            Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
                 OnPropertyChanged(nameof(Books));
             }
         }
@@ -130,12 +392,40 @@ namespace Lab4_5.ViewModels
             return Books is not null;
         }
 
+        private void EditUserExecute(object? obj)
+        {
+            if (obj is User user)
+            {
+
+                var user_page_vm = new UserEditBoxViewModel(user)
+                {
+                    _repository = _repository
+                };
+                var user_page = new UserEditBox()
+                {
+                    DataContext = user_page_vm,
+                };
+                user_page.ShowDialog();
+            }
+            ApplyUserSearchExecute(obj);
+            OnPropertyChanged(nameof(Users));
+        }
+
+        private bool CanEditUserExecute(object? obj)
+        {
+            if (obj is User user)
+            {
+                return user.Id != CurrnetUser.Id;
+            }
+            return Users is not null;
+        }
+
         private void DeleteBookExecute(object? obj)
         {
             if(obj is Book book)
             {
-                _repository.DeleteBookById(book.Id);
-                Books = new ObservableCollection<Book>(_repository.GetAllBooks());
+                _repository.Books.DeleteBookById(book.Id);
+                Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
                 OnPropertyChanged(nameof(Books)); 
             }
         }
@@ -144,9 +434,41 @@ namespace Lab4_5.ViewModels
         {
             return Books is not null;
         }
+
+        private void DeleteUserExecute(object? obj)
+        {
+            if (obj is User user)
+            {
+                if(user.Id == CurrnetUser.Id)
+                {
+                    var mes = new Message("deletion error", "Нельзя удалить себя");
+                }
+                _repository.Users.DeleteUserById(user.Id);
+                if (UserSearchQuery.Length > 0)
+                {
+                    var new_users = new ObservableCollection<User>(_repository.Users.GetAllUsers().Where(u => u.Username.Contains(UserSearchQuery)));
+                    Users = new_users;
+                }
+                else
+                {
+                    var new_users = new ObservableCollection<User>(_repository.Users.GetAllUsers());
+                    Users = new_users;
+                }
+                OnPropertyChanged(nameof(Users));
+            }
+        }
+
+        private bool CanDeleteUserExecute(object? obj)
+        {
+            if(obj is User user)
+            {
+                return user.Id != CurrnetUser.Id;
+            }
+            return Users is not null;
+        }
         private void ApplyFilterExecute(object? obj)
         {
-            var new_books = new ObservableCollection<Book>(_repository.GetAllBooks());
+            var new_books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
             if (FilterAuthor != null)
             {
                 if(FilterAuthor.Name != "none") { new_books = new ObservableCollection<Book>(new_books.Where(b => b.Authors.Contains(FilterAuthor)).ToList()); }
@@ -158,11 +480,33 @@ namespace Lab4_5.ViewModels
             Books = new_books;
             OnPropertyChanged(nameof(Books));
         }
-
-        private void OpenHomeExecute(object? obj)
+        private void ApplySearchExecute(object? obj)
         {
-
+            var new_books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
+            if (FilterAuthor != null)
+            {
+                if (FilterAuthor.Name != "none") { new_books = new ObservableCollection<Book>(new_books.Where(b => b.Authors.Contains(FilterAuthor)).ToList()); }
+            }
+            if (FilterGenre != null)
+            {
+                if (FilterGenre.Name != "none") { new_books = new ObservableCollection<Book>(new_books.Where(b => b.Genres.Contains(FilterGenre)).ToList()); }
+            }
+            if(SearchQuery!= "Search..."){ new_books = new ObservableCollection<Book>(new_books.Where(b => b.Title.Contains(SearchQuery)).ToList()); }
+            Books = new_books;
+            OnPropertyChanged(nameof(Books));
         }
+        private void ApplyUserSearchExecute(object? obj)
+        {
+            var new_users = new ObservableCollection<User>(_repository.Users.GetAllUsers());
+            if (UserSearchQuery != "User Search..."){
+                 new_users = new ObservableCollection<User>(_repository.Users.GetAllUsers().Where(u => u.Username.Contains(UserSearchQuery))); 
+            }
+
+            Users = new_users;
+            OnPropertyChanged(nameof(Users));
+        }
+
+
         private void OpenBookPageExecute(object? obj)
         {
             var what_is = obj.GetType();
@@ -189,7 +533,28 @@ namespace Lab4_5.ViewModels
         }
         private void ExitExecute(object? obj)
         {
-            throw new NotImplementedException();
+            var auth = App.ServiceProvider.GetRequiredService<Auth>();
+            if (obj is Window currentWindow)
+            {
+                auth.Top = currentWindow.Top + 20;
+                auth.Left = currentWindow.Left + 20;
+                auth.Show();
+                currentWindow.Close();
+            }
+        }
+        public Order SelectedOrder;
+        private ObservableCollection<Order> _orders;
+        public ObservableCollection<Order> Orders
+        {
+            get { return _orders; }
+            set
+            {
+                if (_orders != value)
+                {
+                    _orders = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("Orders"));
+                }
+            }
         }
 
         public User SelectedUser;
@@ -229,7 +594,7 @@ namespace Lab4_5.ViewModels
                 if (_genres != value)
                 {
                     _genres = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("Books"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("Genres"));
                 }
             }
         }
@@ -242,12 +607,15 @@ namespace Lab4_5.ViewModels
                 if (_authors != value)
                 {
                     _authors = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("Books"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("Authors"));
                 }
             }
         }
         public event PropertyChangedEventHandler? PropertyChanged = delegate { };
  
+        public void ApplySearch(string query)
+        {
 
+        }
     }
 }

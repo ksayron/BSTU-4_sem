@@ -1,18 +1,24 @@
-﻿using KNP_Library.Modules.classes;
-using KNP_Library.Modules.DAL;
-using KNP_Library.Modules.Hash;
-using KNP_Library.Modules.View;
-using KNP_Library.Modules.ViewModel;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
-using System.Windows;
+﻿using KNP_Library.Modules.DAL;
+using KNP_Library.Modules.classes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-
+using KNP_Library.Modules.ViewModel;
+using KNP_Library.Modules.View;
+using System.Diagnostics.Metrics;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Net.Http;
+using System.IO;
+using System.Text.RegularExpressions;
+using KNP_Library.Modules.Hash;
+using Microsoft.Extensions.DependencyInjection;
 namespace KNP_Library.ViewModels
 {
-    public class RegViewModel : BaseViewModel
+    public class UserAddBoxViewModel : BaseViewModel
     {
         Repository _repository;
 
@@ -21,31 +27,31 @@ namespace KNP_Library.ViewModels
         public string Email { get; set; } = "";
         public int CardId { get; set; }
 
+        public bool IsAdmin { get; set; } = false;
+
         public ICommand RegistrationCommand { get; }
         public ICommand OpenLoginCommand { get; }
         public ICommand ChangeLanguageRuCommand { get; }
         public ICommand ChangeLanguageEnCommand { get; }
 
-        public RegViewModel()
+        public UserAddBoxViewModel()
         {
             //_repository = ((App)Application.Current).repository;
-            RegistrationCommand = new RelayCommand(RegistrationExecute,CanRegister);
-            OpenLoginCommand = new RelayCommand(OpenLoginExecute);
+            RegistrationCommand = new RelayCommand(RegistrationExecute, CanRegister);
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
         }
 
         private bool CanRegister(object? obj)
         {
-            return Login.Length>0 & Password.Length > 0 & CardId >0 & Email.Length>0;
+            return Login.Length > 0 & Password.Length > 0 & CardId > 0 & Email.Length > 0;
         }
 
-        public RegViewModel(Repository repository)
+        public UserAddBoxViewModel(Repository repository)
         {
             _repository = repository;
 
             RegistrationCommand = new RelayCommand(RegistrationExecute);
-            OpenLoginCommand = new RelayCommand(OpenLoginExecute);
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
         }
@@ -70,9 +76,9 @@ namespace KNP_Library.ViewModels
                 return;
             }
 
-            if (!Regex.IsMatch(password_input, @"^(?=.*[A-Z])(?=.*\d)[^\s]{8,}$"))
+            if (!Regex.IsMatch(password_input, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()[\]{}|\\/\-+_.:;=,~`])[^\s<>]{8,}$"))
             {
-                ShowError("Пароль должен содержать не менее 8 символов, одну заглавную букву и одну цифру, без пробелов.");
+                ShowError("Пароль должен содержать не менее 8 символов, одну заглавную букву, спец. символ(@$!%*?&^#()[\\]{}|\\\\/\\-+_.:;=,~`) и одну цифру, без пробелов.");
                 return;
             }
 
@@ -95,7 +101,7 @@ namespace KNP_Library.ViewModels
                 return;
             }
 
-            if (_repository.Users.GetUserIdByEmail(email_input) != 0)
+            if (_repository.Users.GetUserIdByUsername(email_input) != 0)
             {
                 ShowError("Данная почта уже занята");
                 return;
@@ -103,28 +109,19 @@ namespace KNP_Library.ViewModels
 
             //успех
             var hashed_password = SecurePasswordHasher.Hash(password_input);
-            var new_user = new User(card_input, login_input, hashed_password, email_input, 1);
+            int roleId;
+            if(IsAdmin)
+            {
+                roleId = 2;
+            }
+            else
+            {
+                roleId = 1;
+            }
+            var new_user = new User(card_input, login_input, hashed_password, email_input, roleId);
             if (_repository.Users.AddUser(new_user))
             {
-                try
-                {
-                    SendRegistrationEmail(email_input, login_input);
-                }
-                catch (Exception ex)
-                {
-                    ShowError($"Регистрация прошла, но не удалось отправить письмо: {ex.Message}");
-                }
 
-                var message_box = new Message("Регистрация завершена", "Вы успешно зарегистрировались");
-                message_box.Show();
-
-                var auth = App.ServiceProvider.GetRequiredService<Auth>();
-                if (obj is Window currentWindow)
-                {
-                    auth.Top = currentWindow.Top + 20;
-                    auth.Left = currentWindow.Left + 20;
-                }
-                auth.Show();
                 Close(obj);
             }
             else
@@ -134,43 +131,6 @@ namespace KNP_Library.ViewModels
 
         }
 
-        private void OpenLoginExecute(object? obj)
-        {
-            var auth = App.ServiceProvider.GetRequiredService<Auth>();
-            if (obj is Window currentWindow)
-            {
-                auth.Top = currentWindow.Top + 20;
-                auth.Left = currentWindow.Left + 20;
-            }
-            auth.Show();
-            Close(obj);
-        }
-
-
-        private void SendRegistrationEmail(string toEmail, string userName)
-        {
-            var fromAddress = new MailAddress("kucheruk05work@gmail.com", "KNP-Library");
-            var toAddress = new MailAddress(toEmail, userName);
-            const string fromPassword = "gaay hzgt pmmz xhzp"; 
-            const string subject = "Регистрация в KNP-Library";
-            string body = $"Здравствуйте, {userName}!\n\nВы успешно зарегистрировались в KNP-Library!\n\n";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address,fromPassword)
-            };
-
-            using var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            };
-            smtp.Send(message);
-        }
 
         private void ShowError(string message)
         {
@@ -187,4 +147,3 @@ namespace KNP_Library.ViewModels
         }
     }
 }
-

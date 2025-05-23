@@ -1,7 +1,7 @@
-﻿using Lab4_5.Modules.DAL;
-using Lab4_5.Modules.Hash;
-using Lab4_5.Modules.ViewModel;
-using Lab4_5.Modules.View;
+﻿using KNP_Library.Modules.DAL;
+using KNP_Library.Modules.Hash;
+using KNP_Library.Modules.ViewModel;
+using KNP_Library.Modules.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using Lab4_5.Views;
 
-namespace Lab4_5.ViewModels
+namespace KNP_Library.ViewModels
 {
     public class AuthViewModel : BaseViewModel
     {
@@ -27,7 +28,6 @@ namespace Lab4_5.ViewModels
 
         public AuthViewModel()
         {
-            //_repository = ((App)Application.Current).repository;
 
             LoginCommand = new RelayCommand(LoginExecute);
             OpenRegisterCommand = new RelayCommand(OpenRegisterExecute);
@@ -46,14 +46,14 @@ namespace Lab4_5.ViewModels
 
         private void LoginExecute(object? obj)
         {
-            var userId = _repository.GetUserIdByUsername(Login);
+            var userId = _repository.Users.GetUserIdByUsername(Login);
             if (userId == 0)
             {
                 ShowError("Неверный логин или пароль");
                 return;
             }
 
-            var user = _repository.GetUserByCardId(userId);
+            var user = _repository.Users.GetUserByCardId(userId);
             if (user == null || !SecurePasswordHasher.Verify(Password, user.PasswordHash))
             {
                 ShowError("Неверный логин или пароль");
@@ -64,13 +64,24 @@ namespace Lab4_5.ViewModels
             {
                 case 1:
                     {
-                        var vm = App.ServiceProvider.GetRequiredService<AdminMainViewModel>();
+                        var vm = App.ServiceProvider.GetRequiredService<UserMainViewModel>();
                         vm.CurrnetUser = user;
                         var mainWindow = new UserMain()
                         {
                             DataContext = vm
                         };
                         mainWindow?.Show();
+                        var start_pos = mainWindow.Top+mainWindow.Height;
+                        var edge_pos = mainWindow.Left + mainWindow.Width;
+                        foreach(var notif in _repository.Notifications.GetAllActiveNotifications())
+                        {
+                           
+                            var notif_win = new NotificationBox(notif.Message);
+                            notif_win.Left = edge_pos;
+                            notif_win.Top = start_pos;
+                            notif_win.Show();
+                            start_pos -= 110;
+                        }
                         Close(obj);
                         break;
                     }

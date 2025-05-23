@@ -1,31 +1,28 @@
-﻿using System;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.DAL;
+using KNP_Library.Modules.ViewModel;
+using KNP_Library.ViewModels;
+using KNP_Library.Views;
+using KNP_Library;
+using Lab4_5.Views;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KNP_Library.Modules.classes;
-using KNP_Library.Modules.DAL;
-using KNP_Library.Modules.View;
-using KNP_Library.Modules.ViewModel;
-using KNP_Library;
-using System.DirectoryServices;
-using KNP_Library.Modules.Interfaces;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
-using KNP_Library.Views;
-using static System.Reflection.Metadata.BlobBuilder;
 using System.Windows;
-using Lab4_5.Views;
-using System.Diagnostics;
+using KNP_Library.Modules.View;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KNP_Library.ViewModels
 {
-    class BookPageViewModel : BaseViewModel
+    class OrdersBoxViewModel : BaseViewModel
     {
         public Book CurrentBook { get; set; }
-        public string ImgSource { get; set; } 
+        public User Currentuser { get; set; }
+        public string ImgSource { get; set; }
 
         public ICommand OpenBookCommand { get; }
         public ICommand EditBookCommand { get; }
@@ -35,7 +32,7 @@ namespace KNP_Library.ViewModels
         public ICommand OpenBookPageCommand { get; }
         public ICommand ChangeLanguageEnCommand { get; }
         public ICommand ChangeLanguageRuCommand { get; }
-        public BookPageViewModel()
+        public OrdersBoxViewModel()
         {
 
             EditBookCommand = new RelayCommand(EditBookExecute, CanEditBookExecute);
@@ -44,9 +41,9 @@ namespace KNP_Library.ViewModels
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
 
-            var test_author= new Author("Pudgo","Pudgovanna");
-            var test_Genre= new Genre("Dota 2");
-            var test_Genre2= new Genre("Momchik");
+            var test_author = new Author("Pudgo", "Pudgovanna");
+            var test_Genre = new Genre("Dota 2");
+            var test_Genre2 = new Genre("Momchik");
             var test_order = new Order();
             CurrentBook = new Book();
             CurrentBook.Authors.Add(test_author);
@@ -61,26 +58,30 @@ namespace KNP_Library.ViewModels
 
 
         }
-        public BookPageViewModel(Book currentBook)
+        public OrdersBoxViewModel(Book currentBook)
         {
             EditBookCommand = new RelayCommand(EditBookExecute, CanEditBookExecute);
             DeleteBookCommand = new RelayCommand(DeleteBookExecute, CanDeleteBookExecute);
             OpenBookCommand = new RelayCommand(OpenBookExecute, CanOpenPageExecute);
-
+            OpenBookPageCommand = new RelayCommand(OpenBookPageExecute);
             ShowReviewsCommand = new RelayCommand(OpenReviwsExecute);
             ShowOrdersCommand = new RelayCommand(OpenOrdersExecute);
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
 
+
             CurrentBook = currentBook;
             ImgSource = CurrentBook.ImgPath;
         }
 
+        private void OpenBookPageExecute(object? obj)
+        {
 
+        }
 
         private void OpenOrdersExecute(object? obj)
         {
-            var reviews_vm = new OrdersBoxViewModel(CurrentBook);
+            var reviews_vm = this;
             var reviews_win = new OrdersBox()
             {
                 DataContext = reviews_vm,
@@ -120,7 +121,7 @@ namespace KNP_Library.ViewModels
 
         private bool CanOpenPageExecute(object? obj)
         {
-            return CurrentBook.FilePath.Length>0;
+            return CurrentBook.FilePath.Length > 0;
         }
         private void EditBookExecute(object? obj)
         {
@@ -137,12 +138,12 @@ namespace KNP_Library.ViewModels
 
         private bool CanEditBookExecute(object? obj)
         {
-            return CurrentBook.Id >0;
+            return CurrentBook.Id > 0;
         }
 
         private void DeleteBookExecute(object? obj)
         {
-            if(obj is Window win)
+            if (obj is Window win)
             {
                 var repository = App.ServiceProvider.GetRequiredService<Repository>();
                 if (repository.Books.DeleteBookById(CurrentBook.Id))
