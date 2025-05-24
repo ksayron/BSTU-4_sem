@@ -41,7 +41,7 @@ namespace KNP_Library.Modules.classes
         public string StarAssessment { get
             {
                 string star_text = "";
-                for(int i = 0; i < Assessment; i=i+2)
+                for(int i = Assessment; i > 1; i=i-2)
                 {
                     star_text += "★";
                 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KNP_Library.Modules.classes;
+using Lab4_5.Modules.classes;
 
 namespace KNP_Library.Modules.db
 {
@@ -14,7 +15,6 @@ namespace KNP_Library.Modules.db
                                                                 @"Trusted_Connection=true; User Id=Library_User; Password=password;";
         public LibraryContext() : base()
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         public LibraryContext(string connStr) : base()
@@ -29,6 +29,7 @@ namespace KNP_Library.Modules.db
         public DbSet<Order> Orders { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -114,7 +115,11 @@ namespace KNP_Library.Modules.db
                 HasMany(b => b.Reviews).
                 WithOne(r => r.ReviewBook).
                 HasForeignKey(r => r.BookId).
-                OnDelete(DeleteBehavior.Restrict); ;
+                OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Notification>().ToTable("Notification").HasKey(n => n.Id);
+            modelBuilder.Entity<Notification>().Property(r => r.Message).IsRequired();
+            modelBuilder.Entity<Notification>().Property(r => r.ExpireAt).IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

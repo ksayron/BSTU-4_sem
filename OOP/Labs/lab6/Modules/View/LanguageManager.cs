@@ -29,11 +29,11 @@ namespace KNP_Library.Modules.View
 
                 var dictionary = new ResourceDictionary
                 {
-                    Source = new Uri($"Resources/Dictionary/Dictionary{(languageCode == "ru-RU" ? "RU" : "EN")}.xaml", UriKind.Relative)
+                    Source = new Uri($"Resources/Dictionary/Dictionary{(languageCode == "ru-RU" ? "RU" : "EN")}.xaml", UriKind.Relative),
+                    
                 };
 
-                Application.Current.Resources.MergedDictionaries.Clear();
-                Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                ReplaceDictionary("LanguageDictionary", dictionary);
 
                 foreach (Window window in Application.Current.Windows)
                 {
@@ -58,6 +58,26 @@ namespace KNP_Library.Modules.View
                     MessageBoxImage.Error);
             }
 
+        }
+        private void ReplaceDictionary(string key, ResourceDictionary newDict)
+        {
+            var existing = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Contains(key));
+
+            if (existing != null)
+                Application.Current.Resources.MergedDictionaries.Remove(existing);
+
+            newDict[key] = true; 
+            Application.Current.Resources.MergedDictionaries.Add(newDict);
+        }
+        public void ChangeTheme(string themeName)
+        {
+            var themeDict = new ResourceDictionary
+            {
+                Source = new Uri($"/YourAssemblyName;component/Themes/{themeName}.xaml", UriKind.Relative)
+            };
+
+            ReplaceDictionary("ThemeDictionary", themeDict);
         }
     }
 }

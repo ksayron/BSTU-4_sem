@@ -20,6 +20,7 @@ namespace KNP_Library.Modules.DAL
         public ReviewRepository Reviews;
         public OrderRepository Orders;
         public RoleRepository Roles;
+        public NotificationRepository Notifications;
 
         LibraryContext context;
         public Repository()
@@ -32,6 +33,7 @@ namespace KNP_Library.Modules.DAL
             Reviews = new ReviewRepository(context);
             Orders = new OrderRepository(context);
             Roles = new RoleRepository(context);
+            Notifications = new NotificationRepository(context);
         }
         public Repository(string ConnString)
         {
@@ -43,6 +45,7 @@ namespace KNP_Library.Modules.DAL
             Reviews = new ReviewRepository(context);
             Orders = new OrderRepository(context);
             Roles = new RoleRepository(context);
+            Notifications = new NotificationRepository(context);
         }
         
         public void Init()
