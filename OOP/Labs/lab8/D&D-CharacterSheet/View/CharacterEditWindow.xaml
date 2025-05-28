@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D_D_CharacterSheet.View"
         mc:Ignorable="d"
-        Title="Edit Character" Height="300" Width="400">
+        Title="Меню персонажа" Height="300" Width="400">
     <Grid>
         <StackPanel Margin="10">
             <Label>Имя</Label>
@@ -16,7 +16,7 @@
         <TextBox x:Name="ClassBox" Margin="5"/>
             <Label>Уровень</Label>
         <TextBox x:Name="LevelBox" Margin="5"/>
-        <Button Content="Save" Click="Save_Click" Margin="5"/>
+        <Button Content="Сохранить" Click="Save_Click" Margin="5"/>
     </StackPanel>    
         
     </Grid>

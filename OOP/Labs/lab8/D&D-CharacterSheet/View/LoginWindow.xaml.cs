@@ -35,9 +35,9 @@ namespace D_D_CharacterSheet.View
             var user = _db.AuthenticateUser(UsernameBox.Text, PasswordBox.Password);
             if (user != null)
             {
-                LoggedInUser = user;
-                DialogResult = true;
+                var mainWindow = new MainWindow(user);
                 Close();
+                mainWindow.ShowDialog();
             }
             else
             {

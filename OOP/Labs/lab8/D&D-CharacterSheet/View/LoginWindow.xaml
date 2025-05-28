@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:D_D_CharacterSheet.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="230" Width="300">
+        Title="Авторизация" Height="230" Width="300">
     <Grid>
         <StackPanel Margin="10">
             <Label>Логин</Label>

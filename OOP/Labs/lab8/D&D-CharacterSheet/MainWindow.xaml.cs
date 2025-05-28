@@ -23,6 +23,10 @@ namespace D_D_CharacterSheet
         private readonly DatabaseManager _db = new();
         private User _currentUser;
 
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
         public MainWindow(User user)
         {
             InitializeComponent();
@@ -37,7 +41,7 @@ namespace D_D_CharacterSheet
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var editor = new CharacterEditWindow();
+            var editor = new CharacterEditWindow(user:_currentUser);
             if (editor.ShowDialog() == true)
             {
                 _db.AddCharacter(editor.Character);
@@ -47,33 +51,28 @@ namespace D_D_CharacterSheet
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (CharacterGrid.SelectedItem is DataRowView row)
+            if (sender is Button button && button.CommandParameter is Character character)
             {
-                int id = (int)(long)row["Id"];
-                _db.DeleteCharacter(id,_currentUser.Id); 
+   
+                _db.DeleteCharacter(character.Id, _currentUser.Id);
                 LoadData();
             }
         }
 
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            if (CharacterGrid.SelectedItem is DataRowView row)
+            if (sender is Button button && button.CommandParameter is Character character)
             {
-                var editor = new CharacterEditWindow(new Character
-                {
-                    Id = (int)(long)row["Id"],
-                    Name = row["Name"].ToString(),
-                    Race = row["Race"].ToString(),
-                    Class = row["Class"].ToString(),
-                    Level = (int)(long)row["Level"]
-                });
+                var editor = new CharacterEditWindow(user: _currentUser, character: character);
 
                 if (editor.ShowDialog() == true)
                 {
-                    _db.UpdateCharacter(editor.Character); 
+                    _db.UpdateCharacter(editor.Character);
                     LoadData();
                 }
             }
         }
+
     }
 }

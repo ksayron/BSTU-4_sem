@@ -19,14 +19,19 @@ namespace D_D_CharacterSheet.Data
 
         public void EnsureDatabaseCreated()
         {
+            var builder = new SqlConnectionStringBuilder(_connectionString)
+            {
+                InitialCatalog = "master"
+            };
 
-            using var conn = new SqlConnection(_connectionString);
+            using var conn = new SqlConnection(builder.ConnectionString);
+            
             conn.Open();
 
-            var cmd = new SqlCommand("IF DB_ID('DnDCharacters') IS NULL CREATE DATABASE DnDCharacters;", conn);
+            var cmd = new SqlCommand("IF DB_ID('DnDCharacterSheet_DB') IS NULL CREATE DATABASE DnDCharacterSheet_DB;", conn);
             cmd.ExecuteNonQuery();
 
-            conn.ChangeDatabase("DnDCharacters");
+            conn.ChangeDatabase("DnDCharacterSheet_DB");
 
             // Create tables if not exist
             var createUsers = @"
@@ -63,8 +68,8 @@ namespace D_D_CharacterSheet.Data
                 var cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Username", username);
                 cmd.Parameters.AddWithValue("@Password", password);
-
-                cmd.ExecuteScalar();
+                cmd.Transaction = tr;
+                cmd.ExecuteNonQuery();
                 tr.Commit();
                 return true;
             }
@@ -80,7 +85,7 @@ namespace D_D_CharacterSheet.Data
             using var conn = new SqlConnection(_connectionString);
             conn.Open();
 
-            var query = "SELECT Id FROM Users WHERE Username = @Username AND Password = @Password";
+            var query = "SELECT * FROM Users WHERE Username = @Username AND Password = @Password";
             using var cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@Username", username);
             cmd.Parameters.AddWithValue("@Password", password);
@@ -88,11 +93,10 @@ namespace D_D_CharacterSheet.Data
             using var reader = cmd.ExecuteReader();
             if (reader.Read())
             {
-                return new User
-                {
-                    Id = Convert.ToInt32(reader["Id"]),
-                    Userame = reader["Username"].ToString()
-                };
+                var user = new User();
+                user.Id = Convert.ToInt32(reader["Id"]);
+                user.Userame = reader["Username"].ToString();
+                return user;
             }
             return null;
         }
@@ -160,7 +164,7 @@ namespace D_D_CharacterSheet.Data
                 Level = @Level 
             WHERE Id = @Id AND UserId = @UserId";
 
-            using var cmd = new SqlCommand(query, conn);
+            using var cmd = new SqlCommand(query, conn,tr);
             cmd.Parameters.AddWithValue("@Name", character.Name);
             cmd.Parameters.AddWithValue("@Race", character.Race);
             cmd.Parameters.AddWithValue("@Class", character.Class);
@@ -188,36 +192,36 @@ namespace D_D_CharacterSheet.Data
             tr.Commit();
         }
 
-        public List<Character> SearchCharactersByName(int userId, string namePart)
-        {
-            var characters = new List<Character>();
+        //public List<Character> SearchCharactersByName(int userId, string namePart)
+        //{
+        //    var characters = new List<Character>();
 
-            using var conn = new SqlConnection(_connectionString);
-            conn.Open();
+        //    using var conn = new SqlConnection(_connectionString);
+        //    conn.Open();
 
-            var query = @"
-            SELECT * FROM Characters 
-            WHERE UserId = @UserId AND Name LIKE @NamePattern";
+        //    var query = @"
+        //    SELECT * FROM Characters 
+        //    WHERE UserId = @UserId AND Name LIKE @NamePattern";
 
-            using var cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@UserId", userId);
-            cmd.Parameters.AddWithValue("@NamePattern", "%" + namePart + "%");
+        //    using var cmd = new SqlCommand(query, conn);
+        //    cmd.Parameters.AddWithValue("@UserId", userId);
+        //    cmd.Parameters.AddWithValue("@NamePattern", "%" + namePart + "%");
 
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                characters.Add(new Character
-                {
-                    Id = (int)reader["Id"],
-                    Name = reader["Name"].ToString(),
-                    Race = reader["Race"].ToString(),
-                    Class = reader["Class"].ToString(),
-                    Level = (int)reader["Level"],
-                    UserId = (int)reader["UserId"]
-                });
-            }
+        //    using var reader = cmd.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        characters.Add(new Character
+        //        {
+        //            Id = (int)reader["Id"],
+        //            Name = reader["Name"].ToString(),
+        //            Race = reader["Race"].ToString(),
+        //            Class = reader["Class"].ToString(),
+        //            Level = (int)reader["Level"],
+        //            UserId = (int)reader["UserId"]
+        //        });
+        //    }
 
-            return characters;
-        }
+        //    return characters;
+        //}
     }
 }

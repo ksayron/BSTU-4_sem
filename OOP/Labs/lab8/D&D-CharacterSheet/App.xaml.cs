@@ -1,4 +1,5 @@
-﻿using D_D_CharacterSheet.View;
+﻿using D_D_CharacterSheet.Data;
+using D_D_CharacterSheet.View;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -13,17 +14,10 @@ namespace D_D_CharacterSheet
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+             DatabaseManager _db = new();
+            _db.EnsureDatabaseCreated();
             var login = new LoginWindow();
-            if (login.ShowDialog() == true)
-            {
-                var mainWindow = new MainWindow(login.LoggedInUser);
-                mainWindow.Show();
-            }
-            else
-            {
-                Shutdown(); 
-            }
+            login.Show();
         }
 
     }

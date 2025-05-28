@@ -20,12 +20,13 @@ namespace D_D_CharacterSheet.View
     /// </summary>
     public partial class CharacterEditWindow : Window
     {
-        public Character Character { get; private set; }
+        public Character Character { get; private set; } = new Character();
+        public User User { get; private set; }
 
-        public CharacterEditWindow(Character character = null)
+        public CharacterEditWindow(User user, Character character = null)
         {
             InitializeComponent();
-
+            User = user;
             if (character != null)
             {
                 Character = character;
@@ -40,7 +41,8 @@ namespace D_D_CharacterSheet.View
         {
             Character = new Character
             {
-                UserId = Character.UserId,
+                Id = Character.Id,
+                UserId = User.Id,
                 Name = NameBox.Text,
                 Race = RaceBox.Text,
                 Class = ClassBox.Text,
