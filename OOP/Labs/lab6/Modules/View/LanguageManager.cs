@@ -70,14 +70,24 @@ namespace KNP_Library.Modules.View
             newDict[key] = true; 
             Application.Current.Resources.MergedDictionaries.Add(newDict);
         }
-        public void ChangeTheme(string themeName)
+        public void ToggleTheme()
         {
-            var themeDict = new ResourceDictionary
+            var currentTheme = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Contains("ThemeDictionary"));
+
+            string newThemeName;
+
+            if (currentTheme?.Source?.ToString().Contains("LightTheme.xaml") == true)
+                newThemeName = "DarkTheme";
+            else
+                newThemeName = "LightTheme";
+
+            var newThemeDict = new ResourceDictionary
             {
-                Source = new Uri($"/YourAssemblyName;component/Themes/{themeName}.xaml", UriKind.Relative)
+                Source = new Uri($"Resources/Themes/{newThemeName}.xaml", UriKind.Relative)
             };
 
-            ReplaceDictionary("ThemeDictionary", themeDict);
+            ReplaceDictionary("ThemeDictionary", newThemeDict);
         }
     }
 }

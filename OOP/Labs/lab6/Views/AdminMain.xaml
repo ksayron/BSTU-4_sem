@@ -14,13 +14,13 @@
         <vm:AdminMainViewModel/>
     </Window.DataContext>
     <Window.Resources>
-
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="17.837"></RowDefinition>
-            <RowDefinition Height="59*"></RowDefinition>
-            <RowDefinition Height="357*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -32,7 +32,7 @@
             <Image Source="../Resources/Images/Library/logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"  />
         </Border>
 
-        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="#FF3E508E" Visibility="{Binding BooksVisibility}">
+        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="{DynamicResource AccentBrush}" Visibility="{Binding BooksVisibility}">
             <StackPanel>
                 <Label Content="{DynamicResource AuthorFilter}" HorizontalContentAlignment="Center"></Label>
                 <ComboBox Name="AuthorFilter_Combo" ItemsSource="{Binding Authors}" SelectedItem="{Binding FilterAuthor}"></ComboBox>
@@ -43,10 +43,10 @@
                          />
             </StackPanel>
         </Border>
-        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="#FF3E508E" Visibility="{Binding UsersVisibility}">
+        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="{DynamicResource AccentBrush}" Visibility="{Binding UsersVisibility}">
 
         </Border>
-        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="#FF3E508E" Visibility="{Binding OrdersVisibility}">
+        <Border  Grid.Column="0" Grid.Row="2" BorderThickness="0,3,3,0" BorderBrush="Black" Background="{DynamicResource AccentBrush}" Visibility="{Binding OrdersVisibility}">
             <StackPanel>
                 <Label Content="{DynamicResource BookNameSearch}" HorizontalContentAlignment="Center"></Label>
                 <TextBox Name="BookName_Search" Text="{Binding BookNameSearch}" ></TextBox>
@@ -57,7 +57,7 @@
              />
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2,0,0,0" Background="#FF3E508E">
+        <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2,0,0,0" Background="{DynamicResource AccentBrush}">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding CurrnetUser.ProfilePicImage}" Width="20" Name="ProfilePicImage"></Image>
@@ -67,25 +67,24 @@
             </StackPanel>
         </Border>
         <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="2,2,0,0" >
-            <StackPanel Background="#FF3E508E" >
+            <StackPanel Background="{DynamicResource AccentBrush}" >
                 <Button Content="{DynamicResource Users}" Command="{Binding OpenUserTableCommand}"></Button>
                 <Button Content="{DynamicResource Books}" Command="{Binding OpenBookTableCommand}"></Button>
                 <Button Content="{DynamicResource Orders}" Command="{Binding OpenOrderTableCommand}"></Button>
-                <Button Name="AddBookButton" Content="{DynamicResource AddBook}" Visibility="{Binding BooksVisibility}"
+            <Button Name="AddBookButton" Content="{DynamicResource AddBook}" Visibility="{Binding BooksVisibility}"
                     Command="{Binding AddBookCommand}"/>
-                <Button Name="AddUserButton" Content="{DynamicResource AddUser}" Visibility="{Binding UsersVisibility}"
+                
+            <Button Name="AddUserButton" Content="{DynamicResource AddUser}" Visibility="{Binding UsersVisibility}"
                 Command="{Binding AddUserCommand}"/>
                 <Button Content="{DynamicResource AddNotification}" Command="{Binding AddNotificationCommand}"></Button>
+               
                 <Button Content="{DynamicResource Notifications}" Command="{Binding OpenNotificationTableCommand}"></Button>
-                <Button Content="Success" Command="{Binding ShowSuccessCommand}" />
-                <Button Content="Error" Command="{Binding ShowErrorCommand}" />
-                <Button Content="Warning" Command="{Binding ShowWarningCommand}" />
                 <Button Content="{DynamicResource Exit}" Command="{Binding ExitCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"></Button>
-
+                <Button Name="Spam" Content="Spam" Visibility="{Binding BooksVisibility}" Command="{Binding SpamCommand}"/>
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="#FF3E508E" Name="BookSearchBar" Visibility="{Binding BooksVisibility}">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="{DynamicResource AccentBrush}" Name="BookSearchBar" Visibility="{Binding BooksVisibility}">
             <StackPanel Orientation="Horizontal" >
                 <Border  Margin="20,10,20,10" Background="#FFFFF4D6" CornerRadius="10" BorderBrush="Black" BorderThickness="2" Width="677">
                     <TextBox Name="SearchBox" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18"
@@ -98,7 +97,7 @@
                         Command="{Binding ApplySearchCommand}"></Button>
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="#FF3E508E" Name="UserSearchBar" Visibility="{Binding UsersVisibility}">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="{DynamicResource AccentBrush}" Name="UserSearchBar" Visibility="{Binding UsersVisibility}">
             <StackPanel Orientation="Horizontal" >
                 <Border  Margin="20,10,20,10" Background="#FFFFF4D6" CornerRadius="10" BorderBrush="Black" BorderThickness="2" Width="677">
                     <TextBox Name="UserSearchBox" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="18"
@@ -111,35 +110,41 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="#FF3E508E" Name="OrderSearchBar" Visibility="{Binding OrdersVisibility}">
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,0" Background="{DynamicResource AccentBrush}" Name="OrderSearchBar" Visibility="{Binding OrdersVisibility}">
 
         </Border>
         <ScrollViewer Grid.Row="2" Grid.Column="1" Visibility="{Binding BooksVisibility}">
-            <DataGrid   AutoGenerateColumns="True" Name="BooksGrid" 
+            <DataGrid   AutoGenerateColumns="False" Name="BooksGrid" 
                         AutoGeneratingColumn="BooksGrid_AutoGeneratingColumn"
-                        CanUserAddRows="False"                      
+                        CanUserAddRows="False"
+                        
                         ItemsSource="{Binding Books}">
                 <DataGrid.Columns>
+
                     <DataGridTemplateColumn Width="80">
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
                                 <StackPanel >
                                     <Button Content="{DynamicResource OpenBook}" 
-                                            Command="{Binding DataContext.OpenBookPageCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
-                                            CommandParameter="{Binding .}" />
+                        Command="{Binding DataContext.OpenBookPageCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                        CommandParameter="{Binding .}" />
                                     <Button Content="{DynamicResource EditBook}" 
-                                            Command="{Binding DataContext.EditBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
-                                            CommandParameter="{Binding .}"  />
+                        Command="{Binding DataContext.EditBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                        CommandParameter="{Binding .}"  />
                                     <Button Content="{DynamicResource DeleteBook}"  
-                                            Command="{Binding DataContext.DeleteBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
-                                            CommandParameter="{Binding .}"  />
+                        Command="{Binding DataContext.DeleteBookCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" Margin="2"  
+                        CommandParameter="{Binding .}"  />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
+                    
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="{DynamicResource Title}" Binding="{Binding Title}" />
+                    <DataGridTextColumn Header="{DynamicResource Amount}" Binding="{Binding AmountAvailible}" />
+                    <DataGridTextColumn Header="Кол-во заказов" Binding="{Binding IssuedOrders.Count}" />
+                    <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" />
 
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell">
@@ -147,11 +152,11 @@
                     </Style>
                 </DataGrid.CellStyle>
             </DataGrid>
-
+            
         </ScrollViewer>
-
+        
         <ScrollViewer Grid.Row="2" Grid.Column="1" Visibility="{Binding UsersVisibility}">
-            <DataGrid   AutoGenerateColumns="True" Name="UsersGrid" 
+            <DataGrid   AutoGenerateColumns="False" Name="UsersGrid" 
                 CanUserAddRows="False"
                 Visibility="{Binding UsersVisibility}"
                 ItemsSource="{Binding Users}">
@@ -174,9 +179,12 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="{DynamicResource Title}" Binding="{Binding CardId}" />
+                    <DataGridTextColumn Header="{DynamicResource Amount}" Binding="{Binding Username}" />
+                    <DataGridTextColumn Header="Кол-во заказов" Binding="{Binding ActiveBooks.Count}" />
+                    <DataGridTextColumn Header="Кол-во книг прочитанно" Binding="{Binding Orders.Count}" />
 
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell">
@@ -186,7 +194,7 @@
             </DataGrid>
 
         </ScrollViewer>
-        <v:CustomNotification Grid.Column="1" Grid.Row="2" Message="Привет" Type="Success" />
+
         <ScrollViewer Grid.Row="2" Grid.Column="1" Visibility="{Binding OrdersVisibility}">
             <DataGrid   AutoGenerateColumns="True" Name="OrdersGrid" 
                 AutoGeneratingColumn="BooksGrid_AutoGeneratingColumn"
@@ -217,21 +225,22 @@
             </DataGrid>
 
         </ScrollViewer>
-        <ItemsControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" ItemsSource="{Binding Notifications}" Margin="780,250,0,0">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <v:CustomNotification Message="{Binding Message}" Type="{Binding Type}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+
         <DockPanel Grid.ColumnSpan="5" Grid.Row="0" >
-            <Menu DockPanel.Dock="Top" MinHeight="25">
+            
+            <Menu DockPanel.Dock="Top" MinHeight="35" Background="{DynamicResource AccentBrush}" BorderBrush="Black">
+                <MenuItem Header="Undo/Redo">
+                    <MenuItem Header="Undo" Command="{Binding UndoCommand}"/>
+                    <MenuItem Header="Redo" Command="{Binding RedoCommand}"/>
+                </MenuItem>
                 <MenuItem Header="{DynamicResource LangMenu}">
                     <MenuItem Header="{DynamicResource ChangeToRU}" Command="{Binding ChangeLanguageRuCommand}"/>
                     <MenuItem Header="{DynamicResource ChangeToEN}" Command="{Binding ChangeLanguageEnCommand}"/>
                 </MenuItem>
+                <MenuItem Header="Сменить тему" Command="{Binding ChangeThemeCommand}" Background="White" >
+
+                </MenuItem>
             </Menu>
         </DockPanel>
     </Grid>
-
 </Window>

@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:KNP_Library"
         xmlns:vm="clr-namespace:KNP_Library.ViewModels"
+        xmlns:v="clr-namespace:KNP_Library.Modules.View"
         mc:Ignorable="d"
                 Icon="../Resources/Images/book_icon.ico"
               Title="Добавить книгу" Height="700" Width="700">
@@ -77,6 +78,8 @@
                  Text="{Binding Description}"/>
         <TextBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="AmountInput" 
                  Text="{Binding Amount}" PreviewTextInput="OnlyNumericInput"/>
+        <v:CustomEventSource Grid.Column="6" Grid.Row="12" Background="{DynamicResource AccentBrush}" Grid.ColumnSpan="3" Bubbling="CustomEventSource_Bubbling" Tunneling="CustomEventSource_Tunneling" Direct="CustomEventSource_Direct"/>
+        <v:RatingControl Grid.Column="6" Grid.Row="13" Rating="{Binding Amount}" Grid.ColumnSpan="3"/>
         <ScrollViewer  Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3">
             <ItemsControl ItemsSource="{Binding AuthorSelections}">
                 <ItemsControl.ItemTemplate>
@@ -109,7 +112,7 @@
         <Button Grid.Row="16" Grid.Column="3" Content="➕" Command="{Binding AddGenreComboCommand}" />
         <Button Grid.Row="16" Grid.Column="1" Content="✎" Command="{Binding AddGenreСommand}" />
 
-        <Button Grid.Column="6" Grid.Row="16" FontSize="14" FontWeight="Bold"
+        <Button Grid.Column="6" Grid.Row="16" FontSize="14" FontWeight="Bold" Background="{DynamicResource BackgroundBrush}" Foreground="{DynamicResource ForegroundBrush}"
                 Grid.ColumnSpan="3"  
                 Command="{Binding AddBookCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="{DynamicResource AddButton}"></Button>
@@ -136,20 +139,6 @@ FontFamily="Segoe UI" FontWeight="Bold" FontSize="18" Content="{Binding PdfPath}
                 </Style>
             </Style.Resources>
         </Style>
-        <Style TargetType="PasswordBox">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border 
-                CornerRadius="4" 
-                Background="{TemplateBinding Background}" 
-                BorderBrush="{TemplateBinding BorderBrush}" 
-                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+       
     </Window.Resources>
 </Window>

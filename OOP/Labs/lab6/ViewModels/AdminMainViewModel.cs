@@ -17,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using KNP_Library.Views;
 using System.Windows;
 using Lab4_5.Views;
+using Lab4_5.Modules.DAL;
+using Lab4_5.Modules.ViewModel;
 
 namespace KNP_Library.ViewModels
 {
@@ -66,6 +68,7 @@ namespace KNP_Library.ViewModels
 
 
         Repository _repository;
+        UndoRedoManager manager = new UndoRedoManager();
         public ICommand AddBookCommand { get; }
         public ICommand EditBookCommand { get; }
         public ICommand DeleteBookCommand { get; }
@@ -96,14 +99,12 @@ namespace KNP_Library.ViewModels
 
         public ICommand ChangeLanguageRuCommand { get; }
         public ICommand ChangeLanguageEnCommand { get; }
+        public ICommand ChangeThemeCommand { get; }
+        public ICommand UndoCommand { get; }
+        public ICommand RedoCommand { get; }
+
         public ICommand ExitCommand { get; }
-
-        public ObservableCollection<CustomNotification> Notifications { get; set; } = new();
-        public NotificationType Type { get; set; } = NotificationType.Error;
-
-        public ICommand ShowSuccessCommand { get; }
-        public ICommand ShowErrorCommand { get; }
-        public ICommand ShowWarningCommand { get; }
+        public ICommand SpamCommand { get; }
         public AdminMainViewModel()
         {
             //_repository = repository;
@@ -133,6 +134,7 @@ namespace KNP_Library.ViewModels
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
             ExitCommand = new RelayCommand(ExitExecute);
+            SpamCommand = new RelayCommand(SpamExecute);
 
             Author none_option_author = new Author("none", "");
             Genre none_option_genre = new Genre("none");
@@ -148,7 +150,25 @@ namespace KNP_Library.ViewModels
             OrdersVisibility = Visibility.Collapsed;
         }
 
+        private void SpamExecute(object? obj)
+        {
+            using(var unitOfWork = new UnitOfWork() )
+            {
+                
+                var book = new Book { Title = "Spam book" ,Genres=new List<Genre>(Genres),Authors=new List<Author>(Authors),Description="SpamSpamSpam",SmallDescription="Spam",AmountAvailible=100,Rating=0.0 };
+                
+                unitOfWork.Books.AddBook(book);
 
+                var review = new Review
+                {
+                    BookId = unitOfWork.Books.GetBookIdByName(book.Title),
+                    Assessment = 10,
+                    UserId = 2
+                };
+                unitOfWork.Complete();
+            }
+            OnPropertyChanged(nameof(Books));
+        }
 
         public AdminMainViewModel(Repository repository)
         {
@@ -183,6 +203,21 @@ namespace KNP_Library.ViewModels
 
             ChangeLanguageRuCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("ru-RU"));
             ChangeLanguageEnCommand = new RelayCommand(_ => LanguageManager.Instance.ChangeLanguage("en-US"));
+            ChangeThemeCommand = new RelayCommand(_ => LanguageManager.Instance.ToggleTheme());
+            
+            UndoCommand = new RelayCommand(
+                _ => {
+                    manager.Undo();
+                    Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
+                    OnPropertyChanged(nameof(Books));
+            },
+            _=>manager.UndoStackCount>0);
+            RedoCommand = new RelayCommand(_ => { 
+                manager.Redo();
+                Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
+                OnPropertyChanged(nameof(Books)); },
+                _=>manager.RedoStackCount>0);
+
             ExitCommand = new RelayCommand(ExitExecute);
 
             Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
@@ -198,16 +233,8 @@ namespace KNP_Library.ViewModels
             UsersVisibility = Visibility.Collapsed;
             OrdersVisibility = Visibility.Collapsed;
             BooksVisibility = Visibility.Visible;
+        }
 
-            ShowSuccessCommand = new RelayCommand(_ => AddNotification("Успех", NotificationType.Success));
-            ShowErrorCommand = new RelayCommand(_ => AddNotification("Произошла ошибка", NotificationType.Error));
-            ShowWarningCommand = new RelayCommand(_ => AddNotification("Предупреждение", NotificationType.Warning));
-        }
-        private void AddNotification(string message, NotificationType type)
-        {
-            Notifications.Add(new CustomNotification { Message = message, Type = type });
-            OnPropertyChanged(nameof(Notifications));
-        }
         private void OpenNotificationExecute(object? obj)
         {
             var notif_add_vm = new NotificationDataGrid(_repository);
@@ -345,11 +372,16 @@ namespace KNP_Library.ViewModels
         private void AddBookExecute(object? obj)
         {
             var win_vm = App.ServiceProvider.GetRequiredService<BookAddVIewModel>();
+            win_vm.Manager = manager;
             var win = new BookAddBox()
             {
                 DataContext = win_vm
             };
             win.ShowDialog();
+            if(win.DataContext is BookAddVIewModel vm)
+            {
+                manager = vm.Manager;
+            }
             Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
             OnPropertyChanged(nameof(Books));
         }
@@ -377,12 +409,17 @@ namespace KNP_Library.ViewModels
         {
             if(obj is Book book){var repository = App.ServiceProvider.GetRequiredService<Repository>();
             var win_vm = new EditBookViewModel(repository, book);
+            win_vm.Manager = manager;
             var win = new EditBook()
             {
                 DataContext = win_vm
             };
             win.ShowDialog();
-            Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
+            if (win.DataContext is BookAddVIewModel vm)
+            {
+                manager = vm.Manager;
+            }
+                Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
                 OnPropertyChanged(nameof(Books));
             }
         }
@@ -424,7 +461,7 @@ namespace KNP_Library.ViewModels
         {
             if(obj is Book book)
             {
-                _repository.Books.DeleteBookById(book.Id);
+                manager.ExecuteCommand(new DeleteBookCommand(_repository.Books, book));
                 Books = new ObservableCollection<Book>(_repository.Books.GetAllBooks());
                 OnPropertyChanged(nameof(Books)); 
             }

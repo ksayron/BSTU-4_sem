@@ -40,6 +40,21 @@ namespace KNP_Library
         {
             e.Handled = !int.TryParse(e.Text, out _);
         }
+
+        private void CustomEventSource_Bubbling(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Bubbling Event");
+        }
+
+        private void CustomEventSource_Tunneling(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Tunneling Event");
+        }
+
+        private void CustomEventSource_Direct(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Direct Event");
+        }
         //private void AddAuthorCombo_Click(object sender, RoutedEventArgs e)
         //{
         //    AddNewComboBox(authorCombos, repo.GetAllAuthors(), 12); // Authors start at Row 12

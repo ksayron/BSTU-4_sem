@@ -15,12 +15,14 @@ using System.Net.Http;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using KNP_Library.Views;
+using Lab4_5.Modules.ViewModel;
 
 namespace KNP_Library.ViewModels
 {
     public class BookAddVIewModel:BaseViewModel
     {
         Repository _repository;
+        public UndoRedoManager Manager { get; set; }
         public string Title { get; set; } = "";
         public string ShortDescription { get; set; } = "";
         public string Description { get; set; } = "";
@@ -137,10 +139,9 @@ namespace KNP_Library.ViewModels
                 mes.ShowDialog();
                 return;
             }
-            if (_repository.Books.AddBook(book))
-            {
-                Close(obj);
-            }
+            Manager.ExecuteCommand(new AddBookCommand(_repository.Books, book));
+            Close(obj);
+            
         }
         private bool CanAddBookExecute(object? obj)
         {

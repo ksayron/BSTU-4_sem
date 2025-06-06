@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.IO;
 using KNP_Library.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Lab4_5.Modules.ViewModel;
 
 
 namespace KNP_Library.ViewModels
@@ -42,6 +43,7 @@ namespace KNP_Library.ViewModels
         HttpClient client = new HttpClient(handler);
         public string? ImagePath { get; set; }
         public string? PdfPath { get; set; }
+        public UndoRedoManager Manager { get; set; }
 
         public ICommand AddBookCommand { get; }
         public ICommand AddAuthorComboCommand { get; }
@@ -228,6 +230,7 @@ namespace KNP_Library.ViewModels
 
         private void AddBookExecute(object? obj)
         {
+            var oldBook = CurrentBook;
             CurrentBook.Title = Title;
             CurrentBook.AmountAvailible = Amount;
             CurrentBook.Description = Description;
@@ -236,10 +239,9 @@ namespace KNP_Library.ViewModels
             CurrentBook.Genres = GenreSelections.Where(s => s.SelectedGenre != null).Select(s => s.SelectedGenre!).ToList();
             CurrentBook.ImgPath = ImagePath;
             CurrentBook.FilePath = PdfPath;
-            if (_repository.Books.UpdateBook(CurrentBook.Id,CurrentBook))
-            {
-                Close(obj);
-            }
+            Manager.ExecuteCommand(new EditBookCommand(_repository.Books,oldBook,CurrentBook));
+            Close(obj);
+            
         }
         private bool CanAddBookExecute(object? obj)
         {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KNP_Library.Modules.classes;
+using KNP_Library.Modules.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -41,5 +43,80 @@ namespace KNP_Library.Modules.ViewModel
             remove => CommandManager.RequerySuggested -= value!;
         }
     }
+    public interface IUndoableCommand
+    {
+        void Execute();
+        void Undo();
+    }
+
+    public class AddBookCommand : IUndoableCommand
+    {
+        private readonly BookRepository _repository;
+        private readonly Book _book;
+
+        public AddBookCommand(BookRepository repository, Book book)
+        {
+            _repository = repository;
+            _book = book;
+        }
+
+        public void Execute()
+        {
+            _book.Id = 0;
+            _repository.AddBook(_book);
+        }
+
+        public void Undo()
+        {
+            _repository.DeleteBookById(_book.Id);
+        }
+    }
+    public class DeleteBookCommand : IUndoableCommand
+    {
+        private readonly BookRepository _repository;
+        private readonly Book _book;
+
+        public DeleteBookCommand(BookRepository repository, Book book)
+        {
+            _repository = repository;
+            _book = book;
+        }
+
+        public void Execute()
+        {
+            _repository.DeleteBookById(_book.Id);
+        }
+
+        public void Undo()
+        {
+            _book.Id = 0;
+            _repository.AddBook(_book);
+        }
+    }
+
+    public class EditBookCommand : IUndoableCommand
+    {
+        private readonly BookRepository _repository;
+        private readonly Book _oldBook;
+        private readonly Book _newBook;
+
+        public EditBookCommand(BookRepository repository, Book oldBook, Book newBook)
+        {
+            _repository = repository;
+            _oldBook = oldBook;
+            _newBook = newBook;
+        }
+
+        public void Execute()
+        {
+            _repository.UpdateBook(_oldBook.Id,_newBook);
+        }
+
+        public void Undo()
+        {
+            _repository.UpdateBook(_oldBook.Id,_oldBook);
+        }
+    }
+
 
 }

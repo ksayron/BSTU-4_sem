@@ -20,7 +20,21 @@ namespace KNP_Library.ViewModels
     public class ReviewAddBoxViewModel : BaseViewModel
     {
         public Repository _repository;
-        public int Assessment { get; set; } = 0;
+        public int Assessment { get; set; } = 4;
+        private int _currentRating =0;
+        public int CurrentRating
+        {
+            get => _currentRating;
+            set
+            {
+                if (_currentRating != value)
+                {
+                    _currentRating = value;
+                    OnPropertyChanged(nameof(CurrentRating));
+                    Message.ShowM("test",$"Rating changed to: {value}"); // Verify changes
+                }
+            }
+        }
         private FlowDocument _reviewDocument = new FlowDocument();
         public FlowDocument ReviewDocument
         {

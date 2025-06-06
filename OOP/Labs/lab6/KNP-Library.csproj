@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Resources\Images\BookImg\book.png" />
     <None Remove="Resources\Images\BookImg\std-book.svg" />
+    <None Remove="Resources\Images\book_icon.ico" />
     <None Remove="Resources\Images\Library\logo.png" />
     <None Remove="Resources\Images\nopic.jpg" />
     <None Remove="Resources\Images\testpic.jpg" />
@@ -21,12 +22,17 @@
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\BookImg\book.png" />
     <Resource Include="Resources\Images\BookImg\std-book.svg" />
+    <Resource Include="Resources\Images\book_icon.ico" />
     <Resource Include="Resources\Images\Library\logo.png" />
     <Resource Include="Resources\Images\nopic.jpg" />
     <Resource Include="Resources\Images\ProfPic\1.jpg" />
@@ -34,10 +40,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Modules\View\RatingControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AdminMain.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\BookAddBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UserPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Message.xaml.cs">
@@ -52,6 +64,15 @@
     <Compile Update="Views\Auth.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Modules\View\RatingControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,15 @@
-﻿using Lab4_5.Modules.DAL;
-using Lab4_5.ViewModels;
-using Lab4_5.Modules.db;
+﻿using KNP_Library.Modules.DAL;
+using KNP_Library.ViewModels;
+using KNP_Library.Modules.db;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 using System;
 using System.Windows.Media;
-using Lab4_5.Views;
+using KNP_Library.Views;
 
-namespace Lab4_5
+namespace KNP_Library
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -37,11 +37,32 @@ namespace Lab4_5
             services.AddTransient<AdminMainViewModel>();
             services.AddTransient<AdminMain>();
 
+            services.AddTransient<UserMainViewModel>();
+            services.AddTransient<UserMain>();
+
             services.AddTransient<BookAddVIewModel>();
             services.AddTransient<BookAddBox>();
 
             services.AddTransient<EditBookViewModel>();
             services.AddTransient<EditBook>();
+
+            services.AddTransient<BookPageViewModel>();
+            services.AddTransient<BookPage>();
+
+            services.AddTransient<BookPageForUserViewModel>();
+            services.AddTransient<BookPageForUser>();
+
+            services.AddTransient<UserPageViewModel>();
+            services.AddTransient<UserPage>();
+
+            services.AddTransient<UserAddBoxViewModel>();
+            services.AddTransient<UserAddBox>();
+
+            services.AddTransient<AuthorAddBoxViewModel>();
+            services.AddTransient<AuthorAddBox>();
+
+            services.AddTransient<GenreAddBoxViewModel>();
+            services.AddTransient<GenreAddBox>();
 
 
             ServiceProvider = services.BuildServiceProvider();

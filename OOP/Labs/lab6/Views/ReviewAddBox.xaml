@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KNP_Library.Views"
         xmlns:vm="clr-namespace:KNP_Library.ViewModels"
+        xmlns:v="clr-namespace:KNP_Library.Modules.View"
         mc:Ignorable="d"
                 Icon="../Resources/Images/book_icon.ico"
-    Title="{DynamicResource AuthorAddTitle}" Height="600" Width="400">
+    Title="{DynamicResource AuthorAddTitle}" Height="700" Width="400">
     <Window.DataContext>
         <vm:ReviewAddBoxViewModel/>
     </Window.DataContext>
     <Grid Background="#FF3E508E" Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.09*" />
+            <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.15*" />
             <RowDefinition Height="0.00005*" />
@@ -45,16 +47,16 @@
         </DockPanel>
         <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FFEFE1E1" FontSize="16"
                FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource ReviewRating}"></Label>
-        <Label Grid.Column="2" Grid.Row="4" Foreground="#FFEFE1E1" FontSize="16"
+        <Label Grid.Column="2" Grid.Row="5" Foreground="#FFEFE1E1" FontSize="16"
                FontFamily="Segoe UI" FontWeight="Bold" HorizontalAlignment="Center" Content="{DynamicResource ReviewText}"></Label>
-
-        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" 
-                 Text="{Binding Assessment}" PreviewTextInput="OnlyNumericInput"/>
-        <RichTextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="ReviewTextBox" TextChanged="RichTextBox_TextChanged" 
+        <v:CustomTextBox MaxAllowedLength="2" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" 
+                 Text="{Binding CurrentRating}" PreviewTextInput="OnlyNumericInput"/>
+        <v:RatingControl Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1"  Rating="{Binding CurrentRating,Mode=TwoWay}"/>
+        <RichTextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" VerticalContentAlignment="Center" Name="ReviewTextBox" TextChanged="RichTextBox_TextChanged" 
                 />
 
 
-        <Button Grid.Column="1" Grid.Row="7" FontSize="14" FontWeight="Bold"
+        <Button Grid.Column="1" Grid.Row="8" FontSize="14" FontWeight="Bold"
                 Grid.ColumnSpan="3" Margin="46,0,46,0" 
                 Command="{Binding AddReviewCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="{DynamicResource AddButton}"></Button>

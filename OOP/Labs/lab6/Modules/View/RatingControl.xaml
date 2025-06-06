@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="KNP_Library.Modules.View.RatingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KNP_Library.Modules.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:StarFillConverter x:Key="StarFillConverter"/>
+        <Geometry x:Key="StarGeometry">M10,0 L13,8 L20,8 L14,12 L16,20 L10,15 L4,20 L6,12 L0,8 L7,8 Z</Geometry>
+    </UserControl.Resources>
+
+    <ItemsControl ItemsSource="{Binding StarIndices, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Viewbox Width="20" Height="20" Margin="2,0,2,0">
+                    <Path x:Name="StarPath"
+                          Data="{StaticResource StarGeometry}"
+                          Stroke="Gray"
+                          StrokeThickness="0.5"
+                          Tag="{Binding}"
+                          MouseMove="Star_MouseMove"
+                          MouseLeave="Star_MouseLeave"
+                          MouseLeftButtonDown="Star_MouseLeftButtonDown">
+                        <Path.Fill>
+                            <MultiBinding Converter="{StaticResource StarFillConverter}">
+                                <Binding Path="."/>
+                                <Binding Path="Rating" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                                <Binding Path="PreviewRating" RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                            </MultiBinding>
+                        </Path.Fill>
+                    </Path>
+                </Viewbox>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>
