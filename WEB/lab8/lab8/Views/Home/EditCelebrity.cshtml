@@ -1,0 +1,45 @@
+﻿@model NewCelebrityViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.FullName</title>
+</head>
+<body>
+   
+
+    <h2>Edit Celebrity</h2>
+
+    @if (!string.IsNullOrEmpty(Model.ReqPhotoPath))
+    {
+                <div>
+                <img src="~/img/@Model.ReqPhotoPath" alt="@Model.FullName" style="max-width: 300px;" />
+                </div>
+    }
+
+    <form asp-action="EditCelebrity" asp-controller="Home" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="ReqPhotoPath" value="@Model.ReqPhotoPath" />
+
+        <div>
+            <label>Full Name:</label>
+            <input type="text" name="FullName" value="@Model.FullName" required />
+        </div>
+
+        <div>
+            <label asp-for="Nationality"></label>
+            <select asp-for="Nationality" asp-items="Model.Countries"></select>
+            <span asp-validation-for="Nationality"></span>
+        </div>
+
+        <div>
+            <label>Photo:</label>
+            <input type="file" name="UploadedFile" accept="image/*" />
+        </div>
+
+        <button type="submit">Edit</button>
+        <a href="/Home/Index">Cancel</a>
+    </form>
+
+</body>
+</html>

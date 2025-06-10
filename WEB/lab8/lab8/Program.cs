@@ -1,12 +1,7 @@
 using lab6_MSSQL_LIB;
-using lab6_LIB;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.DependencyInjection;
-using lab7.Models;
+using lab8.Models;
 
-namespace lab7
+namespace lab8
 {
     public class Program
     {
@@ -34,7 +29,7 @@ namespace lab7
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseAuthorization();
 
             app.MapControllerRoute(
@@ -43,12 +38,10 @@ namespace lab7
             app.MapCelebrities(configuration);
             app.Run();
         }
-        
     }
-
     static class BuilderExtension
     {
-        
+
         public static IServiceCollection AddCelebritiesConfig(this WebApplicationBuilder builder, string CelebrityJson = "Celebrities.config.json")
         {
             builder.Configuration.AddJsonFile(CelebrityJson);
@@ -60,7 +53,7 @@ namespace lab7
             {
                 return new Repository(builder.Configuration.GetSection("Celebrities").GetValue<string>("ConnectionString"));
             });
-           
+
             return builder.Services;
         }
         public static RouteHandlerBuilder MapCelebrities(this IEndpointRouteBuilder routeBuilder, IConfiguration config, string prefix = "/api/Celebrities")
@@ -81,8 +74,14 @@ namespace lab7
             });
             cel.MapDelete("/{id:int:min(1)}", (IRepository repo, int id) =>
             {
-                if (repo.DelCelebrity(id)) { return $"Celebrity with id:{id} deleted"; }
-                else { throw new DeleteByIDException($"DELETE /Celebrities error, Id = {id}"); }
+                if (repo.DelCelebrity(id))
+                {
+                    return Results.Ok(new { message = $"Celebrity with id:{id} deleted" });
+                }
+                else
+                {
+                    return Results.NotFound(new { error = $"DELETE /Celebrities error, Id = {id}" });
+                }
             });
             cel.MapPost("/", async (HttpRequest request, IRepository repo, IWebHostEnvironment env) =>
             {
@@ -158,6 +157,7 @@ namespace lab7
         {
             PhotosFolder = "./Photos";
             PhotosRequestPath = "/Photos";
+            ConnectionString = "Server=(LocalDb)\\MSSQLLocalDB; Database = Lab6_DB; TrustServerCertificate=True; Trusted_Connection=true";
             ConnectionString = "Server=(LocalDb)\\MSSQLLocalDB; Database = Lab6_DB; TrustServerCertificate=True; Trusted_Connection=true";
         }
     }

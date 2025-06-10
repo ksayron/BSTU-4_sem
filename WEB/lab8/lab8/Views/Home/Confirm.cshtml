@@ -1,0 +1,35 @@
+﻿
+@using lab8.Models;
+@model CelebrityWithFile
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>New Celebrity</title>
+</head>
+<body>
+    <h2>Create Celebrity</h2>
+    <img src="~/img/@Model.celebrity.ReqPhotoPath" />
+    <form action="/api/Celebrities/" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="FullName">Full Name:</label>
+            <input type="text" id="FullName" name="FullName" value="@Model.celebrity.FullName" readonly="readonly" required />
+        </div>
+
+        <div>
+            <label for="Nationality">Nationality:</label>
+            <input type="text" id="Nationality" name="Nationality" value="@Model.celebrity.Nationality"  readonly="readonly" required />
+        </div>
+
+        <div>
+            <label for="ImgPath">Img Path:</label>
+            <input type="text" id="ImgPath" name="ImgPath" value="@Model.celebrity.ReqPhotoPath" readonly="readonly" required />
+        </div>
+
+
+        <button type="submit">Confirm</button>
+        <a href="/Home/Index">Cancel</a>
+    </form>
+</body>
+</html>

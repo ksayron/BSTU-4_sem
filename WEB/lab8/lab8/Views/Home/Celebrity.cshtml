@@ -1,0 +1,41 @@
+﻿@using lab6_MSSQL_LIB;
+@model Celebrity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.FullName</title>
+</head>
+<body>
+    <h2>Celebrity Details</h2>
+
+    <div class="header-row">
+        <p><strong>Full Name:</strong> @Model.FullName</p>
+        <form asp-action="EditCelebrity" asp-controller="Home" asp-route-id="@Model.Id" method="get">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit">Edit</button>
+        </form>
+
+        <form asp-action="ConfirmDel" asp-controller="Home" method="get">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    <p><strong>Nationality:</strong>  @ViewData["CountryLabel"]</p>
+
+    @if (!string.IsNullOrEmpty(Model.ReqPhotoPath))
+    {
+            <div>
+            <img src="~/img/@Model.ReqPhotoPath" alt="@Model.FullName" style="max-width: 300px;" />
+            </div>
+    }
+    <div>
+        @if (ViewData["WikipediaLinks"] is List<string> wikiLinks)
+        {
+            @Html.WikipediaLinks(wikiLinks)
+        }
+    
+</div>
+</body>
+</html>

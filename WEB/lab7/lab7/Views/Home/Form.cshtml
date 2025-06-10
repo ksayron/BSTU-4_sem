@@ -10,8 +10,7 @@
 </head>
 <body>
     <h2>Create Celebrity</h2>
-
-    <form action="/api/Celebrities/" method="post" enctype="multipart/form-data">
+    <form action="/Home/Confirm" method="post" enctype="multipart/form-data">
         <div>
             <label for="FullName">Full Name:</label>
             <input type="text" id="FullName" name="FullName" required />
@@ -24,7 +23,7 @@
 
         <div>
             <label for="UploadedPhoto">Upload Photo:</label>
-            <input type="file" id="UploadedPhoto" name="UploadedPhoto" accept="image/*" required />
+            <input type="file" id="UploadedPhoto" name="file" accept="image/*" required />
         </div>
 
         <button type="submit">Submit</button>

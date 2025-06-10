@@ -1,8 +1,9 @@
 ﻿using lab6_MSSQL_LIB;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace lab7.Models
+namespace lab8.Models
 {
     public interface IFileUploadService
     {
@@ -34,16 +35,5 @@ namespace lab7.Models
         }
     }
     
-    public class NewCelebrityViewModel
-    {
-        [Required]
-        public IFormFile UploadedFile { get; set; }
-        public Celebrity NewCelebrity { get; set; }
-        public string Message { get; set; }
-    }
-    public class CelebrityWithFile
-    {
-        public Celebrity celebrity;
-        public IFormFile File;
-    }
+    
 }

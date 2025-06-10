@@ -1,0 +1,23 @@
+﻿@model NewCelebrityViewModel
+
+<form asp-action="Confirm" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" />
+        <span asp-validation-for="FullName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Nationality"></label>
+        <select asp-for="Nationality" asp-items="Model.Countries"></select>
+        <span asp-validation-for="Nationality"></span>
+    </div>
+
+    <div>
+        <label for="UploadedFile">Upload Photo:</label>
+        <input asp-for="UploadedFile" type="file" accept="image/*" />
+        <span asp-validation-for="UploadedFile"></span>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>

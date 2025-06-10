@@ -29,7 +29,21 @@ namespace lab7.Controllers
         {
             return View(new NewCelebrityViewModel());
         }
+        public IActionResult Confirm(int id)
+        {
+            return View(repo.GetCelebById(id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Confirm(Celebrity celebrity, IFormFile file)
+        {
 
+            var filePath2 = await _fileUploadService.UploadFileAsync(file);
+            celebrity.ReqPhotoPath = filePath2;
+            var celeb = new CelebrityWithFile();
+                celeb.celebrity = celebrity;
+            celeb.File = file;
+            return View(celeb);
+        }
         [HttpPost]
         public async Task<IActionResult> Form(NewCelebrityViewModel model)
         {

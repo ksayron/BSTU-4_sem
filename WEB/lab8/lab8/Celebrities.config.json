@@ -1,0 +1,8 @@
+{
+  "Celebrities": {
+    "PhotosRequestPath": "/Photos",
+    "PhotosFolder": "D:\\BSTU\\4sem\\WEB\\lab8\\lab8\\wwwroot\\img\\",
+    "ConnectionString": "Server=(LocalDb)\\MSSQLLocalDB; Database = Lab6_DB; TrustServerCertificate=True; Trusted_Connection=true",
+    "CountryCodes": "D:\\BSTU\\4sem\\WEB\\lab8\\lab8\\wwwroot\\Country_Codes.json"
+  }
+}
