@@ -1,0 +1,179 @@
+[
+
+  {
+    "Id": 2,
+    "Title": "Великий Гэтсби",
+    "Authors": [
+      {
+        "Id": 2,
+        "FullName": "Ф.С. Фицджеральд"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 1,
+        "Name": "Роман"
+      },
+      {
+        "Id": 3,
+        "Name": "Трагедия"
+      }
+    ],
+    "CoverImagePath": "/images/getsbi.jpg",
+    "Rating": 4.8
+  },
+  {
+    "Id": 3,
+    "Title": "1984",
+    "Authors": [
+      {
+        "Id": 4,
+        "FullName": "George Orwell"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 4,
+        "Name": "Dystopian"
+      },
+      {
+        "Id": 5,
+        "Name": "Political Fiction"
+      }
+    ],
+    "CoverImagePath": "/images/1984.jpg",
+    "Rating": 4.6
+  },
+  {
+    "Id": 4,
+    "Title": "To Kill a Mockingbird",
+    "Authors": [
+      {
+        "Id": 5,
+        "FullName": "Harper Lee"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 6,
+        "Name": "Classic"
+      },
+      {
+        "Id": 7,
+        "Name": "Drama"
+      }
+    ],
+    "CoverImagePath": "/images/mockingbird.jpg",
+    "Rating": 3.7
+  },
+  {
+    "Id": 5,
+    "Title": "Sapiens",
+    "Authors": [
+      {
+        "Id": 6,
+        "FullName": "Yuval Noah Harari"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 8,
+        "Name": "History"
+      },
+      {
+        "Id": 9,
+        "Name": "Science"
+      }
+    ],
+    "CoverImagePath": "/images/sapiens.jpg",
+    "Rating": 4.8
+  },
+  {
+    "Id": 6,
+    "Title": "Dune",
+    "Authors": [
+      {
+        "Id": 7,
+        "FullName": "Frank Herbert"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 10,
+        "Name": "Science Fiction"
+      },
+      {
+        "Id": 11,
+        "Name": "Adventure"
+      }
+    ],
+    "CoverImagePath": "/images/dune.jpg",
+    "Rating": 4.5
+  },
+  {
+    "Id": 7,
+    "Title": "Atomic Habits",
+    "Authors": [
+      {
+        "Id": 8,
+        "FullName": "James Clear"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 12,
+        "Name": "Self-help"
+      },
+      {
+        "Id": 13,
+        "Name": "Psychology"
+      }
+    ],
+    "CoverImagePath": "/images/atomic.jpg",
+    "Rating": 0.9
+  },
+  {
+    "Id": 8,
+    "Title": "Brave New World",
+    "Authors": [
+      {
+        "Id": 9,
+        "FullName": "Aldous Huxley"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 4,
+        "Name": "Dystopian"
+      },
+      {
+        "Id": 14,
+        "Name": "Science Fiction"
+      }
+    ],
+    "CoverImagePath": "/images/brave.jpg",
+    "Rating": 4.4
+  },
+  {
+    "Id": 1,
+    "Title": "Чистый код",
+    "Authors": [
+      {
+        "Id": 1,
+        "FullName": "Р. Мартин"
+      }
+    ],
+    "Genres": [
+      {
+        "Id": 1,
+        "Name": "Programming"
+      },
+      {
+        "Id": 2,
+        "Name": "Software Engineering"
+      }
+    ],
+    "CoverImagePath": "/images/clean_code.jpg",
+    "Rating": 4.4
+  }
+]

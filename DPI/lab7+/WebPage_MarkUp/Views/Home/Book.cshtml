@@ -1,0 +1,117 @@
+﻿
+@using WebPage_MarkUp.Models;
+
+@{
+    Layout = null;
+}
+@model BookDetailsViewModel
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>KNP Library</title>
+    <link rel="stylesheet" asp-append-version="true" href="~/css/site.css" />
+    <link rel="stylesheet" asp-append-version="true" href="~/css/book.css" />
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo">
+            <img src="/images/bookslogo.svg" alt="Logo" width="85" height="85" />
+        </div>
+        <nav class="nav">
+            <a href="/books">Книги</a>
+            <a href="/events">Мероприятия</a>
+            
+        </nav>
+        <div class="username">
+            <a href="/users/">ksayronin</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+      
+<div class="book-detail-container">
+
+    <div class="book-main-info">
+        <div class="cover-container">
+            <img class="book-cover" src="@Model.Book.CoverImagePath" alt="Обложка книги" />
+        </div>
+        <div class="book-text-info">
+            <div class="text-line">
+                <div class="book-title">@Model.Book.Title</div>
+                <div class="book-title-rating">
+                    <div class="book-rating-stars">
+                        <span class="stars">@Model.Book.Stars</span>
+                        <span class="book-rating-value" style="color:black;">(@Model.Book.Rating)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="book-authors">@string.Join(", ", Model.Book.Authors.Select(a => a.Name))</div>
+            <div class="book-genres">@string.Join(", ", Model.Book.Genres.Select(g => g.Name))</div>
+            <div class="book-action-button">
+                <button type="button">Бронировать</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="book-description">
+    @foreach (var paragraph in Model.Book.Description.Split("\n\n"))
+    {
+        <p style="padding-bottom:28px;font-weight:500;">@paragraph</p>
+    }
+    </div>
+
+    <form class="review-form">
+        <h2 class="review-title">Оставьте отзыв</h2>
+        <div class="review-content">
+             <div class="review-rating-block">
+                 <label class="review-rating-label">Ваша оценка</label>
+                 <div class="review-stars1">☆☆☆☆☆</div>
+            </div>
+                <label class="review-label" for="review-text">Рецензия</label>
+            <textarea id="review-text" class="review-textarea" placeholder="Напишите ваш отзыв..."></textarea>
+        </div>
+        <div class="review-actions">
+            <button type="submit" class="review-button submit-button">Подтвердить</button>
+            <button type="reset" class="review-button cancel-button">Отмена</button>
+        </div>
+    </form>
+
+        @foreach (var review in Model.Reviews)
+        {
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-username">@review.Username</span>
+                        <span class="review-stars">@review.Stars</span>
+                        <span class="review-date">@review.Date.ToString("dd.MM.yyyy")</span>
+                    </div>
+                        <div class="review-separator"><div class="review-text">@review.Text</div></div>
+                    
+                </div>
+        }
+
+    </div>
+
+</div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contact-info">
+            <h4>КОНТАКТЫ</h4>
+            <p>
+                МТС: +375 29 123 45 67<br />
+                A1: +375 44 765 43 21<br />
+                Life: +375 33 987 65 43
+            </p>
+        </div>
+        <div class="brand">KNP Library</div>
+    </footer>
+
+</body>
+</html>
+
+
+<style>
+  
+</style>

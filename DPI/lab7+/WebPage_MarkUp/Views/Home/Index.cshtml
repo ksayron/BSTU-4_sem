@@ -1,0 +1,27 @@
+﻿
+@using WebPage_MarkUp.Models;
+@model CatalogViewModel
+@{
+    Layout = "_Layout";
+}
+<div class="catalog-page flex flex-center" style="flex-wrap: wrap;">
+    @foreach (var book in Model.Books)
+    {
+        <a asp-controller="Home" asp-action="Book">
+                <div class="book-card">
+                <img class="book-cover" src="@book.CoverImagePath" alt="Обложка книги" />
+                <div class="book-title">Великий Гэтсби</div>
+                    <div class="book-rating">@book.Stars</div>
+                <div class="book-authors">
+                    @string.Join(", ", book.Authors.Select(a => a.FullName))
+                </div>
+
+                <div class="book-genres">
+                    @string.Join(", ", book.Genres.Select(g => g.Name))
+                </div>
+
+
+            </div>
+        </a>
+    }
+</div>

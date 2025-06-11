@@ -1,0 +1,8 @@
+﻿/* Global Reset and Base Styles */
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0px;
+}
+
