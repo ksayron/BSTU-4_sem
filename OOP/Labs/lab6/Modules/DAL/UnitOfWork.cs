@@ -24,7 +24,6 @@ namespace Lab4_5.Modules.DAL
     public class UnitOfWork : IUnitOfWork
     {
         private readonly LibraryContext _context;
-
         public AuthorGenreRepository AuthorsGenres { get; }
         public BookRepository Books { get; }
         public UserRepository Users { get; }
